@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplifybbb8dd6878c54-staging-213355-authRole",
+      "UnauthRoleArn": "arn:aws:iam::692815762720:role/amplify-amplifybbb8dd6878c54-staging-213355-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::692815762720:role/amplify-amplifybbb8dd6878c54-staging-213355-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-amplifybbb8dd6878c54-staging-213355-deployment",
+      "UnauthRoleName": "amplify-amplifybbb8dd6878c54-staging-213355-unauthRole",
+      "StackName": "amplify-amplifybbb8dd6878c54-staging-213355",
+      "StackId": "arn:aws:cloudformation:us-east-1:692815762720:stack/amplify-amplifybbb8dd6878c54-staging-213355/8e6d9670-dd67-11ed-80ad-1298c2ec6141",
+      "AmplifyAppId": "dn45432rybyjy"
+    },
+    "categories": {
+      "auth": {
+        "santamaria67399077": {}
+      }
+    }
+  }
+}

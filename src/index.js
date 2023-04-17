@@ -2,6 +2,9 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
+import { Amplify } from 'aws-amplify';
+import config from './aws-exports';
+
 // scroll bar
 import 'simplebar/src/simplebar.css';
 
@@ -15,6 +18,8 @@ import 'assets/third-party/apex-chart.css';
 import App from './App';
 import { store } from 'store';
 import reportWebVitals from './reportWebVitals';
+
+Amplify.configure(config);
 
 // ==============================|| MAIN - REACT DOM RENDER  ||============================== //
 
