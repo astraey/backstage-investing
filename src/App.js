@@ -3,15 +3,11 @@ import Routes from 'routes';
 import ThemeCustomization from 'themes';
 import ScrollTop from 'components/ScrollTop';
 
-import logo from "./logo.svg";
 import "@aws-amplify/ui-react/styles.css";
 import {
   withAuthenticator,
   Button,
-  Heading,
-  Image,
-  View,
-  Card,
+  View
 } from "@aws-amplify/ui-react";
 
 
