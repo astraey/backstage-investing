@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "paths": {
+    "/stocks": {
+      "name": "/stocks",
+      "lambdaFunction": "santamaria71dee4bd",
+      "permissions": {
+        "setting": "private",
+        "auth": ["create", "read", "update", "delete"]
+      }
+    },
+    "/items": {
+      "name": "/items",
+      "lambdaFunction": "santamaria71dee4bd",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

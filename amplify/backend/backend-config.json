@@ -1,4 +1,17 @@
 {
+  "api": {
+    "santamariaapi": {
+      "dependsOn": [
+        {
+          "attributes": ["Name", "Arn"],
+          "category": "function",
+          "resourceName": "santamaria71dee4bd"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
   "auth": {
     "santamariad0ceb1e3": {
       "customAuth": false,
@@ -17,6 +30,31 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "santamaria71dee4bd": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_santamaria71dee4bd_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "santamaria71dee4bd"
+        }
+      ]
+    },
+    "AMPLIFY_function_santamaria71dee4bd_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "santamaria71dee4bd"
+        }
+      ]
     }
   }
 }
