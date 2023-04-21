@@ -28,11 +28,12 @@ const App = ({ signOut }) => {
   const [dataFromAPI, setDataFromAPI] = useState(null);
 
   useEffect(() => {
+    setDataFromAPI();
     API.get(apiName, path, myInit)
       .then((response) => {
         // Add your code here
-        console.log(response.data);
-        setDataFromAPI(response.data);
+        console.log(response.data.value);
+        setDataFromAPI(response.data.value);
       })
       .catch((error) => {
         //console.log(error.response);
@@ -42,7 +43,8 @@ const App = ({ signOut }) => {
   return (
     <div>
       <h1>Stock App</h1>
-      <p>{dataFromAPI}</p>
+      <p>Joke from Chuck Norris (Coming from our API)</p>
+      <p>{JSON.stringify(dataFromAPI)}</p>
       <Button onClick={signOut}>Sign Out</Button>
       {/*
       <View className="App">
