@@ -14,6 +14,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+A Chrome Addon to enable CORS is recommended, as it enables the user to run the react project locally and pull data from the remote API. [Allow CORS](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en)
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
