@@ -19,7 +19,8 @@
       "function": {
         "santamaria71dee4bd": {
           "deploymentBucketName": "amplify-amplifybbb8dd6878c54-staging-213355-deployment",
-          "s3Key": "amplify-builds/santamaria71dee4bd-63387a57653442657362-build.zip"
+          "s3Key": "amplify-builds/santamaria71dee4bd-63387a57653442657362-build.zip",
+          "secretsPathAmplifyAppId": "dn45432rybyjy"
         }
       },
       "api": {
