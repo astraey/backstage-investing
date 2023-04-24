@@ -1,9 +1,10 @@
 // assets
-import { DashboardOutlined } from '@ant-design/icons';
+import { DashboardOutlined, PieChartOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
   DashboardOutlined,
+  PieChartOutlined,
 };
 
 // ==============================|| MENU ITEMS - DASHBOARD ||============================== //
@@ -19,6 +20,14 @@ const dashboard = {
       type: 'item',
       url: '/dashboard/default',
       icon: icons.DashboardOutlined,
+      breadcrumbs: false,
+    },
+    {
+      id: 'company',
+      title: 'Company Page',
+      type: 'item',
+      url: '/company',
+      icon: icons.PieChartOutlined,
       breadcrumbs: false,
     },
   ],
