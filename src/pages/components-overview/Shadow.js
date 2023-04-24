@@ -29,10 +29,7 @@ ShadowBox.propTypes = {
 
 function CustomShadowBox({ shadow, label, color, bgcolor }) {
   return (
-    <MainCard
-      border={false}
-      sx={{ bgcolor: bgcolor || 'inherit', boxShadow: shadow }}
-    >
+    <MainCard border={false} sx={{ bgcolor: bgcolor || 'inherit', boxShadow: shadow }}>
       <Stack spacing={1} justifyContent="center" alignItems="center">
         <Typography variant="subtitle1" color={color}>
           {label}
@@ -142,11 +139,7 @@ const ComponentShadow = () => {
           <MainCard title="Custom Shadow" codeHighlight>
             <Grid container spacing={3}>
               <Grid item xs={6} sm={4} md={3} lg={2}>
-                <CustomShadowBox
-                  shadow={theme.customShadows.z1}
-                  label="z1"
-                  color="inherit"
-                />
+                <CustomShadowBox shadow={theme.customShadows.z1} label="z1" color="inherit" />
               </Grid>
             </Grid>
           </MainCard>

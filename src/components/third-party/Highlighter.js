@@ -2,14 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 // material-ui
-import {
-  Box,
-  CardActions,
-  Collapse,
-  Divider,
-  IconButton,
-  Tooltip,
-} from '@mui/material';
+import { Box, CardActions, Collapse, Divider, IconButton, Tooltip } from '@mui/material';
 
 // third-party
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -28,9 +21,7 @@ const Highlighter = ({ children }) => {
 
   return (
     <Box sx={{ position: 'relative' }}>
-      <CardActions
-        sx={{ justifyContent: 'flex-end', p: 1, mb: highlight ? 1 : 0 }}
-      >
+      <CardActions sx={{ justifyContent: 'flex-end', p: 1, mb: highlight ? 1 : 0 }}>
         <Box sx={{ display: 'flex', position: 'inherit', right: 0, top: 6 }}>
           <CopyToClipboard
             text={reactElementToJSXString(children, {
@@ -39,21 +30,12 @@ const Highlighter = ({ children }) => {
             })}
           >
             <Tooltip title="Copy the source" placement="top-end">
-              <IconButton
-                color="secondary"
-                size="small"
-                sx={{ fontSize: '0.875rem' }}
-              >
+              <IconButton color="secondary" size="small" sx={{ fontSize: '0.875rem' }}>
                 <CopyOutlined />
               </IconButton>
             </Tooltip>
           </CopyToClipboard>
-          <Divider
-            orientation="vertical"
-            variant="middle"
-            flexItem
-            sx={{ mx: 1 }}
-          />
+          <Divider orientation="vertical" variant="middle" flexItem sx={{ mx: 1 }} />
           <Tooltip title="Show the source" placement="top-end">
             <IconButton
               sx={{ fontSize: '0.875rem' }}

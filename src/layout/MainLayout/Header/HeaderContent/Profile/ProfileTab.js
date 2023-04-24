@@ -3,21 +3,10 @@ import { useState } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import {
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from '@mui/material';
+import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 
 // assets
-import {
-  EditOutlined,
-  ProfileOutlined,
-  LogoutOutlined,
-  UserOutlined,
-  WalletOutlined,
-} from '@ant-design/icons';
+import { EditOutlined, ProfileOutlined, LogoutOutlined, UserOutlined, WalletOutlined } from '@ant-design/icons';
 
 // ==============================|| HEADER PROFILE - PROFILE TAB ||============================== //
 
@@ -40,38 +29,26 @@ const ProfileTab = ({ handleLogout }) => {
         },
       }}
     >
-      <ListItemButton
-        selected={selectedIndex === 0}
-        onClick={(event) => handleListItemClick(event, 0)}
-      >
+      <ListItemButton selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)}>
         <ListItemIcon>
           <EditOutlined />
         </ListItemIcon>
         <ListItemText primary="Edit Profile" />
       </ListItemButton>
-      <ListItemButton
-        selected={selectedIndex === 1}
-        onClick={(event) => handleListItemClick(event, 1)}
-      >
+      <ListItemButton selected={selectedIndex === 1} onClick={(event) => handleListItemClick(event, 1)}>
         <ListItemIcon>
           <UserOutlined />
         </ListItemIcon>
         <ListItemText primary="View Profile" />
       </ListItemButton>
 
-      <ListItemButton
-        selected={selectedIndex === 3}
-        onClick={(event) => handleListItemClick(event, 3)}
-      >
+      <ListItemButton selected={selectedIndex === 3} onClick={(event) => handleListItemClick(event, 3)}>
         <ListItemIcon>
           <ProfileOutlined />
         </ListItemIcon>
         <ListItemText primary="Social Profile" />
       </ListItemButton>
-      <ListItemButton
-        selected={selectedIndex === 4}
-        onClick={(event) => handleListItemClick(event, 4)}
-      >
+      <ListItemButton selected={selectedIndex === 4} onClick={(event) => handleListItemClick(event, 4)}>
         <ListItemIcon>
           <WalletOutlined />
         </ListItemIcon>

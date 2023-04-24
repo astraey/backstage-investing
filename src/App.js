@@ -13,7 +13,7 @@ import awsconfig from './aws-exports';
 Amplify.configure(awsconfig);
 
 const apiName = 'santamariaapi';
-const path = '/items';
+const path = '/company/AMZN';
 const myInit = {
   headers: {}, // OPTIONAL
   response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
@@ -32,11 +32,11 @@ const App = ({ signOut }) => {
     API.get(apiName, path, myInit)
       .then((response) => {
         // Add your code here
-        console.log(response.data.value);
-        setDataFromAPI(response.data.value);
+        console.log(response);
+        setDataFromAPI(response);
       })
       .catch((error) => {
-        //console.log(error.response);
+        console.log(error.response);
       });
   }, []);
 

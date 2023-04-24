@@ -74,16 +74,7 @@ const ReportAreaChart = () => {
       xaxis: {
         labels: {
           style: {
-            colors: [
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-            ],
+            colors: [secondary, secondary, secondary, secondary, secondary, secondary, secondary, secondary],
           },
         },
       },
@@ -108,14 +99,7 @@ const ReportAreaChart = () => {
     },
   ]);
 
-  return (
-    <ReactApexChart
-      options={options}
-      series={series}
-      type="line"
-      height={345}
-    />
-  );
+  return <ReactApexChart options={options} series={series} type="line" height={345} />;
 };
 
 export default ReportAreaChart;

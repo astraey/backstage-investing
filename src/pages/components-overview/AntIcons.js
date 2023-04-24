@@ -16,11 +16,7 @@ const IFrameWrapper = styled('iframe')(() => ({
 const AntIcons = () => (
   <ComponentSkeleton>
     <MainCard title="Ant Icons">
-      <IFrameWrapper
-        title="Ant Icon"
-        width="100%"
-        src="https://ant.design/components/icon/"
-      />
+      <IFrameWrapper title="Ant Icon" width="100%" src="https://ant.design/components/icon/" />
     </MainCard>
   </ComponentSkeleton>
 );

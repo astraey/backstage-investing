@@ -25,13 +25,7 @@ import MainCard from 'components/MainCard';
 import Transitions from 'components/@extended/Transitions';
 
 // assets
-import {
-  BellOutlined,
-  CloseOutlined,
-  GiftOutlined,
-  MessageOutlined,
-  SettingOutlined,
-} from '@ant-design/icons';
+import { BellOutlined, CloseOutlined, GiftOutlined, MessageOutlined, SettingOutlined } from '@ant-design/icons';
 
 // sx styles
 const avatarSX = {
@@ -268,9 +262,7 @@ const Notification = () => {
                       </ListItemSecondaryAction>
                     </ListItemButton>
                     <Divider />
-                    <ListItemButton
-                      sx={{ textAlign: 'center', py: `${12}px !important` }}
-                    >
+                    <ListItemButton sx={{ textAlign: 'center', py: `${12}px !important` }}>
                       <ListItemText
                         primary={
                           <Typography variant="h6" color="primary">

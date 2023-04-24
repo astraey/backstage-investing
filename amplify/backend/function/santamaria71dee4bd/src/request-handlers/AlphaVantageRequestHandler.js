@@ -1,11 +1,11 @@
 const https = require('https');
 const aws = require('aws-sdk');
 
-class TwelveDataRequestHandler {
+class AlphaVantageRequestHandler {
   constructor() {
     this.apiKey = new aws.SSM()
       .getParameters({
-        Names: ['twelvedataapikey'].map((secretName) => process.env[secretName]),
+        Names: ['alphavantageapikey'].map((secretName) => process.env[secretName]),
         WithDecryption: true,
       })
       .promise();
@@ -49,9 +49,9 @@ class TwelveDataRequestHandler {
     return new Promise((resolve, reject) => {
       const options = {
         method: 'GET',
-        hostname: 'api.twelvedata.com',
+        hostname: 'www.alphavantage.co',
         port: null,
-        path: `/statistics?symbol=${stockTicker}&apikey=${apiKey}`,
+        path: `/query?function=INCOME_STATEMENT&symbol=${stockTicker}&apikey=${apiKey}`, 
       };
 
       const req = https.request(options, (res) => {
@@ -76,4 +76,4 @@ class TwelveDataRequestHandler {
   }
 }
 
-module.exports = TwelveDataRequestHandler;
+module.exports = AlphaVantageRequestHandler;

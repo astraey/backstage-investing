@@ -69,55 +69,15 @@ const ComponentColor = () => (
               title="primary.lighter"
               dark
             />
-            <ColorBox
-              bgcolor="primary.100"
-              data={{ label: 'Blue-2', color: '#bae7ff' }}
-              title="primary[100]"
-              dark
-            />
-            <ColorBox
-              bgcolor="primary.200"
-              data={{ label: 'Blue-3', color: '#91d5ff' }}
-              title="primary[200]"
-              dark
-            />
-            <ColorBox
-              bgcolor="primary.light"
-              data={{ label: 'Blue-4', color: '#69c0ff' }}
-              title="primary.light"
-              dark
-            />
-            <ColorBox
-              bgcolor="primary.400"
-              data={{ label: 'Blue-5', color: '#40a9ff' }}
-              title="primary[400]"
-            />
-            <ColorBox
-              bgcolor="primary.main"
-              data={{ label: 'Blue-6', color: '#1890ff' }}
-              title="primary.main"
-              main
-            />
-            <ColorBox
-              bgcolor="primary.dark"
-              data={{ label: 'Blue-7', color: '#096dd9' }}
-              title="primary.dark"
-            />
-            <ColorBox
-              bgcolor="primary.700"
-              data={{ label: 'Blue-8', color: '#0050b3' }}
-              title="primary[700]"
-            />
-            <ColorBox
-              bgcolor="primary.darker"
-              data={{ label: 'Blue-9', color: '#003a8c' }}
-              title="primary.darker"
-            />
-            <ColorBox
-              bgcolor="primary.900"
-              data={{ label: 'Blue-10', color: '#002766' }}
-              title="primary.900"
-            />
+            <ColorBox bgcolor="primary.100" data={{ label: 'Blue-2', color: '#bae7ff' }} title="primary[100]" dark />
+            <ColorBox bgcolor="primary.200" data={{ label: 'Blue-3', color: '#91d5ff' }} title="primary[200]" dark />
+            <ColorBox bgcolor="primary.light" data={{ label: 'Blue-4', color: '#69c0ff' }} title="primary.light" dark />
+            <ColorBox bgcolor="primary.400" data={{ label: 'Blue-5', color: '#40a9ff' }} title="primary[400]" />
+            <ColorBox bgcolor="primary.main" data={{ label: 'Blue-6', color: '#1890ff' }} title="primary.main" main />
+            <ColorBox bgcolor="primary.dark" data={{ label: 'Blue-7', color: '#096dd9' }} title="primary.dark" />
+            <ColorBox bgcolor="primary.700" data={{ label: 'Blue-8', color: '#0050b3' }} title="primary[700]" />
+            <ColorBox bgcolor="primary.darker" data={{ label: 'Blue-9', color: '#003a8c' }} title="primary.darker" />
+            <ColorBox bgcolor="primary.900" data={{ label: 'Blue-10', color: '#002766' }} title="primary.900" />
           </Stack>
         </MainCard>
       </Grid>
@@ -160,21 +120,9 @@ const ComponentColor = () => (
               title="secondary.main"
               main
             />
-            <ColorBox
-              bgcolor="secondary.600"
-              data={{ label: 'Grey-7', color: '#595959' }}
-              title="secondary.600"
-            />
-            <ColorBox
-              bgcolor="secondary.dark"
-              data={{ label: 'Grey-8', color: '#262626' }}
-              title="secondary.dark"
-            />
-            <ColorBox
-              bgcolor="secondary.800"
-              data={{ label: 'Grey-9', color: '#141414' }}
-              title="secondary[800]"
-            />
+            <ColorBox bgcolor="secondary.600" data={{ label: 'Grey-7', color: '#595959' }} title="secondary.600" />
+            <ColorBox bgcolor="secondary.dark" data={{ label: 'Grey-8', color: '#262626' }} title="secondary.dark" />
+            <ColorBox bgcolor="secondary.800" data={{ label: 'Grey-9', color: '#141414' }} title="secondary[800]" />
             <ColorBox
               bgcolor="secondary.darker"
               data={{ label: 'Grey-10', color: '#000000' }}
@@ -192,16 +140,8 @@ const ComponentColor = () => (
               title="secondary.A100"
               dark
             />
-            <ColorBox
-              bgcolor="secondary.A200"
-              data={{ label: 'Grey-A2', color: '#434343' }}
-              title="secondary.A200"
-            />
-            <ColorBox
-              bgcolor="secondary.A300"
-              data={{ label: 'Grey-A3', color: '#1f1f1f' }}
-              title="secondary.A300"
-            />
+            <ColorBox bgcolor="secondary.A200" data={{ label: 'Grey-A2', color: '#434343' }} title="secondary.A200" />
+            <ColorBox bgcolor="secondary.A300" data={{ label: 'Grey-A3', color: '#1f1f1f' }} title="secondary.A300" />
           </Stack>
         </MainCard>
       </Grid>
@@ -220,56 +160,20 @@ const ComponentColor = () => (
               title="success.light"
               dark
             />
-            <ColorBox
-              bgcolor="success.main"
-              data={{ label: 'Green-6', color: '#52c41a' }}
-              title="success.main"
-              main
-            />
-            <ColorBox
-              bgcolor="success.dark"
-              data={{ label: 'Green-8', color: '#237804' }}
-              title="success.dark"
-            />
-            <ColorBox
-              bgcolor="success.darker"
-              data={{ label: 'Green-10', color: '#092b00' }}
-              title="success.darker"
-            />
+            <ColorBox bgcolor="success.main" data={{ label: 'Green-6', color: '#52c41a' }} title="success.main" main />
+            <ColorBox bgcolor="success.dark" data={{ label: 'Green-8', color: '#237804' }} title="success.dark" />
+            <ColorBox bgcolor="success.darker" data={{ label: 'Green-10', color: '#092b00' }} title="success.darker" />
           </Stack>
         </MainCard>
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
         <MainCard title="Error Color" codeHighlight>
           <Stack>
-            <ColorBox
-              bgcolor="error.lighter"
-              data={{ label: 'Red-1', color: '#fff1f0' }}
-              title="error.lighter"
-              dark
-            />
-            <ColorBox
-              bgcolor="error.light"
-              data={{ label: 'Red-4', color: '#ff7875' }}
-              title="error.light"
-              dark
-            />
-            <ColorBox
-              bgcolor="error.main"
-              data={{ label: 'Red-6', color: '#f5222d' }}
-              title="error.main"
-              main
-            />
-            <ColorBox
-              bgcolor="error.dark"
-              data={{ label: 'Red-8', color: '#a8071a' }}
-              title="error.dark"
-            />
-            <ColorBox
-              bgcolor="error.darker"
-              data={{ label: 'Red-10', color: '#5c0011' }}
-              title="error.darker"
-            />
+            <ColorBox bgcolor="error.lighter" data={{ label: 'Red-1', color: '#fff1f0' }} title="error.lighter" dark />
+            <ColorBox bgcolor="error.light" data={{ label: 'Red-4', color: '#ff7875' }} title="error.light" dark />
+            <ColorBox bgcolor="error.main" data={{ label: 'Red-6', color: '#f5222d' }} title="error.main" main />
+            <ColorBox bgcolor="error.dark" data={{ label: 'Red-8', color: '#a8071a' }} title="error.dark" />
+            <ColorBox bgcolor="error.darker" data={{ label: 'Red-10', color: '#5c0011' }} title="error.darker" />
           </Stack>
         </MainCard>
       </Grid>
@@ -282,28 +186,10 @@ const ComponentColor = () => (
               title="warning.lighter"
               dark
             />
-            <ColorBox
-              bgcolor="warning.light"
-              data={{ label: 'Gold-4', color: '#ffd666' }}
-              title="warning.light"
-              dark
-            />
-            <ColorBox
-              bgcolor="warning.main"
-              data={{ label: 'Gold-6', color: '#faad14' }}
-              title="warning.main"
-              main
-            />
-            <ColorBox
-              bgcolor="warning.dark"
-              data={{ label: 'Gold-8', color: '#ad6800' }}
-              title="warning.dark"
-            />
-            <ColorBox
-              bgcolor="warning.darker"
-              data={{ label: 'Gold-10', color: '#613400' }}
-              title="warning.darker"
-            />
+            <ColorBox bgcolor="warning.light" data={{ label: 'Gold-4', color: '#ffd666' }} title="warning.light" dark />
+            <ColorBox bgcolor="warning.main" data={{ label: 'Gold-6', color: '#faad14' }} title="warning.main" main />
+            <ColorBox bgcolor="warning.dark" data={{ label: 'Gold-8', color: '#ad6800' }} title="warning.dark" />
+            <ColorBox bgcolor="warning.darker" data={{ label: 'Gold-10', color: '#613400' }} title="warning.darker" />
           </Stack>
         </MainCard>
       </Grid>

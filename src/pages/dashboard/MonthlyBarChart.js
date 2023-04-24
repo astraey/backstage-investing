@@ -64,15 +64,7 @@ const MonthlyBarChart = () => {
       xaxis: {
         labels: {
           style: {
-            colors: [
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-            ],
+            colors: [secondary, secondary, secondary, secondary, secondary, secondary, secondary],
           },
         },
       },
@@ -85,12 +77,7 @@ const MonthlyBarChart = () => {
 
   return (
     <div id="chart">
-      <ReactApexChart
-        options={options}
-        series={series}
-        type="bar"
-        height={365}
-      />
+      <ReactApexChart options={options} series={series} type="bar" height={365} />
     </div>
   );
 };

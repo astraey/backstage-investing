@@ -18,19 +18,14 @@ const MainDrawer = ({ open, handleDrawerToggle, window }) => {
   const matchDownMD = useMediaQuery(theme.breakpoints.down('lg'));
 
   // responsive drawer container
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+  const container = window !== undefined ? () => window().document.body : undefined;
 
   // header content
   const drawerContent = useMemo(() => <DrawerContent />, []);
   const drawerHeader = useMemo(() => <DrawerHeader open={open} />, [open]);
 
   return (
-    <Box
-      component="nav"
-      sx={{ flexShrink: { md: 0 }, zIndex: 1300 }}
-      aria-label="mailbox folders"
-    >
+    <Box component="nav" sx={{ flexShrink: { md: 0 }, zIndex: 1300 }} aria-label="mailbox folders">
       {!matchDownMD ? (
         <MiniDrawerStyled variant="permanent" open={open}>
           {drawerHeader}

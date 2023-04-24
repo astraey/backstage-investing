@@ -28,11 +28,7 @@ import MainCard from 'components/MainCard';
 import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
 
 // assets
-import {
-  GiftOutlined,
-  MessageOutlined,
-  SettingOutlined,
-} from '@ant-design/icons';
+import { GiftOutlined, MessageOutlined, SettingOutlined } from '@ant-design/icons';
 import avatar1 from 'assets/images/users/avatar-1.png';
 import avatar2 from 'assets/images/users/avatar-2.png';
 import avatar3 from 'assets/images/users/avatar-3.png';
@@ -84,30 +80,13 @@ const DashboardDefault = () => {
         <Typography variant="h5">Dashboard</Typography>
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce
-          title="Total Page Views"
-          count="4,42,236"
-          percentage={59.3}
-          extra="35,000"
-        />
+        <AnalyticEcommerce title="Total Page Views" count="4,42,236" percentage={59.3} extra="35,000" />
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce
-          title="Total Users"
-          count="78,250"
-          percentage={70.5}
-          extra="8,900"
-        />
+        <AnalyticEcommerce title="Total Users" count="78,250" percentage={70.5} extra="8,900" />
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce
-          title="Total Order"
-          count="18,800"
-          percentage={27.4}
-          isLoss
-          color="warning"
-          extra="1,943"
-        />
+        <AnalyticEcommerce title="Total Order" count="18,800" percentage={27.4} isLoss color="warning" extra="1,943" />
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <AnalyticEcommerce
@@ -120,11 +99,7 @@ const DashboardDefault = () => {
         />
       </Grid>
 
-      <Grid
-        item
-        md={8}
-        sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }}
-      />
+      <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
 
       {/* row 2 */}
       <Grid item xs={12} md={7} lg={8}>
@@ -287,9 +262,7 @@ const DashboardDefault = () => {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                primary={
-                  <Typography variant="subtitle1">Order #002434</Typography>
-                }
+                primary={<Typography variant="subtitle1">Order #002434</Typography>}
                 secondary="Today, 2:00 AM"
               />
               <ListItemSecondaryAction>
@@ -315,9 +288,7 @@ const DashboardDefault = () => {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                primary={
-                  <Typography variant="subtitle1">Order #984947</Typography>
-                }
+                primary={<Typography variant="subtitle1">Order #984947</Typography>}
                 secondary="5 August, 1:45 PM"
               />
               <ListItemSecondaryAction>
@@ -343,9 +314,7 @@ const DashboardDefault = () => {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                primary={
-                  <Typography variant="subtitle1">Order #988784</Typography>
-                }
+                primary={<Typography variant="subtitle1">Order #988784</Typography>}
                 secondary="7 hours ago"
               />
               <ListItemSecondaryAction>
@@ -375,9 +344,7 @@ const DashboardDefault = () => {
                 </Stack>
               </Grid>
               <Grid item>
-                <AvatarGroup
-                  sx={{ '& .MuiAvatar-root': { width: 32, height: 32 } }}
-                >
+                <AvatarGroup sx={{ '& .MuiAvatar-root': { width: 32, height: 32 } }}>
                   <Avatar alt="Remy Sharp" src={avatar1} />
                   <Avatar alt="Travis Howard" src={avatar2} />
                   <Avatar alt="Cindy Baker" src={avatar3} />
@@ -385,11 +352,7 @@ const DashboardDefault = () => {
                 </AvatarGroup>
               </Grid>
             </Grid>
-            <Button
-              size="small"
-              variant="contained"
-              sx={{ textTransform: 'capitalize' }}
-            >
+            <Button size="small" variant="contained" sx={{ textTransform: 'capitalize' }}>
               Need Help?
             </Button>
           </Stack>

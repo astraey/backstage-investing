@@ -5,14 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import {
-  Avatar,
-  Chip,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Typography,
-} from '@mui/material';
+import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
 
 // project import
 import { activeItem } from 'store/reducers/menu';
@@ -31,9 +24,7 @@ const NavItem = ({ item, level }) => {
   }
 
   let listItemProps = {
-    component: forwardRef((props, ref) => (
-      <Link ref={ref} {...props} to={item.url} target={itemTarget} />
-    )),
+    component: forwardRef((props, ref) => <Link ref={ref} {...props} to={item.url} target={itemTarget} />),
   };
   if (item?.external) {
     listItemProps = { component: 'a', href: item.url, target: itemTarget };
@@ -44,11 +35,7 @@ const NavItem = ({ item, level }) => {
   };
 
   const Icon = item.icon;
-  const itemIcon = item.icon ? (
-    <Icon style={{ fontSize: drawerOpen ? '1rem' : '1.25rem' }} />
-  ) : (
-    false
-  );
+  const itemIcon = item.icon ? <Icon style={{ fontSize: drawerOpen ? '1rem' : '1.25rem' }} /> : false;
 
   const isSelected = openItem.findIndex((id) => id === item.id) > -1;
 
@@ -134,10 +121,7 @@ const NavItem = ({ item, level }) => {
       {(drawerOpen || (!drawerOpen && level !== 1)) && (
         <ListItemText
           primary={
-            <Typography
-              variant="h6"
-              sx={{ color: isSelected ? iconSelectedColor : textColor }}
-            >
+            <Typography variant="h6" sx={{ color: isSelected ? iconSelectedColor : textColor }}>
               {item.title}
             </Typography>
           }
