@@ -1,4 +1,3 @@
-
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
@@ -8,7 +7,6 @@
 
 const AlphaVantageRequestHandler = require('./request-handlers/AlphaVantageRequestHandler');
 const alphaVantageRequestHandler = new AlphaVantageRequestHandler();
-
 const headers = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': '*',
@@ -16,20 +14,10 @@ const headers = {
 exports.handler = async (event) => {
   if (typeof event.resource !== 'undefined') {
     switch (true) {
-      
       case event.resource.includes('company'):
         return {
           statusCode: 200,
           headers: headers,
-          /*
-          body: JSON.stringify({
-            resource: event.resource || {},
-            pathParameters: event.pathParameters.proxy || {},
-            response: 'The API Call included the word company in its path',
-            chuckNorrisJoke: await twelveDataRequestHandler.getChuckNorrisJoke(),
-            event: event,
-          }),
-          */
           body: JSON.stringify(await alphaVantageRequestHandler.getCompanyMetrics(event.pathParameters.proxy)),
         };
     }

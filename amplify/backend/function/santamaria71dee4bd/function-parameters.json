@@ -1,7 +1,4 @@
 {
   "lambdaLayers": [],
-  "secretNames": [
-    "twelvedataapikey",
-    "alphavantageapikey"
-  ]
+  "secretNames": ["twelvedataapikey", "alphavantageapikey"]
 }

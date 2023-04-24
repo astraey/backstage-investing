@@ -14,7 +14,7 @@ Amplify.configure(awsconfig);
 
 const apiName = 'santamariaapi';
 const path = '/company/AMZN';
-const myInit = {
+const requestVariables = {
   headers: {}, // OPTIONAL
   response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
   queryStringParameters: {
@@ -29,7 +29,7 @@ const App = ({ signOut }) => {
 
   useEffect(() => {
     setDataFromAPI();
-    API.get(apiName, path, myInit)
+    API.get(apiName, path, requestVariables)
       .then((response) => {
         // Add your code here
         console.log(response);

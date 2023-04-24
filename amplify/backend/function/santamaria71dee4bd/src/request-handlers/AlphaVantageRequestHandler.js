@@ -51,7 +51,7 @@ class AlphaVantageRequestHandler {
         method: 'GET',
         hostname: 'www.alphavantage.co',
         port: null,
-        path: `/query?function=INCOME_STATEMENT&symbol=${stockTicker}&apikey=${apiKey}`, 
+        path: `/query?function=INCOME_STATEMENT&symbol=${stockTicker}&apikey=${apiKey}`,
       };
 
       const req = https.request(options, (res) => {
