@@ -1,4 +1,4 @@
-import logo from 'assets/images/icons/Backstage.svg';
+import logo from 'assets/images/icons/backstage.svg';
 
 
 const Logo = () => {
