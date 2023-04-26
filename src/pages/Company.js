@@ -1,8 +1,9 @@
 import { API } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 const apiName = 'santamariaapi';
-const path = '/company/AMZN';
+//const path = '/company/AAPL';
 const requestVariables = {
   headers: {}, // OPTIONAL
   response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
@@ -13,7 +14,9 @@ const requestVariables = {
 
 const Company = () => {
   const [dataFromAPI, setDataFromAPI] = useState(null);
+  const params = useParams();
   useEffect(() => {
+    let path = `/company/${params.companyTicker}`;
     setDataFromAPI();
     API.get(apiName, path, requestVariables)
       .then((response) => {
@@ -27,7 +30,7 @@ const Company = () => {
   }, []);
   return (
     <div>
-      <h1>AMZN Page</h1>
+      <h1>{params.companyTicker} Page</h1>
       <p>Company Data (Coming from our API)</p>
       <p>{JSON.stringify(dataFromAPI)}</p>
     </div>
