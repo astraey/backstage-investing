@@ -1,6 +1,11 @@
-# Getting Started with the Santa Maria React App
+# Getting Started with the Backstage React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+To connect your app to the correct backend environment using the Amplify CLI, run the Local Setup command, found in AWS Account -> Amplify -> Backend evironments -> Local setup instructions. You may have to run amplify init as well, before you run the local setup command.
+
+### `amplify init`
+
 
 ## Available Scripts
 
