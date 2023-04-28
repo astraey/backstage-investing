@@ -10,6 +10,11 @@
       "StackName": "amplify-backstageinvesting-main-133746",
       "StackId": "arn:aws:cloudformation:us-east-1:692815762720:stack/amplify-backstageinvesting-main-133746/dc84c7b0-e5c9-11ed-ae47-12717c8aaafd",
       "AmplifyAppId": "d3b17q2og92g60"
+    },
+    "categories": {
+      "auth": {
+        "backstageinvestingc9ebcc25": {}
+      }
     }
   }
 }
