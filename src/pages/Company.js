@@ -38,7 +38,7 @@ import avatar2 from 'assets/images/users/avatar-2.png';
 import avatar3 from 'assets/images/users/avatar-3.png';
 import avatar4 from 'assets/images/users/avatar-4.png';
 
-const apiName = 'santamariaapi';
+const apiName = 'backstageinvestingapi';
 const requestVariables = {
   headers: {}, // OPTIONAL
   response: false, // OPTIONAL (if true, return the entire Axios response object instead of only response.data)
@@ -146,7 +146,7 @@ const Company = () => {
         <Grid item xs={12} md={7} lg={8}>
           <Grid container alignItems="center" justifyContent="space-between">
             <Grid item>
-              <Typography variant="h5">Revenue</Typography>
+              <Typography variant="h5">Revenue & Operating Expenses</Typography>
             </Grid>
             <Grid item>
               <Stack direction="row" alignItems="center" spacing={0}>
