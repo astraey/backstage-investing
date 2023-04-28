@@ -1,6 +1,8 @@
 {
-  "providers": ["awscloudformation"],
-  "projectName": "santamaria",
+  "providers": [
+    "awscloudformation"
+  ],
+  "projectName": "backstageinvesting",
   "version": "3.1",
   "frontend": "javascript",
   "javascript": {
