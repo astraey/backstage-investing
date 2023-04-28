@@ -18,7 +18,7 @@ import {
   MenuItem,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from '@mui/material';
 
 // project import
@@ -30,6 +30,7 @@ import SalesColumnChart from 'pages/dashboard/SalesColumnChart';
 import MainCard from 'components/MainCard';
 import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
 import RevenueChart from 'pages/RevenueChart.js';
+import RevenueChart2 from 'pages/RevenueChart2.js';
 
 // assets
 import { GiftOutlined, MessageOutlined, SettingOutlined, SyncOutlined } from '@ant-design/icons';
@@ -179,9 +180,23 @@ const Company = () => {
               />
             </Box>
           </MainCard>
+          {/*
+          <MainCard content={false} sx={{ mt: 1.5 }}>
+            <Box sx={{ pt: 1, pr: 2 }}>
+              <RevenueChart2
+                slot={slot}
+                datesChart={datesChart}
+                revenueValuesChart={revenueValuesChart}
+                operatingExpensesValuesChart={operatingExpensesValuesChart}
+              />
+            </Box>
+          </MainCard>
+          */}
         </Grid>
       ) : (
-        <p><SyncOutlined spin style={{ fontSize: '300%' }} /></p>
+        <p>
+          <SyncOutlined spin style={{ fontSize: '300%' }} />
+        </p>
       )}
       {/*
       {dataReceived ? (

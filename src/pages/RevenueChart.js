@@ -43,9 +43,9 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
   useEffect(() => {
     setOptions((prevState) => ({
       ...prevState,
-      colors: [theme.palette.success.light, theme.palette.error.light],
+      colors: [theme.palette.primary[200], theme.palette.error.light],
       xaxis: {
-        categories: slot === 'All Time' ? datesChart.reverse() : datesChart.slice(0,7).reverse(),
+        categories: slot === 'All Time' ? datesChart.reverse() : datesChart.slice(0, 7).reverse(),
         labels: {
           style: {
             colors: [
@@ -101,11 +101,14 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
     setSeries([
       {
         name: 'Revenue',
-        data: slot === 'All Time' ? revenueValuesChart.reverse() : revenueValuesChart.slice(0,7).reverse(),
+        data: slot === 'All Time' ? revenueValuesChart.reverse() : revenueValuesChart.slice(0, 7).reverse(),
       },
       {
         name: 'Operating Expenses',
-        data: slot === 'All Time' ? operatingExpensesValuesChart.reverse() : operatingExpensesValuesChart.slice(0,7).reverse(),
+        data:
+          slot === 'All Time'
+            ? operatingExpensesValuesChart.reverse()
+            : operatingExpensesValuesChart.slice(0, 7).reverse(),
       },
     ]);
   }, [slot]);
