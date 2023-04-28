@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "paths": {
+    "/company": {
+      "name": "/company",
+      "lambdaFunction": "entrypointfunction",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  }
+}

@@ -1,4 +1,20 @@
 {
+  "api": {
+    "backstageinvestingapi": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "entrypointfunction"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
   "auth": {
     "backstageinvestingc9ebcc25": {
       "customAuth": false,
@@ -25,6 +41,39 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "entrypointfunction": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_entrypointfunction_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "entrypointfunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_entrypointfunction_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "entrypointfunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_entrypointfunction_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "entrypointfunction"
+        }
+      ]
     }
   }
 }
