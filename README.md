@@ -6,7 +6,6 @@ To connect your app to the correct backend environment using the Amplify CLI, ru
 
 ### `amplify init`
 
-
 ## Available Scripts
 
 In the project directory, you can run:
