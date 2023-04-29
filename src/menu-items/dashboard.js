@@ -15,19 +15,19 @@ const dashboard = {
   type: 'group',
   children: [
     {
-      id: 'dashboard',
-      title: 'Dashboard',
-      type: 'item',
-      url: '/dashboard/default',
-      icon: icons.DashboardOutlined,
-      breadcrumbs: false,
-    },
-    {
       id: 'company',
       title: 'Company Page',
       type: 'item',
       url: '/company',
       icon: icons.PieChartOutlined,
+      breadcrumbs: false,
+    },
+    {
+      id: 'dashboard',
+      title: 'Dashboard',
+      type: 'item',
+      url: '/dashboard/default',
+      icon: icons.DashboardOutlined,
       breadcrumbs: false,
     },
   ],

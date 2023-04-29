@@ -92,7 +92,7 @@ const Company = () => {
   const [comprehensiveIncomeNetOfTax, SetComprehensiveIncomeNetOfTax] = useState(null);
   const [dataReceived, setDataReceived] = useState(null);
   const [value, setValue] = useState('today');
-  const [slot, setSlot] = useState('Last 7 Quarters');
+  const [slot, setSlot] = useState('Last 2 Years');
 
   const params = useParams();
 
@@ -107,9 +107,11 @@ const Company = () => {
       .then((response) => {
         console.log(response);
         response.quarterlyReports.map((quarterlyReport) => {
-          grossProfit.push(Math.round(quarterlyReport.grossProfit / 1000000000 * 100) / 100);
-          operatingExpenses.push(Math.round(quarterlyReport.operatingExpenses / 1000000000 * 100) / 100);
-          comprehensiveIncomeNetOfTax.push(Math.round(quarterlyReport.comprehensiveIncomeNetOfTax / 1000000000 * 100) / 100);
+          grossProfit.push(Math.round((quarterlyReport.grossProfit / 1000000000) * 100) / 100);
+          operatingExpenses.push(Math.round((quarterlyReport.operatingExpenses / 1000000000) * 100) / 100);
+          comprehensiveIncomeNetOfTax.push(
+            Math.round((quarterlyReport.comprehensiveIncomeNetOfTax / 1000000000) * 100) / 100,
+          );
           switch (
             `${quarterlyReport.fiscalDateEnding.split('-')[1]}-${quarterlyReport.fiscalDateEnding.split('-')[2]}`
           ) {
@@ -146,59 +148,95 @@ const Company = () => {
       {/*<p>{JSON.stringify(revenueValuesChart)}</p>*/}
       {/*<p>{JSON.stringify(datesChart)}</p>*/}
       {dataReceived ? (
-        <Grid item xs={12} md={7} lg={8}>
-          <Grid container alignItems="center" justifyContent="space-between">
-            <Grid item>
-              <Typography variant="h5">Revenue & Operating Expenses</Typography>
+        <div>
+          {/*<p>{JSON.stringify(datesChart)}</p>*/}
+          <Grid container rowSpacing={4.5} columnSpacing={2.75}>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <AnalyticEcommerce title="Total Page Views" count="4,42,236" percentage={59.3} extra="35,000" />
             </Grid>
-            <Grid item>
-              <Stack direction="row" alignItems="center" spacing={0}>
-                <Button
-                  size="small"
-                  onClick={() => setSlot('All Time')}
-                  color={slot === 'All Time' ? 'primary' : 'secondary'}
-                  variant={slot === 'All Time' ? 'outlined' : 'text'}
-                >
-                  All Time
-                </Button>
-                <Button
-                  size="small"
-                  onClick={() => setSlot('Last 7 Quarters')}
-                  color={slot === 'Last 7 Quarters' ? 'primary' : 'secondary'}
-                  variant={slot === 'Last 7 Quarters' ? 'outlined' : 'text'}
-                >
-                  Last 7 Quarters
-                </Button>
-              </Stack>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <AnalyticEcommerce title="Total Users" count="78,250" percentage={70.5} extra="8,900" />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <AnalyticEcommerce
+                title="Total Order"
+                count="18,800"
+                percentage={27.4}
+                isLoss
+                color="warning"
+                extra="1,943"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <AnalyticEcommerce
+                title="Total Sales"
+                count="$35,078"
+                percentage={27.4}
+                isLoss
+                color="warning"
+                extra="$20,395"
+              />
             </Grid>
           </Grid>
-          <MainCard content={false} sx={{ mt: 1.5 }}>
-            <Box sx={{ pt: 1, pr: 2 }}>
-              <RevenueChart
-                slot={slot}
-                datesChart={datesChart}
-                revenueValuesChart={revenueValuesChart}
-                operatingExpensesValuesChart={operatingExpensesValuesChart}
-              />
-            </Box>
-          </MainCard>
           <br></br>
           <br></br>
-          <Grid container alignItems="center" justifyContent="space-between">
-            <Grid item>
-              <Typography variant="h5">Comprehensive Income Net Of Tax</Typography>
+          <Grid item xs={12} md={7} lg={8}>
+            <Grid container alignItems="center" justifyContent="space-between">
+              <Grid item>
+                <Typography variant="h5">Revenue & Operating Expenses</Typography>
+              </Grid>
+              <Grid item>
+                <Stack direction="row" alignItems="center" spacing={0}>
+                  <Button
+                    size="small"
+                    onClick={() => setSlot('All Time')}
+                    color={slot === 'All Time' ? 'primary' : 'secondary'}
+                    variant={slot === 'All Time' ? 'outlined' : 'text'}
+                  >
+                    All Time
+                  </Button>
+                  <Button
+                    size="small"
+                    onClick={() => setSlot('Last 2 Years')}
+                    color={slot === 'Last 2 Years' ? 'primary' : 'secondary'}
+                    variant={slot === 'Last 2 Years' ? 'outlined' : 'text'}
+                  >
+                    Last 2 Years
+                  </Button>
+                </Stack>
+              </Grid>
             </Grid>
-          </Grid>
-          <MainCard content={false} sx={{ mt: 1.5 }}>
-            <Box sx={{ pt: 1, pr: 2 }}>
-              <ComprehensiveIncomeChart
-                slot={slot}
-                datesChart={datesChart}
-                comprehensiveIncomeNetOfTax={comprehensiveIncomeNetOfTax}
-              />
-            </Box>
-          </MainCard>
-          {/*
+            <MainCard content={false} sx={{ mt: 1.5 }}>
+              <Box sx={{ pt: 1, pr: 2 }}>
+                <RevenueChart
+                  slot={slot}
+                  datesChart={datesChart}
+                  revenueValuesChart={revenueValuesChart}
+                  operatingExpensesValuesChart={operatingExpensesValuesChart}
+                />
+              </Box>
+            </MainCard>
+            <br></br>
+            <br></br>
+            <Grid container alignItems="center" justifyContent="space-between">
+              <Grid item>
+                <Typography variant="h5">Comprehensive Income Net Of Tax</Typography>
+                <Typography variant="h6">
+                  Comprehensive income is the total profit or gain that a company makes in a particular period of time,
+                  plus the value of yet unrealized profits (or losses) in the same period.
+                </Typography>
+              </Grid>
+            </Grid>
+            <MainCard content={false} sx={{ mt: 1.5 }}>
+              <Box sx={{ pt: 1, pr: 2 }}>
+                <ComprehensiveIncomeChart
+                  slot={slot}
+                  datesChart={datesChart}
+                  comprehensiveIncomeNetOfTax={comprehensiveIncomeNetOfTax}
+                />
+              </Box>
+            </MainCard>
+            {/*
           <MainCard content={false} sx={{ mt: 1.5 }}>
             <Box sx={{ pt: 1, pr: 2 }}>
               <RevenueChart2
@@ -210,7 +248,8 @@ const Company = () => {
             </Box>
           </MainCard>
           */}
-        </Grid>
+          </Grid>
+        </div>
       ) : (
         <p>
           <SyncOutlined spin style={{ fontSize: '300%' }} />
@@ -279,11 +318,11 @@ const Company = () => {
                 </Button>
                 <Button
                   size="small"
-                  onClick={() => setSlot('Last 7 Quarters')}
-                  color={slot === 'Last 7 Quarters' ? 'primary' : 'secondary'}
-                  variant={slot === 'Last 7 Quarters' ? 'outlined' : 'text'}
+                  onClick={() => setSlot('Last 2 Years')}
+                  color={slot === 'Last 2 Years' ? 'primary' : 'secondary'}
+                  variant={slot === 'Last 2 Years' ? 'outlined' : 'text'}
                 >
-                  Last 7 Quarters
+                  Last 2 Years
                 </Button>
               </Stack>
             </Grid>

@@ -26,7 +26,7 @@ const MainRoutes = {
   children: [
     {
       path: '/',
-      element: <DashboardDefault />,
+      element: <CompanySelection />,
     },
     {
       path: 'color',

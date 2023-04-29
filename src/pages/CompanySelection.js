@@ -27,6 +27,11 @@ const CompanySelection = () => {
           Tesla
         </Link>
       </p>
+      <p>
+        <Link variant="h6" component={RouterLink} to="/company/W" color="text.primary">
+          Wayfair
+        </Link>
+      </p>
     </div>
   );
 };

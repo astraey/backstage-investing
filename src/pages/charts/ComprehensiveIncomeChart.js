@@ -16,13 +16,16 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
         data:
           slot === 'All Time'
             ? comprehensiveIncomeNetOfTax
-            : comprehensiveIncomeNetOfTax.slice(comprehensiveIncomeNetOfTax.length -7, comprehensiveIncomeNetOfTax.length),
-      }
+            : comprehensiveIncomeNetOfTax.slice(
+                comprehensiveIncomeNetOfTax.length - 7,
+                comprehensiveIncomeNetOfTax.length,
+              ),
+      },
     ]);
   }, [slot]);
 
   const [options, setOptions] = useState({});
-  
+
   useEffect(() => {
     setOptions({
       chart: {
@@ -35,19 +38,22 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
       plotOptions: {
         bar: {
           colors: {
-            ranges: [{
-              from: 0,
-              to: 1000,
-              color: theme.palette.success.light
-            }, {
-              from: -1000,
-              to: 0,
-              color: theme.palette.error.light
-            }]
+            ranges: [
+              {
+                from: 0,
+                to: 1000,
+                color: theme.palette.primary[200],
+              },
+              {
+                from: -1000,
+                to: 0,
+                color: theme.palette.error.light,
+              },
+            ],
           },
-          columnWidth: '80%',
-          borderRadius: 4,
-        }
+          columnWidth: '40%',
+          borderRadius: 3,
+        },
       },
       dataLabels: {
         enabled: true,
@@ -56,12 +62,12 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
         },
       },
       xaxis: {
-        categories: slot === 'All Time' ? datesChart : datesChart.slice(datesChart.length -7, datesChart.length),
+        categories: slot === 'All Time' ? datesChart : datesChart.slice(datesChart.length - 7, datesChart.length),
         axisBorder: {
-          show: false,
+          show: true,
         },
         axisTicks: {
-          show: false,
+          show: true,
         },
         labels: {
           style: {
@@ -70,7 +76,7 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
         },
       },
       yaxis: {
-        show: false,
+        show: true,
       },
       grid: {
         show: true,
@@ -79,10 +85,10 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
       tooltip: {
         theme: 'light',
         y: {
-            formatter(val) {
-              return `$${val}B`;
-            },
+          formatter(val) {
+            return `$${val}B`;
           },
+        },
       },
       colors: [info],
     });

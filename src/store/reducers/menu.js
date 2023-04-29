@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // initial state
 const initialState = {
-  openItem: ['dashboard'],
+  openItem: ['company'],
   openComponent: 'buttons',
   drawerOpen: false,
   componentDrawerOpen: true,

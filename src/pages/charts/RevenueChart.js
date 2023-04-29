@@ -43,7 +43,7 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
       ...prevState,
       colors: [theme.palette.primary[200], theme.palette.error.light],
       xaxis: {
-        categories: slot === 'All Time' ? datesChart : datesChart.slice(datesChart.length -7, datesChart.length),
+        categories: slot === 'All Time' ? datesChart : datesChart.slice(datesChart.length - 7, datesChart.length),
         labels: {
           style: {
             colors: datesChart.map(() => secondary),
@@ -68,10 +68,10 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
       tooltip: {
         theme: 'light',
         y: {
-            formatter(val) {
-              return `$${val}B`;
-            },
+          formatter(val) {
+            return `$${val}B`;
           },
+        },
       },
     }));
   }, [primary, secondary, line, theme, slot]);
@@ -95,10 +95,7 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
       },
       {
         name: 'Operating Expenses',
-        data:
-          slot === 'All Time'
-            ? operatingExpensesValuesChart
-            : operatingExpensesValuesChart.slice(0, 7),
+        data: slot === 'All Time' ? operatingExpensesValuesChart : operatingExpensesValuesChart.slice(0, 7),
       },
     ]);
   }, [slot]);

@@ -7,6 +7,7 @@ import Search from './Search';
 import Profile from './Profile';
 import Notification from './Notification';
 import MobileSection from './MobileSection';
+import Logo from 'components/Logo/Logo';
 
 // ==============================|| HEADER - CONTENT ||============================== //
 
@@ -15,6 +16,7 @@ const HeaderContent = () => {
 
   return (
     <>
+      {/*<Logo/>*/}
       {!matchesXs && <Search />}
       {matchesXs && <Box sx={{ width: '100%', ml: 1 }} />}
 
