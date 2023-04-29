@@ -17,7 +17,10 @@ const areaChartOptions = {
     },
   },
   dataLabels: {
-    enabled: false,
+    enabled: true,
+    formatter(val) {
+      return `$${val}B`;
+    },
   },
   stroke: {
     curve: 'smooth',
@@ -35,33 +38,15 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
   const { primary, secondary } = theme.palette.text;
   const line = theme.palette.divider;
   const [options, setOptions] = useState(areaChartOptions);
-
-  //console.log(inputChartDataOptions);
-  //console.log(inputChartDataSeries);
-  //console.log(slot);
-
   useEffect(() => {
     setOptions((prevState) => ({
       ...prevState,
       colors: [theme.palette.primary[200], theme.palette.error.light],
       xaxis: {
-        categories: slot === 'All Time' ? datesChart.reverse() : datesChart.slice(0, 7).reverse(),
+        categories: slot === 'All Time' ? datesChart : datesChart.slice(datesChart.length -7, datesChart.length),
         labels: {
           style: {
-            colors: [
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-            ],
+            colors: datesChart.map(() => secondary),
           },
         },
         axisBorder: {
@@ -82,6 +67,11 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
       },
       tooltip: {
         theme: 'light',
+        y: {
+            formatter(val) {
+              return `$${val}B`;
+            },
+          },
       },
     }));
   }, [primary, secondary, line, theme, slot]);
@@ -101,23 +91,20 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
     setSeries([
       {
         name: 'Revenue',
-        data: slot === 'All Time' ? revenueValuesChart.reverse() : revenueValuesChart.slice(0, 7).reverse(),
+        data: slot === 'All Time' ? revenueValuesChart : revenueValuesChart.slice(0, 7),
       },
       {
         name: 'Operating Expenses',
         data:
           slot === 'All Time'
-            ? operatingExpensesValuesChart.reverse()
-            : operatingExpensesValuesChart.slice(0, 7).reverse(),
+            ? operatingExpensesValuesChart
+            : operatingExpensesValuesChart.slice(0, 7),
       },
     ]);
   }, [slot]);
 
   return (
     <div>
-      {/*JSON.stringify(datesChart)*/}
-      {/*JSON.stringify(revenueValuesChart)*/}
-      {/*JSON.stringify(operatingExpensesValuesChart)*/}
       <ReactApexChart options={options} series={series} type="area" height={450} />
     </div>
   );

@@ -1,7 +1,6 @@
 import { API } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-//import Chart from 'react-apexcharts';
 
 // material-ui
 import {
@@ -29,8 +28,9 @@ import ReportAreaChart from 'pages/dashboard/ReportAreaChart';
 import SalesColumnChart from 'pages/dashboard/SalesColumnChart';
 import MainCard from 'components/MainCard';
 import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
-import RevenueChart from 'pages/RevenueChart.js';
-import RevenueChart2 from 'pages/RevenueChart2.js';
+import RevenueChart from 'pages/charts/RevenueChart';
+import ComprehensiveIncomeChart from 'pages/charts/ComprehensiveIncomeChart';
+//import RevenueChart2 from 'pages/charts/RevenueChart2';
 
 // assets
 import { GiftOutlined, MessageOutlined, SettingOutlined, SyncOutlined } from '@ant-design/icons';
@@ -82,13 +82,14 @@ const status = [
 ];
 
 const Company = () => {
-  const [dataFromAPI, setDataFromAPI] = useState(null);
+  //const [dataFromAPI, setDataFromAPI] = useState(null);
   //const [grossProfit, setGrossProfit] = useState(null);
   //const [fiscalDateEnding, setFiscalDateEnding] = useState(null);
   //const [inputChartData, setInputChartData] = useState(null);
   const [datesChart, setDatesChart] = useState(null);
   const [revenueValuesChart, setRevenueValuesChart] = useState(null);
   const [operatingExpensesValuesChart, SetOperatingExpensesValuesChart] = useState(null);
+  const [comprehensiveIncomeNetOfTax, SetComprehensiveIncomeNetOfTax] = useState(null);
   const [dataReceived, setDataReceived] = useState(null);
   const [value, setValue] = useState('today');
   const [slot, setSlot] = useState('Last 7 Quarters');
@@ -100,13 +101,15 @@ const Company = () => {
     let grossProfit = [];
     let fiscalDateEnding = [];
     let operatingExpenses = [];
-    setDataFromAPI();
+    let comprehensiveIncomeNetOfTax = [];
+    //setDataFromAPI();
     API.get(apiName, path, requestVariables)
       .then((response) => {
         console.log(response);
         response.quarterlyReports.map((quarterlyReport) => {
-          grossProfit.push(`${quarterlyReport.grossProfit / 1000000}M`);
-          operatingExpenses.push(`${quarterlyReport.operatingExpenses / 1000000}M`);
+          grossProfit.push(Math.round(quarterlyReport.grossProfit / 1000000000 * 100) / 100);
+          operatingExpenses.push(Math.round(quarterlyReport.operatingExpenses / 1000000000 * 100) / 100);
+          comprehensiveIncomeNetOfTax.push(Math.round(quarterlyReport.comprehensiveIncomeNetOfTax / 1000000000 * 100) / 100);
           switch (
             `${quarterlyReport.fiscalDateEnding.split('-')[1]}-${quarterlyReport.fiscalDateEnding.split('-')[2]}`
           ) {
@@ -125,12 +128,11 @@ const Company = () => {
           }
         });
 
-        setDataFromAPI(response);
-
-        setDatesChart(fiscalDateEnding);
-        setRevenueValuesChart(grossProfit);
-        SetOperatingExpensesValuesChart(operatingExpenses);
-
+        //setDataFromAPI(response);
+        setDatesChart(fiscalDateEnding.reverse());
+        setRevenueValuesChart(grossProfit.reverse());
+        SetOperatingExpensesValuesChart(operatingExpenses.reverse());
+        SetComprehensiveIncomeNetOfTax(comprehensiveIncomeNetOfTax.reverse());
         setDataReceived(true);
       })
       .catch((error) => {
@@ -180,6 +182,22 @@ const Company = () => {
               />
             </Box>
           </MainCard>
+          <br></br>
+          <br></br>
+          <Grid container alignItems="center" justifyContent="space-between">
+            <Grid item>
+              <Typography variant="h5">Comprehensive Income Net Of Tax</Typography>
+            </Grid>
+          </Grid>
+          <MainCard content={false} sx={{ mt: 1.5 }}>
+            <Box sx={{ pt: 1, pr: 2 }}>
+              <ComprehensiveIncomeChart
+                slot={slot}
+                datesChart={datesChart}
+                comprehensiveIncomeNetOfTax={comprehensiveIncomeNetOfTax}
+              />
+            </Box>
+          </MainCard>
           {/*
           <MainCard content={false} sx={{ mt: 1.5 }}>
             <Box sx={{ pt: 1, pr: 2 }}>
@@ -207,6 +225,7 @@ const Company = () => {
       */}
 
       {/*Samples From Dashboard Page Start Here*/}
+      <br></br>
       <br></br>
       <Grid container rowSpacing={4.5} columnSpacing={2.75}>
         {/* row 1 */}
