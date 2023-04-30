@@ -6,7 +6,7 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
   const theme = useTheme();
   const { primary, secondary } = theme.palette.text;
   const info = theme.palette.info.light;
-  const [series, setSeries] = useState({});
+  const [series, setSeries] = useState([]);
   const line = theme.palette.divider;
 
   useEffect(() => {
@@ -41,11 +41,11 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
             ranges: [
               {
                 from: 0,
-                to: 1000,
-                color: theme.palette.primary[200],
+                to: 10000000,
+                color: theme.palette.primary.light,
               },
               {
-                from: -1000,
+                from: -10000000,
                 to: 0,
                 color: theme.palette.error.light,
               },
@@ -57,8 +57,15 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
       },
       dataLabels: {
         enabled: true,
+        style: {
+          colors: ['#333'],
+        },
         formatter(val) {
-          return `$${val}B`;
+          if (val < 1000 && val > -1000) {
+            return `$${val}M`;
+          } else {
+            return `$${Math.round((val / 1000) * 10) / 10}B`;
+          }
         },
       },
       xaxis: {
@@ -78,6 +85,17 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
       yaxis: {
         show: true,
       },
+      annotations: {
+        yaxis: [
+          {
+            y: 0,
+            strokeDashArray: 0,
+            borderColor: '#111',
+            borderWidth: 1,
+            opacity: 1,
+          },
+        ],
+      },
       grid: {
         show: true,
         borderColor: line,
@@ -86,7 +104,11 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
         theme: 'light',
         y: {
           formatter(val) {
-            return `$${val}B`;
+            if (val < 1000 && val > -1000) {
+              return `$${val}M`;
+            } else {
+              return `$${Math.round((val / 1000) * 10) / 10}B`;
+            }
           },
         },
       },

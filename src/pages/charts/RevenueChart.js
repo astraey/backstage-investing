@@ -19,7 +19,11 @@ const areaChartOptions = {
   dataLabels: {
     enabled: true,
     formatter(val) {
-      return `$${val}B`;
+      if (val < 1000 && val > -1000) {
+        return `$${val}M`;
+      } else {
+        return `$${Math.round((val / 1000) * 10) / 10}B`;
+      }
     },
   },
   stroke: {
@@ -33,7 +37,7 @@ const areaChartOptions = {
 
 // ==============================|| INCOME AREA CHART ||============================== //
 
-const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesValuesChart }) => {
+const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesValuesChart, costOfRevenue }) => {
   const theme = useTheme();
   const { primary, secondary } = theme.palette.text;
   const line = theme.palette.divider;
@@ -41,7 +45,7 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
   useEffect(() => {
     setOptions((prevState) => ({
       ...prevState,
-      colors: [theme.palette.primary[200], theme.palette.error.light],
+      colors: [theme.palette.primary[200], theme.palette.error.light, theme.palette.warning.main],
       xaxis: {
         categories: slot === 'All Time' ? datesChart : datesChart.slice(datesChart.length - 7, datesChart.length),
         labels: {
@@ -69,7 +73,11 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
         theme: 'light',
         y: {
           formatter(val) {
-            return `$${val}B`;
+            if (val < 1000 && val > -1000) {
+              return `$${val}M`;
+            } else {
+              return `$${Math.round((val / 1000) * 10) / 10}B`;
+            }
           },
         },
       },
@@ -96,6 +104,10 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
       {
         name: 'Operating Expenses',
         data: slot === 'All Time' ? operatingExpensesValuesChart : operatingExpensesValuesChart.slice(0, 7),
+      },
+      {
+        name: 'Cost of Revenue',
+        data: slot === 'All Time' ? costOfRevenue : costOfRevenue.slice(0, 7),
       },
     ]);
   }, [slot]);

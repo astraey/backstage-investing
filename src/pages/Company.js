@@ -30,7 +30,7 @@ import MainCard from 'components/MainCard';
 import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
 import RevenueChart from 'pages/charts/RevenueChart';
 import ComprehensiveIncomeChart from 'pages/charts/ComprehensiveIncomeChart';
-//import RevenueChart2 from 'pages/charts/RevenueChart2';
+import AnalyticCard from 'pages/charts/AnalyticCard';
 
 // assets
 import { GiftOutlined, MessageOutlined, SettingOutlined, SyncOutlined } from '@ant-design/icons';
@@ -82,14 +82,13 @@ const status = [
 ];
 
 const Company = () => {
-  //const [dataFromAPI, setDataFromAPI] = useState(null);
-  //const [grossProfit, setGrossProfit] = useState(null);
-  //const [fiscalDateEnding, setFiscalDateEnding] = useState(null);
-  //const [inputChartData, setInputChartData] = useState(null);
   const [datesChart, setDatesChart] = useState(null);
   const [revenueValuesChart, setRevenueValuesChart] = useState(null);
-  const [operatingExpensesValuesChart, SetOperatingExpensesValuesChart] = useState(null);
-  const [comprehensiveIncomeNetOfTax, SetComprehensiveIncomeNetOfTax] = useState(null);
+  const [operatingExpensesValuesChart, setOperatingExpensesValuesChart] = useState(null);
+  const [comprehensiveIncomeNetOfTax, setComprehensiveIncomeNetOfTax] = useState(null);
+  const [costOfRevenue, setCostOfRevenue] = useState(null);
+  const [comprehensiveIncomeNetOfTaxLastReportedQuarter, setComprehensiveIncomeNetOfTaxLastReportedQuarter] =
+    useState(null);
   const [dataReceived, setDataReceived] = useState(null);
   const [value, setValue] = useState('today');
   const [slot, setSlot] = useState('Last 2 Years');
@@ -102,16 +101,17 @@ const Company = () => {
     let fiscalDateEnding = [];
     let operatingExpenses = [];
     let comprehensiveIncomeNetOfTax = [];
-    //setDataFromAPI();
+    let costOfRevenue = [];
     API.get(apiName, path, requestVariables)
       .then((response) => {
         console.log(response);
         response.quarterlyReports.map((quarterlyReport) => {
-          grossProfit.push(Math.round((quarterlyReport.grossProfit / 1000000000) * 100) / 100);
-          operatingExpenses.push(Math.round((quarterlyReport.operatingExpenses / 1000000000) * 100) / 100);
+          grossProfit.push(Math.round((quarterlyReport.grossProfit / 1000000) * 10) / 10);
+          operatingExpenses.push(Math.round((quarterlyReport.operatingExpenses / 1000000) * 10) / 10);
           comprehensiveIncomeNetOfTax.push(
-            Math.round((quarterlyReport.comprehensiveIncomeNetOfTax / 1000000000) * 100) / 100,
+            Math.round((quarterlyReport.comprehensiveIncomeNetOfTax / 1000000) * 10) / 10,
           );
+          costOfRevenue.push(Math.round((quarterlyReport.costOfRevenue / 1000000) * 10) / 10);
           switch (
             `${quarterlyReport.fiscalDateEnding.split('-')[1]}-${quarterlyReport.fiscalDateEnding.split('-')[2]}`
           ) {
@@ -129,12 +129,31 @@ const Company = () => {
               break;
           }
         });
-
-        //setDataFromAPI(response);
         setDatesChart(fiscalDateEnding.reverse());
         setRevenueValuesChart(grossProfit.reverse());
-        SetOperatingExpensesValuesChart(operatingExpenses.reverse());
-        SetComprehensiveIncomeNetOfTax(comprehensiveIncomeNetOfTax.reverse());
+        setOperatingExpensesValuesChart(operatingExpenses.reverse());
+        setComprehensiveIncomeNetOfTax(comprehensiveIncomeNetOfTax.reverse());
+        setCostOfRevenue(costOfRevenue.reverse());
+
+        //comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax -1] < 1000 && comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax -1] > -1000 ? `$${comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax -1]}M` : `$${Math.round((comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax -1] / 1000) * 10) / 10}B`
+
+        setComprehensiveIncomeNetOfTaxLastReportedQuarter({
+          reportedQuarter: fiscalDateEnding[fiscalDateEnding.length - 1],
+          comprehensiveIncomeNetOfTax: comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1],
+          comprehensiveIncomeNetOfTaxFormatted:
+            comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1] < 1000 &&
+            comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1] > -1000
+              ? `$${comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1]}M`
+              : `$${
+                  Math.round((comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1] / 1000) * 10) / 10
+                }B`,
+          percentageChange: Math.round(
+            ((comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1] -
+              comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 2]) /
+              comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1]) *
+              100,
+          ),
+        });
         setDataReceived(true);
       })
       .catch((error) => {
@@ -145,45 +164,37 @@ const Company = () => {
   return (
     <div>
       <h1>{params.companyTicker} Page</h1>
-      {/*<p>{JSON.stringify(revenueValuesChart)}</p>*/}
-      {/*<p>{JSON.stringify(datesChart)}</p>*/}
       {dataReceived ? (
         <div>
-          {/*<p>{JSON.stringify(datesChart)}</p>*/}
           <Grid container rowSpacing={4.5} columnSpacing={2.75}>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-              <AnalyticEcommerce title="Total Page Views" count="4,42,236" percentage={59.3} extra="35,000" />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <AnalyticEcommerce title="Total Users" count="78,250" percentage={70.5} extra="8,900" />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <AnalyticEcommerce
-                title="Total Order"
-                count="18,800"
-                percentage={27.4}
-                isLoss
-                color="warning"
-                extra="1,943"
+              <AnalyticCard
+                title={`${comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter} Comprehensive Net Income`}
+                count={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTax}
+                percentage={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChange}
+                extra="35,000"
+                companyTicker={params.companyTicker}
+                quarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter}
               />
             </Grid>
+            {/*
             <Grid item xs={12} sm={6} md={4} lg={3}>
-              <AnalyticEcommerce
-                title="Total Sales"
-                count="$35,078"
-                percentage={27.4}
-                isLoss
-                color="warning"
-                extra="$20,395"
-              />
+              <AnalyticCard title="Total Users" count="78250" percentage={70.5} extra="8,900" />
             </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <AnalyticCard title="Total Order" count="18800" percentage={27.4} extra="1,943" />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <AnalyticCard title="Total Sales" count="35078" percentage={27.4} extra="$20,395" />
+            </Grid>
+            */}
           </Grid>
           <br></br>
           <br></br>
           <Grid item xs={12} md={7} lg={8}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
-                <Typography variant="h5">Revenue & Operating Expenses</Typography>
+                <Typography variant="h5">Revenue, Cost of Revenue & Operating Expenses</Typography>
               </Grid>
               <Grid item>
                 <Stack direction="row" alignItems="center" spacing={0}>
@@ -213,6 +224,7 @@ const Company = () => {
                   datesChart={datesChart}
                   revenueValuesChart={revenueValuesChart}
                   operatingExpensesValuesChart={operatingExpensesValuesChart}
+                  costOfRevenue={costOfRevenue}
                 />
               </Box>
             </MainCard>
@@ -236,18 +248,6 @@ const Company = () => {
                 />
               </Box>
             </MainCard>
-            {/*
-          <MainCard content={false} sx={{ mt: 1.5 }}>
-            <Box sx={{ pt: 1, pr: 2 }}>
-              <RevenueChart2
-                slot={slot}
-                datesChart={datesChart}
-                revenueValuesChart={revenueValuesChart}
-                operatingExpensesValuesChart={operatingExpensesValuesChart}
-              />
-            </Box>
-          </MainCard>
-          */}
           </Grid>
         </div>
       ) : (
@@ -255,13 +255,6 @@ const Company = () => {
           <SyncOutlined spin style={{ fontSize: '300%' }} />
         </p>
       )}
-      {/*
-      {dataReceived ? (
-        <Chart options={inputChartDataOptions} series={inputChartDataSeries} type="bar" width="500" />
-      ) : (
-        <p>Loading...</p>
-      )}
-      */}
 
       {/*Samples From Dashboard Page Start Here*/}
       <br></br>
