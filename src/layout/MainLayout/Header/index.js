@@ -8,6 +8,8 @@ import { AppBar, IconButton, Toolbar, useMediaQuery } from '@mui/material';
 import AppBarStyled from './AppBarStyled';
 import HeaderContent from './HeaderContent';
 
+import Logo from 'components/Logo';
+
 // assets
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
@@ -37,6 +39,7 @@ const Header = ({ open, handleDrawerToggle }) => {
       >
         {!open ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </IconButton>
+      {open?<span></span>:<Logo/>}
       <HeaderContent />
     </Toolbar>
   );
