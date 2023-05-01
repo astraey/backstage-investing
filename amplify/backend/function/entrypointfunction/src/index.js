@@ -1,23 +1,6 @@
-/*
-Use the following code to retrieve configured secrets from SSM:
-
-const aws = require('aws-sdk');
-
-const { Parameters } = await (new aws.SSM())
-  .getParameters({
-    Names: ["alphavantageapikey"].map(secretName => process.env[secretName]),
-    WithDecryption: true,
-  })
-  .promise();
-
-Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
-*/
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
-
-//const TwelveDataRequestHandler = require('./request-handlers/TwelveDataRequestHandler');
-//const twelveDataRequestHandler = new TwelveDataRequestHandler();
 
 const AlphaVantageRequestHandler = require('./request-handlers/AlphaVantageRequestHandler');
 const alphaVantageRequestHandler = new AlphaVantageRequestHandler();

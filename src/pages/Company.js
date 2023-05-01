@@ -39,6 +39,8 @@ import avatar2 from 'assets/images/users/avatar-2.png';
 import avatar3 from 'assets/images/users/avatar-3.png';
 import avatar4 from 'assets/images/users/avatar-4.png';
 
+const stocks = require('stock-ticker-symbol');
+
 const apiName = 'backstageinvestingapi';
 const requestVariables = {
   headers: {}, // OPTIONAL
@@ -163,7 +165,7 @@ const Company = () => {
 
   return (
     <div>
-      <h1>{params.companyTicker} Page</h1>
+      <h1>{stocks.lookup(params.companyTicker)}</h1>
       {dataReceived ? (
         <div>
           <Grid container rowSpacing={4.5} columnSpacing={2.75}>
