@@ -1,6 +1,6 @@
 # Getting Started with the Backstage React App
 
-To run this project on your device, clone the repository, and then execute the following commands:
+To run this project on your device, Node.js 14.X is recommended. Clone the repository, and then execute the following commands:
 
 
 `npm install -g @aws-amplify/cli`
