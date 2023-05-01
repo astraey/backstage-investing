@@ -4,6 +4,7 @@ To run this project on your device, clone the repository, and then execute the f
 
 
 `npm install -g @aws-amplify/cli`
+
 `amplify configure`
 
 You will need AWS credentials to complete the amplify configuration. Next, execute the following command:
