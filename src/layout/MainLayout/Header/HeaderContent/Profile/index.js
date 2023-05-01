@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
+import { Auth } from 'aws-amplify';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -63,7 +64,9 @@ const Profile = () => {
   const theme = useTheme();
 
   const handleLogout = async () => {
-    // logout
+    Auth.signOut()
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
   };
 
   const anchorRef = useRef(null);

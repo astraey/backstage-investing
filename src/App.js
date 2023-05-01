@@ -19,9 +19,6 @@ const App = ({ signOut }) => {
           <Routes />
         </ScrollTop>
       </ThemeCustomization>
-      <View className="App">
-        <Button onClick={signOut}>Sign Out</Button>
-      </View>
     </div>
   );
 };
