@@ -35,11 +35,15 @@ const AnalyticCard = ({ color, title, count, percentage, isLoss, extra, companyT
                   color={count >= 0 ? 'warning' : 'warning'}
                   icon={
                     <>
-                      {count >= 0 && <RiseOutlined style={{ fontSize: '1rem', color: '#fff' }} />}
-                      {count < 0 && <FallOutlined style={{ fontSize: '1rem', color: '#fff' }} />}
+                      {count >= 0 && <RiseOutlined style={{ fontSize: '1.5rem', color: '#fff' }} />}
+                      {count < 0 && <FallOutlined style={{ fontSize: '1.5rem', color: '#fff' }} />}
                     </>
                   }
-                  label={count < 1000 && count > -1000 ? `$${Math.abs(count)}M` : `$${Math.round((Math.abs(count) / 1000) * 10) / 10}B`}
+                  label={
+                    count < 1000 && count > -1000
+                      ? `$${Math.abs(count)}M`
+                      : `$${Math.round((Math.abs(count) / 1000) * 10) / 10}B`
+                  }
                   sx={{ ml: 0, pl: 1 }}
                   size="medium"
                 />
@@ -53,15 +57,23 @@ const AnalyticCard = ({ color, title, count, percentage, isLoss, extra, companyT
           <Typography variant="caption" color="textSecondary">
             {companyTicker} lost{' '}
             <Typography component="span" variant="caption" sx={{ color: theme.palette.error.main }}>
-              {count < 1000 && count > -1000 ? `$${Math.abs(count)}M` : `$${Math.round((Math.abs(count) / 1000) * 10) / 10}B`}
+              {count < 1000 && count > -1000
+                ? `$${Math.abs(count)}M`
+                : `$${Math.round((Math.abs(count) / 1000) * 10) / 10}B`}
             </Typography>{' '}
             in {quarter}
           </Typography>
         ) : (
-            <Typography variant="caption" color="textSecondary">
-            {companyTicker} gained{' '}
-            <Typography component="span" variant="caption" sx={{ color: theme.palette.success.main }}>
-              {count < 1000 && count > -1000 ? `$${Math.abs(count)}M` : `$${Math.round((Math.abs(count) / 1000) * 10) / 10}B`}
+          <Typography variant="caption" color="textSecondary">
+            {companyTicker} made{' '}
+            <Typography
+              component="span"
+              variant="caption"
+              sx={{ color: theme.palette.success.main, fontWeight: 'bold' }}
+            >
+              {count < 1000 && count > -1000
+                ? `$${Math.abs(count)}M`
+                : `$${Math.round((Math.abs(count) / 1000) * 10) / 10}B`}
             </Typography>{' '}
             in {quarter}
           </Typography>

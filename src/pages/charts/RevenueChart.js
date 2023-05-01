@@ -47,7 +47,7 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
       ...prevState,
       colors: [theme.palette.primary[200], theme.palette.error.light, theme.palette.warning.main],
       xaxis: {
-        categories: slot === 'All Time' ? datesChart : datesChart.slice(datesChart.length - 7, datesChart.length),
+        categories: slot === 'All Time' ? datesChart : datesChart.slice(datesChart.length - 8, datesChart.length),
         labels: {
           style: {
             colors: datesChart.map(() => secondary),
@@ -57,7 +57,7 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
           show: true,
           color: line,
         },
-        tickAmount: slot === 'All Time' ? 11 : 7,
+        tickAmount: slot === 'All Time' ? datesChart.length : 8,
       },
       yaxis: {
         labels: {
@@ -99,15 +99,24 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
     setSeries([
       {
         name: 'Revenue',
-        data: slot === 'All Time' ? revenueValuesChart : revenueValuesChart.slice(0, 7),
+        data:
+          slot === 'All Time'
+            ? revenueValuesChart
+            : revenueValuesChart.slice(revenueValuesChart.length - 8, revenueValuesChart.length),
       },
       {
         name: 'Operating Expenses',
-        data: slot === 'All Time' ? operatingExpensesValuesChart : operatingExpensesValuesChart.slice(0, 7),
+        data:
+          slot === 'All Time'
+            ? operatingExpensesValuesChart
+            : operatingExpensesValuesChart.slice(
+                operatingExpensesValuesChart.length - 8,
+                operatingExpensesValuesChart.length,
+              ),
       },
       {
         name: 'Cost of Revenue',
-        data: slot === 'All Time' ? costOfRevenue : costOfRevenue.slice(0, 7),
+        data: slot === 'All Time' ? costOfRevenue : costOfRevenue.slice(costOfRevenue.length - 8, costOfRevenue.length),
       },
     ]);
   }, [slot]);
