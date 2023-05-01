@@ -42,7 +42,7 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
               {
                 from: 0,
                 to: 10000000,
-                color: theme.palette.primary.main,
+                color: theme.palette.success.main,
               },
               {
                 from: -10000000,
@@ -57,8 +57,22 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
       },
       dataLabels: {
         enabled: true,
-        style: {
-          colors: ['#333'],
+        background: {
+          enabled: true,
+          foreColor: '#fff',
+          padding: 4,
+          borderRadius: 2,
+          borderWidth: 1,
+          borderColor: '#fff',
+          opacity: 0.3,
+          dropShadow: {
+            enabled: false,
+            top: 1,
+            left: 1,
+            blur: 1,
+            color: '#000',
+            opacity: 0.45
+          }
         },
         formatter(val) {
           if (val < 1000 && val > -1000) {

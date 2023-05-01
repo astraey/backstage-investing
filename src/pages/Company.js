@@ -180,7 +180,14 @@ const Company = () => {
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-              <AnalyticCard title="Total Users" count="78250" percentage={70.5} extra="8,900" />
+              <AnalyticCard
+                title={`${comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter} Comprehensive Net Income`}
+                count={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTax}
+                percentage={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChange}
+                extra="35,000"
+                companyTicker={params.companyTicker}
+                quarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter}
+              />{' '}
             </Grid>
             {/*
             <Grid item xs={12} sm={6} md={4} lg={3}>

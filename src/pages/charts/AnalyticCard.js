@@ -86,7 +86,7 @@ const AnalyticCard = ({ color, title, count, percentage, isLoss, extra, companyT
 AnalyticCard.propTypes = {
   color: PropTypes.string,
   title: PropTypes.string,
-  count: PropTypes.string,
+  count: PropTypes.number,
   percentage: PropTypes.number,
   isLoss: PropTypes.bool,
   extra: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
