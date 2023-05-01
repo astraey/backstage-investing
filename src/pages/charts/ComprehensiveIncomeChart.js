@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import ReactApexChart from 'react-apexcharts';
 
+import { dollarFormatter } from 'utils/dollarFormatter';
+
 const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTax }) => {
   const theme = useTheme();
   const { primary, secondary } = theme.palette.text;
@@ -30,7 +32,6 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
     setOptions({
       chart: {
         type: 'bar',
-        height: 365,
         toolbar: {
           show: false,
         },
@@ -42,16 +43,16 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
               {
                 from: 0,
                 to: 10000000,
-                color: theme.palette.success.main,
+                color: theme.palette.success.light,
               },
               {
                 from: -10000000,
                 to: 0,
-                color: theme.palette.error.main,
+                color: theme.palette.error.light,
               },
             ],
           },
-          columnWidth: '40%',
+          columnWidth: '70%',
           borderRadius: 3,
         },
       },
@@ -59,26 +60,32 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
         enabled: true,
         background: {
           enabled: true,
-          foreColor: '#fff',
+          foreColor: '#000',
           padding: 4,
           borderRadius: 2,
           borderWidth: 1,
           borderColor: '#fff',
-          opacity: 0.3,
+          opacity: 0.4,
           dropShadow: {
             enabled: false,
             top: 1,
             left: 1,
             blur: 1,
             color: '#000',
-            opacity: 0.45
-          }
+            opacity: 0.45,
+          },
         },
         formatter(val) {
-          if (val < 1000 && val > -1000) {
-            return `$${val}M`;
+          let isNegative = false;
+          if (val < 0) {
+            isNegative = true;
+            val = Math.abs(val);
+          }
+        
+          if (val < 1000) {
+            return isNegative ? `-$${val}M` : `$${val}M`;
           } else {
-            return `$${Math.round((val / 1000) * 10) / 10}B`;
+            return isNegative ? `-$${Math.round((val / 1000) * 10) / 10}B` : `$${Math.round((val / 1000) * 10) / 10}B`;
           }
         },
       },
@@ -118,10 +125,16 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
         theme: 'light',
         y: {
           formatter(val) {
-            if (val < 1000 && val > -1000) {
-              return `$${val}M`;
+            let isNegative = false;
+            if (val < 0) {
+              isNegative = true;
+              val = Math.abs(val);
+            }
+          
+            if (val < 1000) {
+              return isNegative ? `-$${val}M` : `$${val}M`;
             } else {
-              return `$${Math.round((val / 1000) * 10) / 10}B`;
+              return isNegative ? `-$${Math.round((val / 1000) * 10) / 10}B` : `$${Math.round((val / 1000) * 10) / 10}B`;
             }
           },
         },
@@ -132,7 +145,7 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
 
   return (
     <div id="chart">
-      <ReactApexChart options={options} series={series} type="bar" height={365} />
+      <ReactApexChart options={options} series={series} type="bar" height={500} />
     </div>
   );
 };

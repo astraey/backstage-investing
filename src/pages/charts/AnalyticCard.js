@@ -13,7 +13,7 @@ import { RiseOutlined, FallOutlined } from '@ant-design/icons';
 
 // ==============================|| STATISTICS - ECOMMERCE CARD  ||============================== //
 
-const AnalyticCard = ({ color, title, count, percentage, isLoss, extra, companyTicker, quarter }) => {
+const AnalyticCard = ({ color, title, count, percentage, isLoss, extra, companyTicker, companyName, quarter }) => {
   const theme = useTheme();
   return (
     <MainCard contentSX={{ p: 2.25 }}>
@@ -55,8 +55,8 @@ const AnalyticCard = ({ color, title, count, percentage, isLoss, extra, companyT
       <Box sx={{ pt: 2.25 }}>
         {count < 0 ? (
           <Typography variant="caption" color="textSecondary">
-            {companyTicker} lost{' '}
-            <Typography component="span" variant="caption" sx={{ color: theme.palette.error.main }}>
+            {companyName} lost{' '}
+            <Typography component="span" variant="caption" sx={{ color: theme.palette.error.main, fontWeight: 'bold' }}>
               {count < 1000 && count > -1000
                 ? `$${Math.abs(count)}M`
                 : `$${Math.round((Math.abs(count) / 1000) * 10) / 10}B`}
@@ -65,7 +65,7 @@ const AnalyticCard = ({ color, title, count, percentage, isLoss, extra, companyT
           </Typography>
         ) : (
           <Typography variant="caption" color="textSecondary">
-            {companyTicker} made{' '}
+            {companyName} made{' '}
             <Typography
               component="span"
               variant="caption"

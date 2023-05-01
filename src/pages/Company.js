@@ -165,7 +165,7 @@ const Company = () => {
 
   return (
     <div>
-      <h1>{stocks.lookup(params.companyTicker)}</h1>
+      <h1>{`${stocks.lookup(params.companyTicker)}`}<Typography variant="caption" color="secondary">{` ${params.companyTicker}`}</Typography></h1>
       {dataReceived ? (
         <div>
           <Grid container rowSpacing={4.5} columnSpacing={2.75}>
@@ -176,6 +176,7 @@ const Company = () => {
                 percentage={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChange}
                 extra="35,000"
                 companyTicker={params.companyTicker}
+                companyName={stocks.lookup(params.companyTicker)}
                 quarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter}
               />
             </Grid>

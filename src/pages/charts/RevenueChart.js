@@ -19,10 +19,16 @@ const areaChartOptions = {
   dataLabels: {
     enabled: true,
     formatter(val) {
-      if (val < 1000 && val > -1000) {
-        return `$${val}M`;
+      let isNegative = false;
+      if (val < 0) {
+        isNegative = true;
+        val = Math.abs(val);
+      }
+    
+      if (val < 1000) {
+        return isNegative ? `-$${val}M` : `$${val}M`;
       } else {
-        return `$${Math.round((val / 1000) * 10) / 10}B`;
+        return isNegative ? `-$${Math.round((val / 1000) * 10) / 10}B` : `$${Math.round((val / 1000) * 10) / 10}B`;
       }
     },
   },
@@ -73,10 +79,16 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
         theme: 'light',
         y: {
           formatter(val) {
-            if (val < 1000 && val > -1000) {
-              return `$${val}M`;
+            let isNegative = false;
+            if (val < 0) {
+              isNegative = true;
+              val = Math.abs(val);
+            }
+          
+            if (val < 1000) {
+              return isNegative ? `-$${val}M` : `$${val}M`;
             } else {
-              return `$${Math.round((val / 1000) * 10) / 10}B`;
+              return isNegative ? `-$${Math.round((val / 1000) * 10) / 10}B` : `$${Math.round((val / 1000) * 10) / 10}B`;
             }
           },
         },
