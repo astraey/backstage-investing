@@ -11,7 +11,7 @@ import HeaderContent from './HeaderContent';
 import Logo from 'components/Logo';
 
 // assets
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import { DoubleLeftOutlined, MenuOutlined } from '@ant-design/icons';
 
 // ==============================|| MAIN LAYOUT - HEADER ||============================== //
 
@@ -19,8 +19,8 @@ const Header = ({ open, handleDrawerToggle }) => {
   const theme = useTheme();
   const matchDownMD = useMediaQuery(theme.breakpoints.down('lg'));
 
-  const iconBackColor = 'grey.100';
-  const iconBackColorOpen = 'grey.200';
+  const iconBackColor = 'grey.30';
+  const iconBackColorOpen = 'grey.30';
 
   // common header
   const mainHeader = (
@@ -37,7 +37,7 @@ const Header = ({ open, handleDrawerToggle }) => {
           ml: { xs: 0, lg: -2 },
         }}
       >
-        {!open ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        {!open ? <MenuOutlined /> : <DoubleLeftOutlined />}
       </IconButton>
       {open?<span></span>:<Logo/>}
       <HeaderContent />
