@@ -81,7 +81,7 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
             isNegative = true;
             val = Math.abs(val);
           }
-        
+
           if (val < 1000) {
             return isNegative ? `-$${val}M` : `$${val}M`;
           } else {
@@ -130,11 +130,13 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
               isNegative = true;
               val = Math.abs(val);
             }
-          
+
             if (val < 1000) {
               return isNegative ? `-$${val}M` : `$${val}M`;
             } else {
-              return isNegative ? `-$${Math.round((val / 1000) * 10) / 10}B` : `$${Math.round((val / 1000) * 10) / 10}B`;
+              return isNegative
+                ? `-$${Math.round((val / 1000) * 10) / 10}B`
+                : `$${Math.round((val / 1000) * 10) / 10}B`;
             }
           },
         },

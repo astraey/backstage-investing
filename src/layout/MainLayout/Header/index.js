@@ -39,7 +39,7 @@ const Header = ({ open, handleDrawerToggle }) => {
       >
         {!open ? <MenuOutlined /> : <DoubleLeftOutlined />}
       </IconButton>
-      {open?<span></span>:<Logo/>}
+      {open ? <span></span> : <Logo />}
       <HeaderContent />
     </Toolbar>
   );

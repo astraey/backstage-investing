@@ -165,7 +165,10 @@ const Company = () => {
 
   return (
     <div>
-      <h1>{`${stocks.lookup(params.companyTicker)}`}<Typography variant="caption" color="secondary">{` ${params.companyTicker}`}</Typography></h1>
+      <h1>
+        {`${stocks.lookup(params.companyTicker)}`}
+        <Typography variant="caption" color="secondary">{` ${params.companyTicker}`}</Typography>
+      </h1>
       {dataReceived ? (
         <div>
           <Grid container rowSpacing={4.5} columnSpacing={2.75}>
