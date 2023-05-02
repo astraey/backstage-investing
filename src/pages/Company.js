@@ -94,6 +94,7 @@ const Company = () => {
   const [dataReceived, setDataReceived] = useState(null);
   const [value, setValue] = useState('today');
   const [slot, setSlot] = useState('Last 2 Years');
+  const [costofGoodsAndServicesSold, setCostofGoodsAndServicesSold] = useState('Last 2 Years');
 
   const params = useParams();
 
@@ -104,6 +105,7 @@ const Company = () => {
     let operatingExpenses = [];
     let comprehensiveIncomeNetOfTax = [];
     let costOfRevenue = [];
+    let costofGoodsAndServicesSold = [];
     API.get(apiName, path, requestVariables)
       .then((response) => {
         console.log(response);
@@ -114,6 +116,7 @@ const Company = () => {
             Math.round((quarterlyReport.comprehensiveIncomeNetOfTax / 1000000) * 10) / 10,
           );
           costOfRevenue.push(Math.round((quarterlyReport.costOfRevenue / 1000000) * 10) / 10);
+          costofGoodsAndServicesSold.push(Math.round((quarterlyReport.costofGoodsAndServicesSold / 1000000) * 10) / 10);
           switch (
             `${quarterlyReport.fiscalDateEnding.split('-')[1]}-${quarterlyReport.fiscalDateEnding.split('-')[2]}`
           ) {
@@ -136,7 +139,9 @@ const Company = () => {
         setOperatingExpensesValuesChart(operatingExpenses.reverse());
         setComprehensiveIncomeNetOfTax(comprehensiveIncomeNetOfTax.reverse());
         setCostOfRevenue(costOfRevenue.reverse());
+        setCostofGoodsAndServicesSold(costofGoodsAndServicesSold.reverse());
 
+        //console.log(costOfRevenue);
         //comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax -1] < 1000 && comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax -1] > -1000 ? `$${comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax -1]}M` : `$${Math.round((comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax -1] / 1000) * 10) / 10}B`
 
         setComprehensiveIncomeNetOfTaxLastReportedQuarter({
@@ -161,7 +166,7 @@ const Company = () => {
       .catch((error) => {
         console.log(error.response);
       });
-  }, []);
+  }, [useParams()]);
 
   return (
     <div>
@@ -241,6 +246,7 @@ const Company = () => {
                   revenueValuesChart={revenueValuesChart}
                   operatingExpensesValuesChart={operatingExpensesValuesChart}
                   costOfRevenue={costOfRevenue}
+                  costOfGoodsAndServicesSold={costofGoodsAndServicesSold}
                 />
               </Box>
             </MainCard>

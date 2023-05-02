@@ -43,7 +43,14 @@ const areaChartOptions = {
 
 // ==============================|| INCOME AREA CHART ||============================== //
 
-const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesValuesChart, costOfRevenue }) => {
+const RevenueChart = ({
+  slot,
+  datesChart,
+  revenueValuesChart,
+  operatingExpensesValuesChart,
+  costOfRevenue,
+  costOfGoodsAndServicesSold,
+}) => {
   const theme = useTheme();
   const { primary, secondary } = theme.palette.text;
   const line = theme.palette.divider;
@@ -51,7 +58,12 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
   useEffect(() => {
     setOptions((prevState) => ({
       ...prevState,
-      colors: [theme.palette.primary[200], theme.palette.error.light, theme.palette.warning.main],
+      colors: [
+        theme.palette.primary[200],
+        theme.palette.error.light,
+        theme.palette.warning.main,
+        theme.palette.secondary[400],
+      ],
       xaxis: {
         categories: slot === 'All Time' ? datesChart : datesChart.slice(datesChart.length - 8, datesChart.length),
         labels: {
@@ -96,7 +108,18 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
         },
       },
     }));
-  }, [primary, secondary, line, theme, slot]);
+  }, [
+    primary,
+    secondary,
+    line,
+    theme,
+    slot,
+    datesChart,
+    revenueValuesChart,
+    operatingExpensesValuesChart,
+    costOfRevenue,
+    costOfGoodsAndServicesSold,
+  ]);
 
   const [series, setSeries] = useState([
     {
@@ -132,8 +155,18 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
         name: 'Cost of Revenue',
         data: slot === 'All Time' ? costOfRevenue : costOfRevenue.slice(costOfRevenue.length - 8, costOfRevenue.length),
       },
+      {
+        name: 'Cost of Goods and Services Sold',
+        data:
+          slot === 'All Time'
+            ? costOfGoodsAndServicesSold
+            : costOfGoodsAndServicesSold.slice(
+                costOfGoodsAndServicesSold.length - 8,
+                costOfGoodsAndServicesSold.length,
+              ),
+      },
     ]);
-  }, [slot]);
+  }, [slot, datesChart, revenueValuesChart, operatingExpensesValuesChart, costOfRevenue, costOfGoodsAndServicesSold]);
 
   return (
     <div>

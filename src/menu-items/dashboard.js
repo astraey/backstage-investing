@@ -18,7 +18,7 @@ const dashboard = {
       id: 'company',
       title: 'Company Page',
       type: 'item',
-      url: '/company',
+      url: '/',
       icon: icons.PieChartOutlined,
       breadcrumbs: false,
     },

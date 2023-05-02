@@ -2,7 +2,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 // material-ui
-import { Container, InputAdornment, TextField, Link, Stack, Typography } from '@mui/material';
+import { Container, Grid, InputAdornment, TextField, Link, Stack, Typography } from '@mui/material';
 
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 
@@ -16,15 +16,22 @@ const CompanySelection = () => {
 
   return (
     <div>
-      <>
-        <Container maxWidth="md" sx={{ mt: 30 }}>
-          <Typography variant="h2" style={{ textAlign: 'center' }}>
-            Search for a Company
-          </Typography>
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        style={{ minHeight: '60vh' }}
+      >
+        <Grid item xs={3}>
+          <Typography variant="h2">Search for a Company</Typography>
           <br></br>
+        </Grid>
+        <Grid item xs={7}>
           <Autocomplete
             value={value}
-            sx={{ width: 900, height: 300 }}
+            sx={{ width: 600 }}
             onChange={(event, newValue) => {
               navigate(`company/${newValue.ticker}`);
               if (typeof newValue === 'string') {
@@ -65,7 +72,10 @@ const CompanySelection = () => {
             renderOption={(props, option) => <li {...props}>{option.nameTicker}</li>}
             renderInput={(params) => <TextField placeholder="Search" {...params} label="" />}
           />
-        </Container>
+        </Grid>
+      </Grid>
+      <>
+        <Container maxWidth="md" sx={{ mt: 30 }}></Container>
       </>
     </div>
   );

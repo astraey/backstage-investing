@@ -24,7 +24,7 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
               ),
       },
     ]);
-  }, [slot]);
+  }, [slot, datesChart, comprehensiveIncomeNetOfTax]);
 
   const [options, setOptions] = useState({});
 
@@ -143,7 +143,7 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
       },
       colors: [info],
     });
-  }, [slot]);
+  }, [slot, datesChart, comprehensiveIncomeNetOfTax]);
 
   return (
     <div id="chart">
