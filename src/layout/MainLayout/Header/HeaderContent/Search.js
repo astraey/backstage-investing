@@ -1,14 +1,12 @@
 // material-ui
-import { Box, FormControl, InputAdornment, OutlinedInput } from '@mui/material';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Box, FormControl } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-import { useParams } from 'react-router-dom';
-
 // assets
-import { SearchOutlined } from '@ant-design/icons';
+//import { SearchOutlined } from '@ant-design/icons';
 
-import { Container, TextField, Link, Stack, Typography } from '@mui/material';
+import { TextField } from '@mui/material';
 
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 
@@ -20,8 +18,6 @@ const filter = createFilterOptions();
 const Search = () => {
   const [value, setValue] = useState(null);
   const navigate = useNavigate();
-  const params = useParams();
-  console.log(window.location.pathname);
   return (
     <Box sx={{ width: '100%', ml: { xs: 0, md: 3 } }}>
       {window.location.pathname !== '/' ? (

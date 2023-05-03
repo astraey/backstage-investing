@@ -13,7 +13,7 @@ import { RiseOutlined, FallOutlined } from '@ant-design/icons';
 
 // ==============================|| STATISTICS - ECOMMERCE CARD  ||============================== //
 
-const AnalyticCard = ({ color, title, count, percentage, isLoss, extra, companyTicker, companyName, quarter }) => {
+const AnalyticCard = ({ title, count, companyTicker, companyName, quarter }) => {
   const theme = useTheme();
   return (
     <MainCard contentSX={{ p: 2.25 }}>
@@ -27,9 +27,7 @@ const AnalyticCard = ({ color, title, count, percentage, isLoss, extra, companyT
               <Grid>
                 <Chip
                   style={
-                    count >= 0
-                      ? { backgroundColor: theme.palette.success.light }
-                      : { backgroundColor: theme.palette.error.light }
+                    count >= 0 ? { backgroundColor: theme.palette.success.light } : { backgroundColor: theme.palette.error.light }
                   }
                   variant="combined"
                   color={count >= 0 ? 'warning' : 'warning'}
@@ -40,9 +38,7 @@ const AnalyticCard = ({ color, title, count, percentage, isLoss, extra, companyT
                     </>
                   }
                   label={
-                    count < 1000 && count > -1000
-                      ? `$${Math.abs(count)}M`
-                      : `$${Math.round((Math.abs(count) / 1000) * 10) / 10}B`
+                    count < 1000 && count > -1000 ? `$${Math.abs(count)}M` : `$${Math.round((Math.abs(count) / 1000) * 10) / 10}B`
                   }
                   sx={{ ml: 0, pl: 1 }}
                   size="medium"
@@ -55,25 +51,17 @@ const AnalyticCard = ({ color, title, count, percentage, isLoss, extra, companyT
       <Box sx={{ pt: 2.25 }}>
         {count < 0 ? (
           <Typography variant="caption" color="textSecondary">
-            {companyName} lost{' '}
+            {companyName || companyTicker} lost{' '}
             <Typography component="span" variant="caption" sx={{ color: theme.palette.error.main, fontWeight: 'bold' }}>
-              {count < 1000 && count > -1000
-                ? `$${Math.abs(count)}M`
-                : `$${Math.round((Math.abs(count) / 1000) * 10) / 10}B`}
+              {count < 1000 && count > -1000 ? `$${Math.abs(count)}M` : `$${Math.round((Math.abs(count) / 1000) * 10) / 10}B`}
             </Typography>{' '}
             in {quarter}
           </Typography>
         ) : (
           <Typography variant="caption" color="textSecondary">
-            {companyName} made{' '}
-            <Typography
-              component="span"
-              variant="caption"
-              sx={{ color: theme.palette.success.main, fontWeight: 'bold' }}
-            >
-              {count < 1000 && count > -1000
-                ? `$${Math.abs(count)}M`
-                : `$${Math.round((Math.abs(count) / 1000) * 10) / 10}B`}
+            {companyName || companyTicker} made{' '}
+            <Typography component="span" variant="caption" sx={{ color: theme.palette.success.main, fontWeight: 'bold' }}>
+              {count < 1000 && count > -1000 ? `$${Math.abs(count)}M` : `$${Math.round((Math.abs(count) / 1000) * 10) / 10}B`}
             </Typography>{' '}
             in {quarter}
           </Typography>

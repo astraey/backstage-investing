@@ -1,8 +1,8 @@
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 // material-ui
-import { Container, Grid, InputAdornment, TextField, Link, Stack, Typography } from '@mui/material';
+import { Container, Grid, TextField, Typography } from '@mui/material';
 
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 
@@ -16,14 +16,7 @@ const CompanySelection = () => {
 
   return (
     <div>
-      <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-        style={{ minHeight: '60vh' }}
-      >
+      <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ minHeight: '60vh' }}>
         <Grid item xs={3}>
           <Typography variant="h2">Search for a Company</Typography>
           <br></br>

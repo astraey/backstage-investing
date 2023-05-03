@@ -89,8 +89,8 @@ const Company = () => {
   const [operatingExpensesValuesChart, setOperatingExpensesValuesChart] = useState(null);
   const [comprehensiveIncomeNetOfTax, setComprehensiveIncomeNetOfTax] = useState(null);
   const [costOfRevenue, setCostOfRevenue] = useState(null);
-  const [comprehensiveIncomeNetOfTaxLastReportedQuarter, setComprehensiveIncomeNetOfTaxLastReportedQuarter] =
-    useState(null);
+  const [comprehensiveIncomeNetOfTaxLastReportedQuarter, setComprehensiveIncomeNetOfTaxLastReportedQuarter] = useState(null);
+  const [revenueLastReportedQuarter, setRevenueLastReportedQuarter] = useState(null);
   const [dataReceived, setDataReceived] = useState(null);
   const [value, setValue] = useState('today');
   const [slot, setSlot] = useState('Last 2 Years');
@@ -100,7 +100,7 @@ const Company = () => {
 
   useEffect(() => {
     let path = `/company/${params.companyTicker}`;
-    let grossProfit = [];
+    let totalRevenue = [];
     let fiscalDateEnding = [];
     let operatingExpenses = [];
     let comprehensiveIncomeNetOfTax = [];
@@ -109,17 +109,13 @@ const Company = () => {
     API.get(apiName, path, requestVariables)
       .then((response) => {
         console.log(response);
-        response.quarterlyReports.map((quarterlyReport) => {
-          grossProfit.push(Math.round((quarterlyReport.grossProfit / 1000000) * 10) / 10);
+        response.quarterlyReports.forEach((quarterlyReport) => {
+          totalRevenue.push(Math.round((quarterlyReport.totalRevenue / 1000000) * 10) / 10);
           operatingExpenses.push(Math.round((quarterlyReport.operatingExpenses / 1000000) * 10) / 10);
-          comprehensiveIncomeNetOfTax.push(
-            Math.round((quarterlyReport.comprehensiveIncomeNetOfTax / 1000000) * 10) / 10,
-          );
+          comprehensiveIncomeNetOfTax.push(Math.round((quarterlyReport.comprehensiveIncomeNetOfTax / 1000000) * 10) / 10);
           costOfRevenue.push(Math.round((quarterlyReport.costOfRevenue / 1000000) * 10) / 10);
           costofGoodsAndServicesSold.push(Math.round((quarterlyReport.costofGoodsAndServicesSold / 1000000) * 10) / 10);
-          switch (
-            `${quarterlyReport.fiscalDateEnding.split('-')[1]}-${quarterlyReport.fiscalDateEnding.split('-')[2]}`
-          ) {
+          switch (`${quarterlyReport.fiscalDateEnding.split('-')[1]}-${quarterlyReport.fiscalDateEnding.split('-')[2]}`) {
             case '03-31':
               fiscalDateEnding.push(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
               break;
@@ -132,17 +128,17 @@ const Company = () => {
             case '12-31':
               fiscalDateEnding.push(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
               break;
+            default:
+              break;
           }
+          //return quarterlyReport;
         });
         setDatesChart(fiscalDateEnding.reverse());
-        setRevenueValuesChart(grossProfit.reverse());
+        setRevenueValuesChart(totalRevenue.reverse());
         setOperatingExpensesValuesChart(operatingExpenses.reverse());
         setComprehensiveIncomeNetOfTax(comprehensiveIncomeNetOfTax.reverse());
         setCostOfRevenue(costOfRevenue.reverse());
         setCostofGoodsAndServicesSold(costofGoodsAndServicesSold.reverse());
-
-        //console.log(costOfRevenue);
-        //comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax -1] < 1000 && comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax -1] > -1000 ? `$${comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax -1]}M` : `$${Math.round((comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax -1] / 1000) * 10) / 10}B`
 
         setComprehensiveIncomeNetOfTaxLastReportedQuarter({
           reportedQuarter: fiscalDateEnding[fiscalDateEnding.length - 1],
@@ -151,28 +147,49 @@ const Company = () => {
             comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1] < 1000 &&
             comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1] > -1000
               ? `$${comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1]}M`
-              : `$${
-                  Math.round((comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1] / 1000) * 10) / 10
-                }B`,
+              : `$${Math.round((comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1] / 1000) * 10) / 10}B`,
           percentageChange: Math.round(
             ((comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1] -
               comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 2]) /
               comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1]) *
               100,
           ),
+          percentageChangeQuarter: fiscalDateEnding[fiscalDateEnding.length - 2],
+        });
+        setRevenueLastReportedQuarter({
+          reportedQuarter: fiscalDateEnding[fiscalDateEnding.length - 1],
+          totalRevenue: totalRevenue[totalRevenue.length - 1],
+          revenueFormatted:
+            totalRevenue[totalRevenue.length - 1] < 1000 && totalRevenue[totalRevenue.length - 1] > -1000
+              ? `$${totalRevenue[totalRevenue.length - 1]}M`
+              : `$${Math.round((totalRevenue[totalRevenue.length - 1] / 1000) * 10) / 10}B`,
+          percentageChange: Math.round(
+            ((totalRevenue[totalRevenue.length - 1] - totalRevenue[totalRevenue.length - 2]) /
+              totalRevenue[totalRevenue.length - 1]) *
+              100,
+          ),
+          percentageChangeQuarter: fiscalDateEnding[fiscalDateEnding.length - 2],
         });
         setDataReceived(true);
       })
       .catch((error) => {
         console.log(error.response);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [useParams()]);
 
   return (
     <div>
       <h1>
-        {`${stocks.lookup(params.companyTicker)}`}
-        <Typography variant="caption" color="secondary">{` ${params.companyTicker}`}</Typography>
+        {stocks.lookup(params.companyTicker) ? (
+          <span>
+            {' '}
+            {`${stocks.lookup(params.companyTicker)}`}
+            <Typography variant="caption" color="secondary">{` ${params.companyTicker}`}</Typography>
+          </span>
+        ) : (
+          <span>{params.companyTicker}</span>
+        )}
       </h1>
       {dataReceived ? (
         <div>
@@ -181,21 +198,22 @@ const Company = () => {
               <AnalyticCard
                 title={`${comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter} Comprehensive Net Income`}
                 count={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTax}
-                percentage={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChange}
-                extra="35,000"
                 companyTicker={params.companyTicker}
                 companyName={stocks.lookup(params.companyTicker)}
                 quarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter}
+                percentageChange={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChange}
+                percentageChangeQuarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChangeQuarter}
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
               <AnalyticCard
-                title={`${comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter} Comprehensive Net Income`}
-                count={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTax}
-                percentage={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChange}
-                extra="35,000"
+                title={`${revenueLastReportedQuarter.reportedQuarter} Revenue`}
+                count={revenueLastReportedQuarter.totalRevenue}
                 companyTicker={params.companyTicker}
-                quarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter}
+                companyName={stocks.lookup(params.companyTicker)}
+                quarter={revenueLastReportedQuarter.reportedQuarter}
+                percentageChange={revenueLastReportedQuarter.percentageChange}
+                percentageChangeQuarter={revenueLastReportedQuarter.percentageChangeQuarter}
               />{' '}
             </Grid>
             {/*
@@ -215,7 +233,7 @@ const Company = () => {
           <Grid item xs={12} md={7} lg={8}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
-                <Typography variant="h5">Revenue, Cost of Revenue & Operating Expenses</Typography>
+                <Typography variant="h5">Revenue & Cost of Revenue</Typography>
               </Grid>
               <Grid item>
                 <Stack direction="row" alignItems="center" spacing={0}>
@@ -256,8 +274,8 @@ const Company = () => {
               <Grid item>
                 <Typography variant="h5">Comprehensive Income Net Of Tax</Typography>
                 <Typography variant="h6">
-                  Comprehensive income is the total profit or gain that a company makes in a particular period of time,
-                  plus the value of yet unrealized profits (or losses) in the same period.
+                  Comprehensive income is the total profit or gain that a company makes in a particular period of time, plus the
+                  value of yet unrealized profits (or losses) in the same period.
                 </Typography>
               </Grid>
             </Grid>
@@ -293,24 +311,10 @@ const Company = () => {
           <AnalyticEcommerce title="Total Users" count="78,250" percentage={70.5} extra="8,900" />
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={3}>
-          <AnalyticEcommerce
-            title="Total Order"
-            count="18,800"
-            percentage={27.4}
-            isLoss
-            color="warning"
-            extra="1,943"
-          />
+          <AnalyticEcommerce title="Total Order" count="18,800" percentage={27.4} isLoss color="warning" extra="1,943" />
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={3}>
-          <AnalyticEcommerce
-            title="Total Sales"
-            count="$35,078"
-            percentage={27.4}
-            isLoss
-            color="warning"
-            extra="$20,395"
-          />
+          <AnalyticEcommerce title="Total Sales" count="$35,078" percentage={27.4} isLoss color="warning" extra="$20,395" />
         </Grid>
 
         <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
@@ -475,10 +479,7 @@ const Company = () => {
                     <GiftOutlined />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText
-                  primary={<Typography variant="subtitle1">Order #002434</Typography>}
-                  secondary="Today, 2:00 AM"
-                />
+                <ListItemText primary={<Typography variant="subtitle1">Order #002434</Typography>} secondary="Today, 2:00 AM" />
                 <ListItemSecondaryAction>
                   <Stack alignItems="flex-end">
                     <Typography variant="subtitle1" noWrap>
@@ -527,10 +528,7 @@ const Company = () => {
                     <SettingOutlined />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText
-                  primary={<Typography variant="subtitle1">Order #988784</Typography>}
-                  secondary="7 hours ago"
-                />
+                <ListItemText primary={<Typography variant="subtitle1">Order #988784</Typography>} secondary="7 hours ago" />
                 <ListItemSecondaryAction>
                   <Stack alignItems="flex-end">
                     <Typography variant="subtitle1" noWrap>

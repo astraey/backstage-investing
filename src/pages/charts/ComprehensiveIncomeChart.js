@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import ReactApexChart from 'react-apexcharts';
 
-import { dollarFormatter } from 'utils/dollarFormatter';
-
 const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTax }) => {
   const theme = useTheme();
-  const { primary, secondary } = theme.palette.text;
+  const { secondary } = theme.palette.text;
+  //const { primary } = theme.palette.text;
   const info = theme.palette.info.light;
-  const [series, setSeries] = useState([]);
   const line = theme.palette.divider;
+
+  const [series, setSeries] = useState([]);
+  const [options, setOptions] = useState({});
 
   useEffect(() => {
     setSeries([
@@ -18,17 +19,9 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
         data:
           slot === 'All Time'
             ? comprehensiveIncomeNetOfTax
-            : comprehensiveIncomeNetOfTax.slice(
-                comprehensiveIncomeNetOfTax.length - 7,
-                comprehensiveIncomeNetOfTax.length,
-              ),
+            : comprehensiveIncomeNetOfTax.slice(comprehensiveIncomeNetOfTax.length - 7, comprehensiveIncomeNetOfTax.length),
       },
     ]);
-  }, [slot, datesChart, comprehensiveIncomeNetOfTax]);
-
-  const [options, setOptions] = useState({});
-
-  useEffect(() => {
     setOptions({
       chart: {
         type: 'bar',
@@ -84,7 +77,7 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
 
           if (val < 1000) {
             return isNegative ? `-$${val}M` : `$${val}M`;
-          } else {
+          } else if (val >= 1000) {
             return isNegative ? `-$${Math.round((val / 1000) * 10) / 10}B` : `$${Math.round((val / 1000) * 10) / 10}B`;
           }
         },
@@ -133,16 +126,15 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
 
             if (val < 1000) {
               return isNegative ? `-$${val}M` : `$${val}M`;
-            } else {
-              return isNegative
-                ? `-$${Math.round((val / 1000) * 10) / 10}B`
-                : `$${Math.round((val / 1000) * 10) / 10}B`;
+            } else if (val >= 1000) {
+              return isNegative ? `-$${Math.round((val / 1000) * 10) / 10}B` : `$${Math.round((val / 1000) * 10) / 10}B`;
             }
           },
         },
       },
       colors: [info],
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slot, datesChart, comprehensiveIncomeNetOfTax]);
 
   return (

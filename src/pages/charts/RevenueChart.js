@@ -27,7 +27,7 @@ const areaChartOptions = {
 
       if (val < 1000) {
         return isNegative ? `-$${val}M` : `$${val}M`;
-      } else {
+      } else if (val >= 1000) {
         return isNegative ? `-$${Math.round((val / 1000) * 10) / 10}B` : `$${Math.round((val / 1000) * 10) / 10}B`;
       }
     },
@@ -58,12 +58,7 @@ const RevenueChart = ({
   useEffect(() => {
     setOptions((prevState) => ({
       ...prevState,
-      colors: [
-        theme.palette.primary[200],
-        theme.palette.error.light,
-        theme.palette.warning.main,
-        theme.palette.secondary[400],
-      ],
+      colors: [theme.palette.primary[200], theme.palette.error.light, theme.palette.warning.main, theme.palette.secondary[400]],
       xaxis: {
         categories: slot === 'All Time' ? datesChart : datesChart.slice(datesChart.length - 8, datesChart.length),
         labels: {
@@ -79,6 +74,7 @@ const RevenueChart = ({
       },
       yaxis: {
         labels: {
+          show: false,
           style: {
             colors: [secondary],
           },
@@ -99,10 +95,8 @@ const RevenueChart = ({
 
             if (val < 1000) {
               return isNegative ? `-$${val}M` : `$${val}M`;
-            } else {
-              return isNegative
-                ? `-$${Math.round((val / 1000) * 10) / 10}B`
-                : `$${Math.round((val / 1000) * 10) / 10}B`;
+            } else if (val >= 1000) {
+              return isNegative ? `-$${Math.round((val / 1000) * 10) / 10}B` : `$${Math.round((val / 1000) * 10) / 10}B`;
             }
           },
         },
@@ -142,28 +136,8 @@ const RevenueChart = ({
             : revenueValuesChart.slice(revenueValuesChart.length - 8, revenueValuesChart.length),
       },
       {
-        name: 'Operating Expenses',
-        data:
-          slot === 'All Time'
-            ? operatingExpensesValuesChart
-            : operatingExpensesValuesChart.slice(
-                operatingExpensesValuesChart.length - 8,
-                operatingExpensesValuesChart.length,
-              ),
-      },
-      {
         name: 'Cost of Revenue',
         data: slot === 'All Time' ? costOfRevenue : costOfRevenue.slice(costOfRevenue.length - 8, costOfRevenue.length),
-      },
-      {
-        name: 'Cost of Goods and Services Sold',
-        data:
-          slot === 'All Time'
-            ? costOfGoodsAndServicesSold
-            : costOfGoodsAndServicesSold.slice(
-                costOfGoodsAndServicesSold.length - 8,
-                costOfGoodsAndServicesSold.length,
-              ),
       },
     ]);
   }, [slot, datesChart, revenueValuesChart, operatingExpensesValuesChart, costOfRevenue, costOfGoodsAndServicesSold]);

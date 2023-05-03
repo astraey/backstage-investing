@@ -89,14 +89,7 @@ const DashboardDefault = () => {
         <AnalyticEcommerce title="Total Order" count="18,800" percentage={27.4} isLoss color="warning" extra="1,943" />
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce
-          title="Total Sales"
-          count="$35,078"
-          percentage={27.4}
-          isLoss
-          color="warning"
-          extra="$20,395"
-        />
+        <AnalyticEcommerce title="Total Sales" count="$35,078" percentage={27.4} isLoss color="warning" extra="$20,395" />
       </Grid>
 
       <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
@@ -261,10 +254,7 @@ const DashboardDefault = () => {
                   <GiftOutlined />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText
-                primary={<Typography variant="subtitle1">Order #002434</Typography>}
-                secondary="Today, 2:00 AM"
-              />
+              <ListItemText primary={<Typography variant="subtitle1">Order #002434</Typography>} secondary="Today, 2:00 AM" />
               <ListItemSecondaryAction>
                 <Stack alignItems="flex-end">
                   <Typography variant="subtitle1" noWrap>
@@ -287,10 +277,7 @@ const DashboardDefault = () => {
                   <MessageOutlined />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText
-                primary={<Typography variant="subtitle1">Order #984947</Typography>}
-                secondary="5 August, 1:45 PM"
-              />
+              <ListItemText primary={<Typography variant="subtitle1">Order #984947</Typography>} secondary="5 August, 1:45 PM" />
               <ListItemSecondaryAction>
                 <Stack alignItems="flex-end">
                   <Typography variant="subtitle1" noWrap>
@@ -313,10 +300,7 @@ const DashboardDefault = () => {
                   <SettingOutlined />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText
-                primary={<Typography variant="subtitle1">Order #988784</Typography>}
-                secondary="7 hours ago"
-              />
+              <ListItemText primary={<Typography variant="subtitle1">Order #988784</Typography>} secondary="7 hours ago" />
               <ListItemSecondaryAction>
                 <Stack alignItems="flex-end">
                   <Typography variant="subtitle1" noWrap>

@@ -98,10 +98,7 @@ const RevenueChart2 = ({ slot, datesChart, revenueValuesChart, operatingExpenses
     },
     {
       name: 'Operating Expenses',
-      data:
-        slot === 'All Time'
-          ? operatingExpensesValuesChart.reverse()
-          : operatingExpensesValuesChart.slice(0, 7).reverse(),
+      data: slot === 'All Time' ? operatingExpensesValuesChart.reverse() : operatingExpensesValuesChart.slice(0, 7).reverse(),
     },
   ]);
 
