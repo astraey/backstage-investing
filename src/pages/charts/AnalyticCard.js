@@ -13,7 +13,18 @@ import { RiseOutlined, FallOutlined } from '@ant-design/icons';
 
 // ==============================|| STATISTICS - ECOMMERCE CARD  ||============================== //
 
-const AnalyticCard = ({ title, count, companyTicker, companyName, quarter }) => {
+const AnalyticCard = ({
+  title,
+  count,
+  countFormatted,
+  companyTicker,
+  companyName,
+  quarter,
+  percentageChange,
+  percentageChangeQuarter,
+  countPreviousQuarter,
+  countPreviousQuarterFormatted,
+}) => {
   const theme = useTheme();
   return (
     <MainCard contentSX={{ p: 2.25 }}>
@@ -24,48 +35,60 @@ const AnalyticCard = ({ title, count, companyTicker, companyName, quarter }) => 
         <Grid container alignItems="center">
           <Grid item>
             <Typography variant="h4" color="inherit">
-              <Grid>
-                <Chip
-                  style={
-                    count >= 0 ? { backgroundColor: theme.palette.success.light } : { backgroundColor: theme.palette.error.light }
-                  }
-                  variant="combined"
-                  color={count >= 0 ? 'warning' : 'warning'}
-                  icon={
-                    <>
-                      {count >= 0 && <RiseOutlined style={{ fontSize: '1.5rem', color: '#fff' }} />}
-                      {count < 0 && <FallOutlined style={{ fontSize: '1.5rem', color: '#fff' }} />}
-                    </>
-                  }
-                  label={
-                    count < 1000 && count > -1000 ? `$${Math.abs(count)}M` : `$${Math.round((Math.abs(count) / 1000) * 10) / 10}B`
-                  }
-                  sx={{ ml: 0, pl: 1 }}
-                  size="medium"
-                />
-              </Grid>
+              {countFormatted}
             </Typography>
           </Grid>
+          {percentageChange && (
+            <Grid item>
+              <Chip
+                variant="combined"
+                style={{
+                  backgroundColor: count < 0 ? theme.palette.error.light : theme.palette.success.light,
+                  fontWeight: 'bold',
+                  fontSize: '1rem',
+                }}
+                color={count >= 0 ? 'warning' : 'warning'}
+                icon={
+                  <>
+                    {count >= 0 && <RiseOutlined style={{ fontSize: '1.5rem', color: '#fff' }} />}
+                    {count < 0 && <FallOutlined style={{ fontSize: '1.5rem', color: '#fff' }} />}
+                  </>
+                }
+                label={`${percentageChange}%`}
+                sx={{ ml: 1.25, pl: 1 }}
+                size="medium"
+              />
+            </Grid>
+          )}
         </Grid>
       </Stack>
       <Box sx={{ pt: 2.25 }}>
-        {count < 0 ? (
-          <Typography variant="caption" color="textSecondary">
-            {companyName || companyTicker} lost{' '}
-            <Typography component="span" variant="caption" sx={{ color: theme.palette.error.main, fontWeight: 'bold' }}>
-              {count < 1000 && count > -1000 ? `$${Math.abs(count)}M` : `$${Math.round((Math.abs(count) / 1000) * 10) / 10}B`}
-            </Typography>{' '}
-            in {quarter}
-          </Typography>
-        ) : (
-          <Typography variant="caption" color="textSecondary">
-            {companyName || companyTicker} made{' '}
-            <Typography component="span" variant="caption" sx={{ color: theme.palette.success.main, fontWeight: 'bold' }}>
-              {count < 1000 && count > -1000 ? `$${Math.abs(count)}M` : `$${Math.round((Math.abs(count) / 1000) * 10) / 10}B`}
-            </Typography>{' '}
-            in {quarter}
-          </Typography>
-        )}
+        <Typography variant="caption" color="textSecondary">
+          {companyName || companyTicker} {count < 0 ? <span>lost</span> : <span>made</span>}{' '}
+          <Typography
+            component="span"
+            variant="caption"
+            sx={{ color: count < 0 ? theme.palette.error.main : theme.palette.success.main, fontWeight: 'bold' }}
+          >
+            {countFormatted.replace('-', '')}
+          </Typography>{' '}
+          in {quarter}, {count < 0 ? <span>loosing</span> : <span>making</span>}{' '}
+          <span
+            style={{
+              fontWeight: 'bold',
+            }}
+          >
+            {percentageChange}%
+          </span>{' '}
+          more than in {percentageChangeQuarter}, when they {countPreviousQuarter < 0 ? <span>lost</span> : <span>made</span>}{' '}
+          <Typography
+            component="span"
+            variant="caption"
+            sx={{ color: countPreviousQuarter < 0 ? theme.palette.error.main : theme.palette.success.main, fontWeight: 'bold' }}
+          >
+            {countPreviousQuarterFormatted.replace('-', '')}
+          </Typography>{' '}
+        </Typography>
       </Box>
     </MainCard>
   );

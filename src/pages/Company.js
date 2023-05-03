@@ -155,6 +155,12 @@ const Company = () => {
               100,
           ),
           percentageChangeQuarter: fiscalDateEnding[fiscalDateEnding.length - 2],
+          comprehensiveIncomeNetOfTaxPreviousQuarter: comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 2],
+          comprehensiveIncomeNetOfTaxPreviousQuarterFormatted:
+            comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 2] < 1000 &&
+            comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 2] > -1000
+              ? `$${comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 2]}M`
+              : `$${Math.round((comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 2] / 1000) * 10) / 10}B`,
         });
         setRevenueLastReportedQuarter({
           reportedQuarter: fiscalDateEnding[fiscalDateEnding.length - 1],
@@ -169,6 +175,11 @@ const Company = () => {
               100,
           ),
           percentageChangeQuarter: fiscalDateEnding[fiscalDateEnding.length - 2],
+          totalRevenuePreviousQuarter: totalRevenue[totalRevenue.length - 2],
+          revenuePreviousQuarterFormatted:
+            totalRevenue[totalRevenue.length - 2] < 1000 && totalRevenue[totalRevenue.length - 2] > -1000
+              ? `$${totalRevenue[totalRevenue.length - 2]}M`
+              : `$${Math.round((totalRevenue[totalRevenue.length - 2] / 1000) * 10) / 10}B`,
         });
         setDataReceived(true);
       })
@@ -198,22 +209,30 @@ const Company = () => {
               <AnalyticCard
                 title={`${comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter} Comprehensive Net Income`}
                 count={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTax}
+                countFormatted={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxFormatted}
                 companyTicker={params.companyTicker}
                 companyName={stocks.lookup(params.companyTicker)}
                 quarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter}
                 percentageChange={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChange}
                 percentageChangeQuarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChangeQuarter}
+                countPreviousQuarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxPreviousQuarter}
+                countPreviousQuarterFormatted={
+                  comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxPreviousQuarterFormatted
+                }
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
               <AnalyticCard
                 title={`${revenueLastReportedQuarter.reportedQuarter} Revenue`}
                 count={revenueLastReportedQuarter.totalRevenue}
+                countFormatted={revenueLastReportedQuarter.revenueFormatted}
                 companyTicker={params.companyTicker}
                 companyName={stocks.lookup(params.companyTicker)}
                 quarter={revenueLastReportedQuarter.reportedQuarter}
                 percentageChange={revenueLastReportedQuarter.percentageChange}
                 percentageChangeQuarter={revenueLastReportedQuarter.percentageChangeQuarter}
+                countPreviousQuarter={revenueLastReportedQuarter.revenueLastReportedQuarter}
+                countPreviousQuarterFormatted={revenueLastReportedQuarter.revenuePreviousQuarterFormatted}
               />{' '}
             </Grid>
             {/*
