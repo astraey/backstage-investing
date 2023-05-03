@@ -9,7 +9,7 @@ import MainCard from 'components/MainCard';
 import { useTheme } from '@mui/material/styles';
 
 // assets
-import { RiseOutlined, FallOutlined } from '@ant-design/icons';
+import { RiseOutlined, FallOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
 
 // ==============================|| STATISTICS - ECOMMERCE CARD  ||============================== //
 
@@ -26,6 +26,20 @@ const AnalyticCard = ({
   countPreviousQuarterFormatted,
 }) => {
   const theme = useTheme();
+  console.log(title);
+
+  console.log(companyTicker);
+  console.log(companyName);
+  console.log(quarter);
+  console.log(count);
+  console.log(countFormatted);
+  console.log(percentageChangeQuarter);
+  console.log(countPreviousQuarter);
+  console.log(countPreviousQuarterFormatted);
+  console.log(percentageChange);
+  console.log("-----------------------------");
+
+
   return (
     <MainCard contentSX={{ p: 2.25 }}>
       <Stack spacing={1.7}>
@@ -34,30 +48,43 @@ const AnalyticCard = ({
         </Typography>
         <Grid container alignItems="center">
           <Grid item>
-            <Typography variant="h4" color="inherit">
-              {countFormatted}
-            </Typography>
+            <Chip
+              variant="combined"
+              style={{
+                backgroundColor: count < 0 ? theme.palette.error.main : theme.palette.success.main,
+                fontWeight: 'bold',
+                fontSize: '1rem',
+              }}
+              color={count >= 0 ? 'warning' : 'warning'}
+              icon={
+                <>
+                  {count >= 0 && <UpOutlined style={{ fontSize: '1.2rem', color: '#fff' }} />}
+                  {count < 0 && <DownOutlined style={{ fontSize: '1.2rem', color: '#fff' }} />}
+                </>
+              }
+              label={countFormatted}
+              sx={{ ml: 0, pl: 1 }}
+              size="medium"
+            />
           </Grid>
           {percentageChange && (
             <Grid item>
-              <Chip
-                variant="combined"
-                style={{
-                  backgroundColor: count < 0 ? theme.palette.error.light : theme.palette.success.light,
-                  fontWeight: 'bold',
-                  fontSize: '1rem',
-                }}
-                color={count >= 0 ? 'warning' : 'warning'}
-                icon={
-                  <>
-                    {count >= 0 && <RiseOutlined style={{ fontSize: '1.5rem', color: '#fff' }} />}
-                    {count < 0 && <FallOutlined style={{ fontSize: '1.5rem', color: '#fff' }} />}
-                  </>
-                }
-                label={`${percentageChange}%`}
-                sx={{ ml: 1.25, pl: 1 }}
-                size="medium"
-              />
+              <Grid container alignItems="center">
+                <Grid item>
+                  <Chip
+                    variant="combined"
+                    icon={
+                      <>
+                        {(percentageChange >= 0) && <RiseOutlined style={{ fontSize: '1rem', color: 'inherit' }} />}
+                        {percentageChange < 0 && <FallOutlined style={{ fontSize: '1rem', color: 'inherit' }} />}
+                      </>
+                    }
+                    label={`${percentageChange}%`}
+                    sx={{ ml: 1.25, pl: 1 }}
+                    size="small"
+                  />
+                </Grid>
+              </Grid>
             </Grid>
           )}
         </Grid>

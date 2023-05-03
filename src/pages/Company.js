@@ -4,6 +4,15 @@ import { useParams } from 'react-router-dom';
 
 // material-ui
 import {
+  Box,
+  Button,
+  Grid,
+  Stack,
+  Typography,
+} from '@mui/material';
+
+/*
+import {
   Avatar,
   AvatarGroup,
   Box,
@@ -19,25 +28,30 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+*/
 
 // project import
-import OrdersTable from 'pages/dashboard/OrdersTable';
-import IncomeAreaChart from 'pages/dashboard/IncomeAreaChart';
-import MonthlyBarChart from 'pages/dashboard/MonthlyBarChart';
-import ReportAreaChart from 'pages/dashboard/ReportAreaChart';
-import SalesColumnChart from 'pages/dashboard/SalesColumnChart';
+//import OrdersTable from 'pages/dashboard/OrdersTable';
+//import IncomeAreaChart from 'pages/dashboard/IncomeAreaChart';
+//import MonthlyBarChart from 'pages/dashboard/MonthlyBarChart';
+//import ReportAreaChart from 'pages/dashboard/ReportAreaChart';
+//import SalesColumnChart from 'pages/dashboard/SalesColumnChart';
 import MainCard from 'components/MainCard';
-import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
+//import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
 import RevenueChart from 'pages/charts/RevenueChart';
 import ComprehensiveIncomeChart from 'pages/charts/ComprehensiveIncomeChart';
 import AnalyticCard from 'pages/charts/AnalyticCard';
 
+
 // assets
+import { SyncOutlined } from '@ant-design/icons';
+/*
 import { GiftOutlined, MessageOutlined, SettingOutlined, SyncOutlined } from '@ant-design/icons';
 import avatar1 from 'assets/images/users/avatar-1.png';
 import avatar2 from 'assets/images/users/avatar-2.png';
 import avatar3 from 'assets/images/users/avatar-3.png';
 import avatar4 from 'assets/images/users/avatar-4.png';
+*/
 
 const stocks = require('stock-ticker-symbol');
 
@@ -50,6 +64,7 @@ const requestVariables = {
   },
 };
 
+/*
 // avatar style
 const avatarSX = {
   width: 36,
@@ -82,6 +97,7 @@ const status = [
     label: 'This Year',
   },
 ];
+*/
 
 const Company = () => {
   const [datesChart, setDatesChart] = useState(null);
@@ -92,7 +108,7 @@ const Company = () => {
   const [comprehensiveIncomeNetOfTaxLastReportedQuarter, setComprehensiveIncomeNetOfTaxLastReportedQuarter] = useState(null);
   const [revenueLastReportedQuarter, setRevenueLastReportedQuarter] = useState(null);
   const [dataReceived, setDataReceived] = useState(null);
-  const [value, setValue] = useState('today');
+  //const [value, setValue] = useState('today');
   const [slot, setSlot] = useState('Last 2 Years');
   const [costofGoodsAndServicesSold, setCostofGoodsAndServicesSold] = useState('Last 2 Years');
 
@@ -151,7 +167,7 @@ const Company = () => {
           percentageChange: Math.round(
             ((comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1] -
               comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 2]) /
-              comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1]) *
+              Math.abs(comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1])) *
               100,
           ),
           percentageChangeQuarter: fiscalDateEnding[fiscalDateEnding.length - 2],
@@ -171,11 +187,11 @@ const Company = () => {
               : `$${Math.round((totalRevenue[totalRevenue.length - 1] / 1000) * 10) / 10}B`,
           percentageChange: Math.round(
             ((totalRevenue[totalRevenue.length - 1] - totalRevenue[totalRevenue.length - 2]) /
-              totalRevenue[totalRevenue.length - 1]) *
+            Math.abs(totalRevenue[totalRevenue.length - 1])) *
               100,
           ),
           percentageChangeQuarter: fiscalDateEnding[fiscalDateEnding.length - 2],
-          totalRevenuePreviousQuarter: totalRevenue[totalRevenue.length - 2],
+          revenueLastReportedQuarter: totalRevenue[totalRevenue.length - 2],
           revenuePreviousQuarterFormatted:
             totalRevenue[totalRevenue.length - 2] < 1000 && totalRevenue[totalRevenue.length - 2] > -1000
               ? `$${totalRevenue[totalRevenue.length - 2]}M`
