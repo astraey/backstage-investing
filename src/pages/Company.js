@@ -205,7 +205,7 @@ const Company = () => {
       {dataReceived ? (
         <div>
           <Grid container rowSpacing={4.5} columnSpacing={2.75}>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
+            <Grid item xs={12} sm={6} md={4} lg={6}>
               <AnalyticCard
                 title={`${comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter} Comprehensive Net Income`}
                 count={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTax}
@@ -221,7 +221,7 @@ const Company = () => {
                 }
               />
             </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
+            <Grid item xs={12} sm={6} md={4} lg={6}>
               <AnalyticCard
                 title={`${revenueLastReportedQuarter.reportedQuarter} Revenue`}
                 count={revenueLastReportedQuarter.totalRevenue}
@@ -316,10 +316,10 @@ const Company = () => {
       )}
 
       {/*Samples From Dashboard Page Start Here*/}
+      {/*
       <br></br>
       <br></br>
       <Grid container rowSpacing={4.5} columnSpacing={2.75}>
-        {/* row 1 */}
         <Grid item xs={12} sx={{ mb: -2.25 }}>
           <Typography variant="h5">Dashboard Samples</Typography>
         </Grid>
@@ -338,7 +338,6 @@ const Company = () => {
 
         <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
 
-        {/* row 2 */}
         <Grid item xs={12} md={7} lg={8}>
           <Grid container alignItems="center" justifyContent="space-between">
             <Grid item>
@@ -391,7 +390,6 @@ const Company = () => {
           </MainCard>
         </Grid>
 
-        {/* row 3 */}
         <Grid item xs={12} md={7} lg={8}>
           <Grid container alignItems="center" justifyContent="space-between">
             <Grid item>
@@ -429,7 +427,6 @@ const Company = () => {
           </MainCard>
         </Grid>
 
-        {/* row 4 */}
         <Grid item xs={12} md={7} lg={8}>
           <Grid container alignItems="center" justifyContent="space-between">
             <Grid item>
@@ -590,6 +587,7 @@ const Company = () => {
           </MainCard>
         </Grid>
       </Grid>
+      */}
     </div>
   );
 };
