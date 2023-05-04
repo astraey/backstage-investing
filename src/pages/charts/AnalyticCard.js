@@ -120,7 +120,7 @@ const AnalyticCard = ({
                 return <span>more</span>;
               case percentageChange < 0 && count < 0 && countPreviousQuarter >= 0:
                 return <span>more</span>;
-                // eslint-disable-next-line
+              // eslint-disable-next-line
               case percentageChange < 0 && count >= 0 && countPreviousQuarter >= 0:
                 return <span>less</span>;
               default:

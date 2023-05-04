@@ -124,23 +124,47 @@ const Company = () => {
           comprehensiveIncomeNetOfTax.push(Math.round((quarterlyReport.comprehensiveIncomeNetOfTax / 1000000) * 10) / 10);
           costOfRevenue.push(Math.round((quarterlyReport.costOfRevenue / 1000000) * 10) / 10);
           costofGoodsAndServicesSold.push(Math.round((quarterlyReport.costofGoodsAndServicesSold / 1000000) * 10) / 10);
-          switch (`${quarterlyReport.fiscalDateEnding.split('-')[1]}-${quarterlyReport.fiscalDateEnding.split('-')[2]}`) {
-            case '03-31':
-              fiscalDateEnding.push(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-              break;
-            case '06-30':
-              fiscalDateEnding.push(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-              break;
-            case '09-30':
-              fiscalDateEnding.push(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-              break;
-            case '12-31':
-              fiscalDateEnding.push(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-              break;
-            default:
-              break;
+          let monthDay = `${quarterlyReport.fiscalDateEnding.split('-')[1]}-${quarterlyReport.fiscalDateEnding.split('-')[2]}`;
+          console.log(quarterlyReport.fiscalDateEnding);
+          if (monthDay === '03-31') {
+            fiscalDateEnding.push(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+            console.log(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`)
+          } 
+          else if (monthDay === '04-30') {
+            fiscalDateEnding.push(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+            console.log(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`)
+          } 
+
+
+          else if (monthDay === '06-30') {
+            fiscalDateEnding.push(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+            console.log(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`)
+          } 
+          else if (monthDay === '07-31') {
+            fiscalDateEnding.push(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+            console.log(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`)
+          } 
+
+          else if (monthDay === '09-30') {
+            fiscalDateEnding.push(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+            console.log(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`)
+          } 
+          else if (monthDay === '10-31') {
+            fiscalDateEnding.push(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+            console.log(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`)
+          } 
+
+          else if (monthDay === '12-31') {
+            fiscalDateEnding.push(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+            console.log(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`)
+          } 
+          else if (monthDay === '01-31') {
+            fiscalDateEnding.push(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]-1}`);
+            console.log(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`)
+          } 
+          else {
+            fiscalDateEnding.push('Quarter Unknown');
           }
-          //return quarterlyReport;
         });
         setDatesChart(fiscalDateEnding.reverse());
         setRevenueValuesChart(totalRevenue.reverse());

@@ -74,7 +74,7 @@ const RevenueChart = ({
       },
       yaxis: {
         labels: {
-          show: false,
+          show: true,
           style: {
             colors: [secondary],
           },
