@@ -37,8 +37,7 @@ const AnalyticCard = ({
   console.log(countPreviousQuarter);
   console.log(countPreviousQuarterFormatted);
   console.log(percentageChange);
-  console.log("-----------------------------");
-
+  console.log('-----------------------------');
 
   return (
     <MainCard contentSX={{ p: 2.25 }}>
@@ -75,7 +74,7 @@ const AnalyticCard = ({
                     variant="combined"
                     icon={
                       <>
-                        {(percentageChange >= 0) && <RiseOutlined style={{ fontSize: '1rem', color: 'inherit' }} />}
+                        {percentageChange >= 0 && <RiseOutlined style={{ fontSize: '1rem', color: 'inherit' }} />}
                         {percentageChange < 0 && <FallOutlined style={{ fontSize: '1rem', color: 'inherit' }} />}
                       </>
                     }
@@ -105,9 +104,30 @@ const AnalyticCard = ({
               fontWeight: 'bold',
             }}
           >
-            {percentageChange}%
+            {Math.abs(percentageChange)}%
           </span>{' '}
-          more than in {percentageChangeQuarter}, when they {countPreviousQuarter < 0 ? <span>lost</span> : <span>made</span>}{' '}
+          {(() => {
+            switch (true) {
+              case percentageChange >= 0 && count < 0 && countPreviousQuarter < 0:
+                return <span>less</span>;
+              case percentageChange < 0 && count < 0 && countPreviousQuarter < 0:
+                return <span>more</span>;
+              case percentageChange >= 0 && count >= 0 && countPreviousQuarter >= 0:
+                return <span>more</span>;
+              case percentageChange < 0 && count >= 0 && countPreviousQuarter >= 0:
+                return <span>less</span>;
+              case percentageChange >= 0 && count >= 0 && countPreviousQuarter < 0:
+                return <span>more</span>;
+              case percentageChange < 0 && count < 0 && countPreviousQuarter >= 0:
+                return <span>more</span>;
+                // eslint-disable-next-line
+              case percentageChange < 0 && count >= 0 && countPreviousQuarter >= 0:
+                return <span>less</span>;
+              default:
+                return <span></span>;
+            }
+          })()}{' '}
+          than in {percentageChangeQuarter}, when they {countPreviousQuarter < 0 ? <span>lost</span> : <span>made</span>}{' '}
           <Typography
             component="span"
             variant="caption"

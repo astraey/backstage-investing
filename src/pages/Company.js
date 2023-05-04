@@ -3,13 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 // material-ui
-import {
-  Box,
-  Button,
-  Grid,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 
 /*
 import {
@@ -41,7 +35,6 @@ import MainCard from 'components/MainCard';
 import RevenueChart from 'pages/charts/RevenueChart';
 import ComprehensiveIncomeChart from 'pages/charts/ComprehensiveIncomeChart';
 import AnalyticCard from 'pages/charts/AnalyticCard';
-
 
 // assets
 import { SyncOutlined } from '@ant-design/icons';
@@ -187,7 +180,7 @@ const Company = () => {
               : `$${Math.round((totalRevenue[totalRevenue.length - 1] / 1000) * 10) / 10}B`,
           percentageChange: Math.round(
             ((totalRevenue[totalRevenue.length - 1] - totalRevenue[totalRevenue.length - 2]) /
-            Math.abs(totalRevenue[totalRevenue.length - 1])) *
+              Math.abs(totalRevenue[totalRevenue.length - 1])) *
               100,
           ),
           percentageChangeQuarter: fiscalDateEnding[fiscalDateEnding.length - 2],
