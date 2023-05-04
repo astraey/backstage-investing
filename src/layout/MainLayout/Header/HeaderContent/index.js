@@ -1,23 +1,24 @@
 // material-ui
-import { Box, useMediaQuery } from '@mui/material';
+//import { Box, useMediaQuery } from '@mui/material';
 //import { GithubOutlined } from '@ant-design/icons';
 
 // project import
 import Search from './Search';
 import Profile from './Profile';
 //import Notification from './Notification';
-import MobileSection from './MobileSection';
+//import MobileSection from './MobileSection';
 
 // ==============================|| HEADER - CONTENT ||============================== //
 
 const HeaderContent = () => {
-  const matchesXs = useMediaQuery((theme) => theme.breakpoints.down('md'));
+  //const matchesXs = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
   return (
     <>
-      {/*<Logo/>*/}
-      {!matchesXs && <Search />}
-      {matchesXs && <Box sx={{ width: '100%', ml: 1 }} />}
+      <Search />
+      {/*Commented Out Mobile Responsiveness*/}     
+      {/*!matchesXs && <Search />*/}
+      {/*matchesXs && <Box sx={{ width: '100%', ml: 1 }} />*/}
 
       {/*
       <IconButton
@@ -34,9 +35,12 @@ const HeaderContent = () => {
       */}
       {/*
       <Notification />
-      */}
+      
+      //Commented Out Mobile Responsiveness
       {!matchesXs && <Profile />}
       {matchesXs && <MobileSection />}
+      */}
+      <Profile />
     </>
   );
 };
