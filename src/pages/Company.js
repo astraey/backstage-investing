@@ -1,6 +1,7 @@
 import { API } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useTheme } from '@mui/material/styles';
 
 // material-ui
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
@@ -106,6 +107,7 @@ const Company = () => {
   const [costofGoodsAndServicesSold, setCostofGoodsAndServicesSold] = useState('Last 2 Years');
 
   const params = useParams();
+  const theme = useTheme();
 
   useEffect(() => {
     let path = `/company/${params.companyTicker}`;
@@ -269,7 +271,7 @@ const Company = () => {
           <Grid item xs={12} md={7} lg={8}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
-                <Typography variant="h5">Revenue & Cost of Revenue</Typography>
+                <Typography variant="h4">Revenue & Cost of Revenue</Typography>
               </Grid>
               <Grid item>
                 <Stack direction="row" alignItems="center" spacing={0}>
@@ -292,6 +294,20 @@ const Company = () => {
                 </Stack>
               </Grid>
             </Grid>
+            <br></br>
+            <Typography color="textSecondary" variant="h6">
+              Revenue refers to the total amount of money that a company earns from its sales of goods or services over a specific period. It is the
+              top line of a company's income statement, which represents the company's total sales or turnover. Revenue is calculated by multiplying
+              the price of a product or service by the quantity sold. Cost of revenue, also known as cost of goods sold (COGS), refers to the direct
+              costs associated with producing or delivering a company's goods or services. This includes the cost of raw materials, labor,
+              manufacturing overhead, shipping, and any other expenses directly related to producing or delivering a product or service. To calculate
+              the gross profit of a company, which is the revenue minus the cost of revenue, the cost of revenue is deducted from the revenue. The
+              gross profit reflects how much revenue a company retains after accounting for the direct costs of producing its goods or services.
+              Revenue and cost of revenue are important financial metrics that can help investors and analysts assess a company's financial
+              performance and profitability. A high revenue figure combined with a low cost of revenue can indicate that a company is generating
+              significant profits and is efficiently managing its costs. On the other hand, a low revenue figure combined with a high cost of revenue
+              can indicate that a company is struggling to generate profits and may need to find ways to reduce its costs or increase its revenue.
+            </Typography>
             <MainCard content={false} sx={{ mt: 1.5 }}>
               <Box sx={{ pt: 1, pr: 2 }}>
                 <RevenueChart
@@ -308,8 +324,8 @@ const Company = () => {
             <br></br>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
-                <Typography variant="h5">Comprehensive Income Net Of Tax</Typography>
-                <Typography variant="h6">
+                <Typography variant="h4">Comprehensive Income Net Of Tax</Typography>
+                <Typography color="textSecondary" variant="h6">
                   Comprehensive income is the total profit or gain that a company makes in a particular period of time, plus the value of yet
                   unrealized profits (or losses) in the same period.
                 </Typography>
@@ -324,7 +340,11 @@ const Company = () => {
         </div>
       ) : (
         <p>
-          <SyncOutlined spin style={{ fontSize: '300%' }} />
+          <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ minHeight: '60vh' }}>
+            <Grid item xs={7}>
+              <SyncOutlined spin style={{ fontSize: '1000%', color: theme.palette.primary.light }} />
+            </Grid>
+          </Grid>
         </p>
       )}
 
