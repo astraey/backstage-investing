@@ -52,9 +52,7 @@
     "sec-fetch-dest": ["empty"],
     "sec-fetch-mode": ["cors"],
     "sec-fetch-site": ["cross-site"],
-    "User-Agent": [
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
-    ],
+    "User-Agent": ["Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"],
     "Via": ["2.0 527715fc8b8c6fc58dafc25125fc8102.cloudfront.net (CloudFront)"],
     "X-Amz-Cf-Id": ["secret"],
     "x-amz-date": ["20230424T103206Z"],

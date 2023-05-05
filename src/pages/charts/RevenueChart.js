@@ -43,14 +43,7 @@ const areaChartOptions = {
 
 // ==============================|| INCOME AREA CHART ||============================== //
 
-const RevenueChart = ({
-  slot,
-  datesChart,
-  revenueValuesChart,
-  operatingExpensesValuesChart,
-  costOfRevenue,
-  costOfGoodsAndServicesSold,
-}) => {
+const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesValuesChart, costOfRevenue, costOfGoodsAndServicesSold }) => {
   const theme = useTheme();
   const { primary, secondary } = theme.palette.text;
   const line = theme.palette.divider;
@@ -130,10 +123,7 @@ const RevenueChart = ({
     setSeries([
       {
         name: 'Revenue',
-        data:
-          slot === 'All Time'
-            ? revenueValuesChart
-            : revenueValuesChart.slice(revenueValuesChart.length - 8, revenueValuesChart.length),
+        data: slot === 'All Time' ? revenueValuesChart : revenueValuesChart.slice(revenueValuesChart.length - 8, revenueValuesChart.length),
       },
       {
         name: 'Cost of Revenue',

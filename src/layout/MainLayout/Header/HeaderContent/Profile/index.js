@@ -33,13 +33,7 @@ import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons
 // tab panel wrapper
 function TabPanel({ children, value, index, ...other }) {
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`profile-tabpanel-${index}`}
-      aria-labelledby={`profile-tab-${index}`}
-      {...other}
-    >
+    <div role="tabpanel" hidden={value !== index} id={`profile-tabpanel-${index}`} aria-labelledby={`profile-tab-${index}`} {...other}>
       {value === index && children}
     </div>
   );

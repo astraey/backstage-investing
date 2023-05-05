@@ -16,7 +16,7 @@ const HeaderContent = () => {
   return (
     <>
       <Search />
-      {/*Commented Out Mobile Responsiveness*/}     
+      {/*Commented Out Mobile Responsiveness*/}
       {/*!matchesXs && <Search />*/}
       {/*matchesXs && <Box sx={{ width: '100%', ml: 1 }} />*/}
 

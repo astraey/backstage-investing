@@ -55,13 +55,7 @@ const Breadcrumbs = ({ navigation, title, ...others }) => {
   // collapse item
   if (main && main.type === 'collapse') {
     mainContent = (
-      <Typography
-        component={Link}
-        to={document.location.pathname}
-        variant="h6"
-        sx={{ textDecoration: 'none' }}
-        color="textSecondary"
-      >
+      <Typography component={Link} to={document.location.pathname} variant="h6" sx={{ textDecoration: 'none' }} color="textSecondary">
         {main.title}
       </Typography>
     );

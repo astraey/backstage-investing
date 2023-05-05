@@ -37,22 +37,10 @@ const FirebaseSocial = () => {
         },
       }}
     >
-      <Button
-        variant="outlined"
-        color="secondary"
-        fullWidth={!matchDownSM}
-        startIcon={<img src={Google} alt="Google" />}
-        onClick={googleHandler}
-      >
+      <Button variant="outlined" color="secondary" fullWidth={!matchDownSM} startIcon={<img src={Google} alt="Google" />} onClick={googleHandler}>
         {!matchDownSM && 'Google'}
       </Button>
-      <Button
-        variant="outlined"
-        color="secondary"
-        fullWidth={!matchDownSM}
-        startIcon={<img src={Twitter} alt="Twitter" />}
-        onClick={twitterHandler}
-      >
+      <Button variant="outlined" color="secondary" fullWidth={!matchDownSM} startIcon={<img src={Twitter} alt="Twitter" />} onClick={twitterHandler}>
         {!matchDownSM && 'Twitter'}
       </Button>
       <Button

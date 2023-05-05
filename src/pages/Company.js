@@ -128,41 +128,29 @@ const Company = () => {
           console.log(quarterlyReport.fiscalDateEnding);
           if (monthDay === '03-31') {
             fiscalDateEnding.push(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            console.log(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`)
-          } 
-          else if (monthDay === '04-30') {
+            console.log(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+          } else if (monthDay === '04-30') {
             fiscalDateEnding.push(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            console.log(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`)
-          } 
-
-
-          else if (monthDay === '06-30') {
+            console.log(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+          } else if (monthDay === '06-30') {
             fiscalDateEnding.push(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            console.log(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`)
-          } 
-          else if (monthDay === '07-31') {
+            console.log(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+          } else if (monthDay === '07-31') {
             fiscalDateEnding.push(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            console.log(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`)
-          } 
-
-          else if (monthDay === '09-30') {
+            console.log(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+          } else if (monthDay === '09-30') {
             fiscalDateEnding.push(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            console.log(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`)
-          } 
-          else if (monthDay === '10-31') {
+            console.log(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+          } else if (monthDay === '10-31') {
             fiscalDateEnding.push(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            console.log(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`)
-          } 
-
-          else if (monthDay === '12-31') {
+            console.log(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+          } else if (monthDay === '12-31') {
             fiscalDateEnding.push(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            console.log(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`)
-          } 
-          else if (monthDay === '01-31') {
-            fiscalDateEnding.push(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]-1}`);
-            console.log(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`)
-          } 
-          else {
+            console.log(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+          } else if (monthDay === '01-31') {
+            fiscalDateEnding.push(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0] - 1}`);
+            console.log(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+          } else {
             fiscalDateEnding.push('Quarter Unknown');
           }
         });
@@ -203,9 +191,7 @@ const Company = () => {
               ? `$${totalRevenue[totalRevenue.length - 1]}M`
               : `$${Math.round((totalRevenue[totalRevenue.length - 1] / 1000) * 10) / 10}B`,
           percentageChange: Math.round(
-            ((totalRevenue[totalRevenue.length - 1] - totalRevenue[totalRevenue.length - 2]) /
-              Math.abs(totalRevenue[totalRevenue.length - 1])) *
-              100,
+            ((totalRevenue[totalRevenue.length - 1] - totalRevenue[totalRevenue.length - 2]) / Math.abs(totalRevenue[totalRevenue.length - 1])) * 100,
           ),
           percentageChangeQuarter: fiscalDateEnding[fiscalDateEnding.length - 2],
           revenueLastReportedQuarter: totalRevenue[totalRevenue.length - 2],
@@ -240,22 +226,6 @@ const Company = () => {
           <Grid container rowSpacing={4.5} columnSpacing={2.75}>
             <Grid item xs={12} sm={6} md={4} lg={6}>
               <AnalyticCard
-                title={`${comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter} Comprehensive Net Income`}
-                count={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTax}
-                countFormatted={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxFormatted}
-                companyTicker={params.companyTicker}
-                companyName={stocks.lookup(params.companyTicker)}
-                quarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter}
-                percentageChange={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChange}
-                percentageChangeQuarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChangeQuarter}
-                countPreviousQuarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxPreviousQuarter}
-                countPreviousQuarterFormatted={
-                  comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxPreviousQuarterFormatted
-                }
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={6}>
-              <AnalyticCard
                 title={`${revenueLastReportedQuarter.reportedQuarter} Revenue`}
                 count={revenueLastReportedQuarter.totalRevenue}
                 countFormatted={revenueLastReportedQuarter.revenueFormatted}
@@ -267,6 +237,20 @@ const Company = () => {
                 countPreviousQuarter={revenueLastReportedQuarter.revenueLastReportedQuarter}
                 countPreviousQuarterFormatted={revenueLastReportedQuarter.revenuePreviousQuarterFormatted}
               />{' '}
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={6}>
+              <AnalyticCard
+                title={`${comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter} Comprehensive Net Income`}
+                count={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTax}
+                countFormatted={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxFormatted}
+                companyTicker={params.companyTicker}
+                companyName={stocks.lookup(params.companyTicker)}
+                quarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter}
+                percentageChange={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChange}
+                percentageChangeQuarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChangeQuarter}
+                countPreviousQuarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxPreviousQuarter}
+                countPreviousQuarterFormatted={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxPreviousQuarterFormatted}
+              />
             </Grid>
             {/*
             <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -326,18 +310,14 @@ const Company = () => {
               <Grid item>
                 <Typography variant="h5">Comprehensive Income Net Of Tax</Typography>
                 <Typography variant="h6">
-                  Comprehensive income is the total profit or gain that a company makes in a particular period of time, plus the
-                  value of yet unrealized profits (or losses) in the same period.
+                  Comprehensive income is the total profit or gain that a company makes in a particular period of time, plus the value of yet
+                  unrealized profits (or losses) in the same period.
                 </Typography>
               </Grid>
             </Grid>
             <MainCard content={false} sx={{ mt: 1.5 }}>
               <Box sx={{ pt: 1, pr: 2 }}>
-                <ComprehensiveIncomeChart
-                  slot={slot}
-                  datesChart={datesChart}
-                  comprehensiveIncomeNetOfTax={comprehensiveIncomeNetOfTax}
-                />
+                <ComprehensiveIncomeChart slot={slot} datesChart={datesChart} comprehensiveIncomeNetOfTax={comprehensiveIncomeNetOfTax} />
               </Box>
             </MainCard>
           </Grid>
