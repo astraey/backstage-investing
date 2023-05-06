@@ -83,7 +83,6 @@ const Profile = () => {
   };
 
   const iconBackColorOpen = 'grey.300';
-
   return (
     <Box sx={{ flexShrink: 0, ml: 0.75 }}>
       <ButtonBase
@@ -101,7 +100,7 @@ const Profile = () => {
       >
         <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 0.5 }}>
           <Avatar alt="profile user" src={avatar5} sx={{ width: 32, height: 32 }} />
-          <Typography variant="subtitle1">Juan Delmuro</Typography>
+          <Typography variant="subtitle1">{Auth.user.attributes.email.split('@')[0] || ''}</Typography>
         </Stack>
       </ButtonBase>
       <Popper
@@ -144,10 +143,7 @@ const Profile = () => {
                           <Stack direction="row" spacing={1.25} alignItems="center">
                             <Avatar alt="profile user" src={avatar5} sx={{ width: 32, height: 32 }} />
                             <Stack>
-                              <Typography variant="h6">Juan Delmuro</Typography>
-                              <Typography variant="body2" color="textSecondary">
-                                email@gmail.com
-                              </Typography>
+                              <Typography variant="h6">{Auth.user.attributes.email}</Typography>
                             </Stack>
                           </Stack>
                         </Grid>
