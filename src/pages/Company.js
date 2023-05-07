@@ -32,6 +32,7 @@ import {
 //import ReportAreaChart from 'pages/dashboard/ReportAreaChart';
 //import SalesColumnChart from 'pages/dashboard/SalesColumnChart';
 import MainCard from 'components/MainCard';
+import SimplePopover from 'components/SimplePopover';
 //import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
 import RevenueChart from 'pages/charts/RevenueChart';
 import ComprehensiveIncomeChart from 'pages/charts/ComprehensiveIncomeChart';
@@ -296,18 +297,25 @@ const Company = () => {
             </Grid>
             <br></br>
             <Typography color="textSecondary" variant="h6">
-              Revenue refers to the total amount of money that a company earns from its sales of goods or services over a specific period. It is the
-              top line of a company's income statement, which represents the company's total sales or turnover. Revenue is calculated by multiplying
-              the price of a product or service by the quantity sold. Cost of revenue, also known as cost of goods sold (COGS), refers to the direct
-              costs associated with producing or delivering a company's goods or services. This includes the cost of raw materials, labor,
-              manufacturing overhead, shipping, and any other expenses directly related to producing or delivering a product or service. To calculate
-              the gross profit of a company, which is the revenue minus the cost of revenue, the cost of revenue is deducted from the revenue. The
-              gross profit reflects how much revenue a company retains after accounting for the direct costs of producing its goods or services.
-              Revenue and cost of revenue are important financial metrics that can help investors and analysts assess a company's financial
-              performance and profitability. A high revenue figure combined with a low cost of revenue can indicate that a company is generating
-              significant profits and is efficiently managing its costs. On the other hand, a low revenue figure combined with a high cost of revenue
-              can indicate that a company is struggling to generate profits and may need to find ways to reduce its costs or increase its revenue.
+              Revenue is the total amount of money a business earns from selling its products or services. In other words, revenue is the income a
+              company generates from its primary operations before deducting expenses such as the cost of goods sold, taxes, and other business
+              expenses. It is essentially the money that flows into a business from its customers or clients.
             </Typography>
+            <br></br>
+            <SimplePopover
+              buttonTitle="Why is Revenue Important"
+              content="Revenue refers to the total amount of money that a company earns from its sales of goods or services over a specific period. It is the
+                    top line of a company's income statement, which represents the company's total sales or turnover. Revenue is calculated by multiplying
+                    the price of a product or service by the quantity sold. Cost of revenue, also known as cost of goods sold (COGS), refers to the direct
+                    costs associated with producing or delivering a company's goods or services. This includes the cost of raw materials, labor,
+                    manufacturing overhead, shipping, and any other expenses directly related to producing or delivering a product or service. To calculate
+                    the gross profit of a company, which is the revenue minus the cost of revenue, the cost of revenue is deducted from the revenue. The
+                    gross profit reflects how much revenue a company retains after accounting for the direct costs of producing its goods or services.
+                    Revenue and cost of revenue are important financial metrics that can help investors and analysts assess a company's financial
+                    performance and profitability. A high revenue figure combined with a low cost of revenue can indicate that a company is generating
+                    significant profits and is efficiently managing its costs. On the other hand, a low revenue figure combined with a high cost of revenue
+                    can indicate that a company is struggling to generate profits and may need to find ways to reduce its costs or increase its revenue."
+            />
             <MainCard content={false} sx={{ mt: 1.5 }}>
               <Box sx={{ pt: 1, pr: 2 }}>
                 <RevenueChart
@@ -329,6 +337,11 @@ const Company = () => {
                   Comprehensive income is the total profit or gain that a company makes in a particular period of time, plus the value of yet
                   unrealized profits (or losses) in the same period.
                 </Typography>
+                <br></br>
+                <SimplePopover
+                  buttonTitle="Why is Comprehensive Net of Tax important"
+                  content="Comprehensive net of tax refers to a financial statement that includes all of a company's financial transactions and their effects on its overall financial position, taking into account the impact of taxes. This statement provides a comprehensive view of a company's financial performance by combining its income statement, balance sheet, and other financial information, and adjusting for the effects of taxes. It takes into account all sources of income and expenses, including those that are not directly related to the company's core business operations. The net of tax aspect refers to the fact that the statement takes into account the impact of taxes on the company's financial position. This means that the statement includes both pre-tax and after-tax figures, allowing investors and analysts to assess the company's financial performance on a more complete and accurate basis. Overall, the comprehensive net of tax statement provides a comprehensive view of a company's financial position that takes into account all relevant financial transactions and their impact on the company's overall financial health."
+                />
               </Grid>
             </Grid>
             <MainCard content={false} sx={{ mt: 1.5 }}>

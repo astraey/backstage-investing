@@ -9,14 +9,13 @@ import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 //import { EditOutlined, ProfileOutlined, LogoutOutlined, UserOutlined, WalletOutlined } from '@ant-design/icons';
 import { LogoutOutlined } from '@ant-design/icons';
 
-
 // ==============================|| HEADER PROFILE - PROFILE TAB ||============================== //
 
 const ProfileTab = ({ handleLogout }) => {
   const theme = useTheme();
 
   //const [selectedIndex, setSelectedIndex] = useState(0);
-  //Added line below to avoid warning 
+  //Added line below to avoid warning
   const selectedIndex = 0;
 
   /*

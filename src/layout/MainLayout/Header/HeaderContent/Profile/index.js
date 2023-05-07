@@ -3,7 +3,6 @@ import { useRef, useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 
-
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import {
@@ -49,7 +48,6 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-
 /*
 function a11yProps(index) {
   return {
@@ -74,7 +72,6 @@ const Profile = ({ user }) => {
   const [userEmail, setUserEmail] = useState(false);
   const [username, setUsername] = useState(false);
 
-
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -98,13 +95,11 @@ const Profile = ({ user }) => {
 
   const iconBackColorOpen = 'grey.300';
 
-
   useEffect(() => {
-    setUserEmail(user.attributes.email)
-    setUsername(user.attributes.email.split('@')[0])
-  })
+    setUserEmail(user.attributes.email);
+    setUsername(user.attributes.email.split('@')[0]);
+  });
 
-  
   return (
     <Box sx={{ flexShrink: 0, ml: 0.75 }}>
       <ButtonBase
@@ -165,7 +160,7 @@ const Profile = ({ user }) => {
                           <Stack direction="row" spacing={1.25} alignItems="center">
                             <Avatar alt="profile user" src={avatar5} sx={{ width: 32, height: 32 }} />
                             <Stack>
-                            <Typography variant="subtitle1">{userEmail}</Typography>
+                              <Typography variant="subtitle1">{userEmail}</Typography>
                             </Stack>
                           </Stack>
                         </Grid>
