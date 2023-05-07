@@ -339,13 +339,13 @@ const Company = () => {
           </Grid>
         </div>
       ) : (
-        <p>
+        <div>
           <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ minHeight: '60vh' }}>
             <Grid item xs={7}>
               <SyncOutlined spin style={{ fontSize: '1000%', color: theme.palette.primary.light }} />
             </Grid>
           </Grid>
-        </p>
+        </div>
       )}
 
       {/*Samples From Dashboard Page Start Here*/}

@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -15,8 +17,8 @@ import {
   Paper,
   Popper,
   Stack,
-  Tab,
-  Tabs,
+  //Tab,
+  //Tabs,
   Typography,
 } from '@mui/material';
 
@@ -24,14 +26,16 @@ import {
 import MainCard from 'components/MainCard';
 import Transitions from 'components/@extended/Transitions';
 import ProfileTab from './ProfileTab';
-import SettingTab from './SettingTab';
+//import SettingTab from './SettingTab';
 
 // assets
 import avatar5 from 'assets/images/users/avatar-5.png';
-import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+//import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import { LogoutOutlined } from '@ant-design/icons';
 
 // tab panel wrapper
 function TabPanel({ children, value, index, ...other }) {
+  //console.log(Auth.currentUserInfo);
   return (
     <div role="tabpanel" hidden={value !== index} id={`profile-tabpanel-${index}`} aria-labelledby={`profile-tab-${index}`} {...other}>
       {value === index && children}
@@ -45,18 +49,20 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
+
+/*
 function a11yProps(index) {
   return {
     id: `profile-tab-${index}`,
     'aria-controls': `profile-tabpanel-${index}`,
   };
 }
+*/
 
 // ==============================|| HEADER CONTENT - PROFILE ||============================== //
 
-const Profile = () => {
+const Profile = ({ user }) => {
   const theme = useTheme();
-
   const handleLogout = async () => {
     Auth.signOut()
       .then((data) => console.log(data))
@@ -65,6 +71,10 @@ const Profile = () => {
 
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
+  const [userEmail, setUserEmail] = useState(false);
+  const [username, setUsername] = useState(false);
+
+
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -76,13 +86,25 @@ const Profile = () => {
     setOpen(false);
   };
 
-  const [value, setValue] = useState(0);
+  //const [value, setValue] = useState(0);
+  //Added line below to avoid warning.
+  const value = 0;
 
+  /*
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  */
 
   const iconBackColorOpen = 'grey.300';
+
+
+  useEffect(() => {
+    setUserEmail(user.attributes.email)
+    setUsername(user.attributes.email.split('@')[0])
+  })
+
+  
   return (
     <Box sx={{ flexShrink: 0, ml: 0.75 }}>
       <ButtonBase
@@ -100,7 +122,7 @@ const Profile = () => {
       >
         <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 0.5 }}>
           <Avatar alt="profile user" src={avatar5} sx={{ width: 32, height: 32 }} />
-          <Typography variant="subtitle1">{Auth.user.attributes.email.split('@')[0] || ''}</Typography>
+          <Typography variant="subtitle1">{username}</Typography>
         </Stack>
       </ButtonBase>
       <Popper
@@ -143,7 +165,7 @@ const Profile = () => {
                           <Stack direction="row" spacing={1.25} alignItems="center">
                             <Avatar alt="profile user" src={avatar5} sx={{ width: 32, height: 32 }} />
                             <Stack>
-                              <Typography variant="h6">{Auth.user.attributes.email}</Typography>
+                            <Typography variant="subtitle1">{userEmail}</Typography>
                             </Stack>
                           </Stack>
                         </Grid>
@@ -157,6 +179,7 @@ const Profile = () => {
                     {open && (
                       <>
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                          {/* 
                           <Tabs variant="fullWidth" value={value} onChange={handleChange} aria-label="profile tabs">
                             <Tab
                               sx={{
@@ -177,6 +200,7 @@ const Profile = () => {
                               label="Profile"
                               {...a11yProps(0)}
                             />
+              
                             <Tab
                               sx={{
                                 display: 'flex',
@@ -195,15 +219,18 @@ const Profile = () => {
                               }
                               label="Setting"
                               {...a11yProps(1)}
-                            />
+                            /> 
                           </Tabs>
+                          */}
                         </Box>
                         <TabPanel value={value} index={0} dir={theme.direction}>
                           <ProfileTab handleLogout={handleLogout} />
                         </TabPanel>
-                        <TabPanel value={value} index={1} dir={theme.direction}>
+                        {/*
+                        <TabPanel value={value} index={1} dir={theme.direction}>              
                           <SettingTab />
                         </TabPanel>
+                        */}
                       </>
                     )}
                   </MainCard>
@@ -217,4 +244,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withAuthenticator(Profile);
