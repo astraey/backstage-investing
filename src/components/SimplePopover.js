@@ -1,39 +1,36 @@
 import * as React from 'react';
-import { Popover, Button, Typography } from '@mui/material';
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import { Button, Typography } from '@mui/material';
+import {
+  //QuestionCircleOutlined,
+  DownOutlined,
+  UpOutlined,
+} from '@ant-design/icons';
+import Stack from '@mui/system/Stack';
+import FocusTrap from '@mui/base/FocusTrap';
 
 const SimplePopover = ({ buttonTitle, content }) => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
-
+  const [open, setOpen] = React.useState(false);
   return (
-    <div>
-      <Button aria-describedby={id} onClick={handleClick} variant="secondary" startIcon={<QuestionCircleOutlined />}>
-        {buttonTitle}
-      </Button>
-      <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-      >
-        <Typography sx={{ p: 2 }}>{content}</Typography>
-      </Popover>
-    </div>
+    <span>
+      {open ? <br></br> : <span></span>}
+      <FocusTrap open={open} disableRestoreFocus disableAutoFocus>
+        <Stack alignItems="center" spacing={3} direction="row" justifyContent="baseline">
+          <Button type="button" variant="secondary" onClick={() => setOpen(!open)}>
+            {open ? (
+              <span>
+                <UpOutlined /> <b>{buttonTitle}</b>
+              </span>
+            ) : (
+              <span>
+                <DownOutlined /> <b>{buttonTitle}</b>
+              </span>
+            )}
+          </Button>
+          {open && <Typography>{content}</Typography>}
+        </Stack>
+      </FocusTrap>
+      {open ? <br></br> : <span></span>}
+    </span>
   );
 };
 
