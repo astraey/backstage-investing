@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 
 // material-ui
-import { Box, Button, Grid, Stack, Typography } from '@mui/material';
+import { Box, Button, Grid, Stack, Typography, Alert, AlertTitle } from '@mui/material';
 
 /*
 import {
@@ -102,7 +102,9 @@ const Company = () => {
   const [costOfRevenue, setCostOfRevenue] = useState(null);
   const [comprehensiveIncomeNetOfTaxLastReportedQuarter, setComprehensiveIncomeNetOfTaxLastReportedQuarter] = useState(null);
   const [revenueLastReportedQuarter, setRevenueLastReportedQuarter] = useState(null);
+  const [revenueInfoOpen, setRevenueInfoOpen] = useState(null);
   const [dataReceived, setDataReceived] = useState(null);
+
   //const [value, setValue] = useState('today');
   const [slot, setSlot] = useState('Last 2 Years');
   const [costofGoodsAndServicesSold, setCostofGoodsAndServicesSold] = useState('Last 2 Years');
@@ -272,7 +274,15 @@ const Company = () => {
           <Grid item xs={12} md={7} lg={8}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
-                <Typography variant="h4">Revenue & Cost of Revenue</Typography>
+                <h2>
+                  <span>
+                    <span>Revenue & Cost of Revenue</span>
+                    <Typography variant="caption" color="secondary">
+                      {' '}
+                      Why is it important?
+                    </Typography>
+                  </span>
+                </h2>
               </Grid>
               <Grid item>
                 <Stack direction="row" alignItems="center" spacing={0}>
@@ -295,7 +305,6 @@ const Company = () => {
                 </Stack>
               </Grid>
             </Grid>
-            <br></br>
             <Typography color="textSecondary" variant="">
               Revenue is the total amount of money a business earns from selling its products or services. In other words, revenue is the income a
               company generates from its primary operations before deducting expenses such as the cost of goods sold, taxes, and other business
@@ -316,6 +325,10 @@ const Company = () => {
                     significant profits and is efficiently managing its costs. On the other hand, a low revenue figure combined with a high cost of revenue
                     can indicate that a company is struggling to generate profits and may need to find ways to reduce its costs or increase its revenue."
             />
+            <Alert severity="info" variant="outlined">
+              <AlertTitle>Info</AlertTitle>
+              This is an info alert — <strong>check it out!</strong>
+            </Alert>
             <MainCard content={false} sx={{ mt: 1.5 }}>
               <Box sx={{ pt: 1, pr: 2 }}>
                 <RevenueChart

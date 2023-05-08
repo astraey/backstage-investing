@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button, Typography } from '@mui/material';
 import {
   //QuestionCircleOutlined,
+  CloseSquareTwoTone,
   DownOutlined,
   UpOutlined,
 } from '@ant-design/icons';
@@ -18,11 +19,11 @@ const SimplePopover = ({ buttonTitle, content }) => {
           <Button type="button" variant="secondary" onClick={() => setOpen(!open)}>
             {open ? (
               <span>
-                <UpOutlined /> <b>{buttonTitle}</b>
+                <CloseSquareTwoTone style={{ fontSize: '30px', color: 'red' }} twoToneColor="#eb2f96" />
               </span>
             ) : (
               <span>
-                <DownOutlined /> <b>{buttonTitle}</b>
+                <DownOutlined /> {buttonTitle}
               </span>
             )}
           </Button>

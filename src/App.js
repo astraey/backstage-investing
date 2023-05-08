@@ -2,6 +2,7 @@
 import Routes from 'routes';
 import ThemeCustomization from 'themes';
 import ScrollTop from 'components/ScrollTop';
+import 'App.css';
 
 import { Amplify } from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
