@@ -19,7 +19,7 @@
       "function": {
         "entrypointfunction": {
           "deploymentBucketName": "amplify-backstageinvesting-main-133746-deployment",
-          "s3Key": "amplify-builds/entrypointfunction-75347a675a4f43457633-build.zip",
+          "s3Key": "amplify-builds/entrypointfunction-614c5570704c7655794e-build.zip",
           "secretsPathAmplifyAppId": "d3b17q2og92g60"
         }
       },
