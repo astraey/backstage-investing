@@ -9,7 +9,7 @@ import MainCard from 'components/MainCard';
 import { useTheme } from '@mui/material/styles';
 
 // assets
-import { RiseOutlined, FallOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
+import { RiseOutlined, FallOutlined, DownOutlined, UpOutlined, SwapRightOutlined } from '@ant-design/icons';
 
 // ==============================|| STATISTICS - ECOMMERCE CARD  ||============================== //
 
@@ -66,7 +66,6 @@ const AnalyticCard = ({
               size="medium"
             />
           </Grid>
-          {percentageChange && (
             <Grid item>
               <Grid container alignItems="center">
                 <Grid item>
@@ -74,8 +73,9 @@ const AnalyticCard = ({
                     variant="combined"
                     icon={
                       <>
-                        {percentageChange >= 0 && <RiseOutlined style={{ fontSize: '1rem', color: 'inherit' }} />}
+                        {percentageChange > 0 && <RiseOutlined style={{ fontSize: '1rem', color: 'inherit' }} />}
                         {percentageChange < 0 && <FallOutlined style={{ fontSize: '1rem', color: 'inherit' }} />}
+                        {percentageChange === 0 && <SwapRightOutlined style={{ fontSize: '1rem', color: 'inherit' }} />}
                       </>
                     }
                     label={`${percentageChange}%`}
@@ -85,7 +85,6 @@ const AnalyticCard = ({
                 </Grid>
               </Grid>
             </Grid>
-          )}
         </Grid>
       </Stack>
       <Box sx={{ pt: 2.25 }}>
