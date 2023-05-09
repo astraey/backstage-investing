@@ -40,15 +40,13 @@ const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChar
 
   return (
     <Alert
-      severity={averageMargin>50?"success":averageMargin<24?"error":"info"}
+      severity={averageMargin > 50 ? 'success' : averageMargin < 24 ? 'error' : 'info'}
       sx={{ fontSize: '0.9rem', borderRadius: '16px' }}
       onClose={() => {
         setRevenueInfoOpen(false);
       }}
     >
-      <AlertTitle sx={{ fontSize: '1.1rem' }}>
-        {companyTicker}'s Revenue and Cost of Revenue
-      </AlertTitle>
+      <AlertTitle sx={{ fontSize: '1.1rem' }}>{companyTicker}'s Revenue and Cost of Revenue</AlertTitle>
       As shown on the graph below, in the last {dates.length >= 4 ? `${Math.ceil(dates.length / 4)} years` : `${dates.length} quarters`},{' '}
       {companyName || companyTicker} has{' '}
       {revenueHigherThanCostAll ? (

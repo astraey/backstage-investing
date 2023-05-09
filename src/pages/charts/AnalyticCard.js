@@ -47,6 +47,7 @@ const AnalyticCard = ({
         </Typography>
         <Grid container alignItems="center">
           <Grid item>
+            {/*
             <Chip
               variant="combined"
               style={{
@@ -65,6 +66,17 @@ const AnalyticCard = ({
               sx={{ ml: 0, pl: 1 }}
               size="medium"
             />
+            */}
+
+            <Typography
+              variant="h4"
+              color="inherit"
+              style={{
+                color: count < 0 && theme.palette.error.main,
+              }}
+            >
+              {countFormatted.replace("$-","-$")}
+            </Typography>
           </Grid>
           <Grid item>
             <Grid container alignItems="center">
@@ -73,7 +85,7 @@ const AnalyticCard = ({
                   variant="combined"
                   icon={
                     <>
-                      {percentageChange > 0 && <RiseOutlined style={{ fontSize: '1rem', color: 'inherit' }} />}
+                      {percentageChange > 0 && <RiseOutlined style={{ fontSize: 'rem', color: 'inherit' }} />}
                       {percentageChange < 0 && <FallOutlined style={{ fontSize: '1rem', color: 'inherit' }} />}
                       {percentageChange === 0 && <SwapRightOutlined style={{ fontSize: '1rem', color: 'inherit' }} />}
                     </>
@@ -81,6 +93,9 @@ const AnalyticCard = ({
                   label={`${percentageChange}%`}
                   sx={{ ml: 1.25, pl: 1 }}
                   size="small"
+                  style={{
+                    backgroundColor: percentageChange < 0 ? theme.palette.error.light : theme.palette.success.light,
+                  }}
                 />
               </Grid>
             </Grid>
