@@ -1,4 +1,6 @@
-const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChart, revenueValuesChart, costOfRevenue }) => {
+import { Alert, AlertTitle } from '@mui/material';
+
+const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChart, revenueValuesChart, costOfRevenue, setRevenueInfoOpen }) => {
   let revenueValues = slot === 'All Time' ? revenueValuesChart : revenueValuesChart.slice(revenueValuesChart.length - 8, revenueValuesChart.length);
   let costOfRevenueValues = slot === 'All Time' ? costOfRevenue : costOfRevenue.slice(costOfRevenue.length - 8, costOfRevenue.length);
   let dates = slot === 'All Time' ? datesChart : datesChart.slice(datesChart.length - 8, datesChart.length);
@@ -37,14 +39,23 @@ const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChar
   }
 
   return (
-    <p>
+    <Alert
+      severity={averageMargin>50?"success":averageMargin<24?"error":"info"}
+      sx={{ fontSize: '0.9rem', borderRadius: '16px' }}
+      onClose={() => {
+        setRevenueInfoOpen(false);
+      }}
+    >
+      <AlertTitle sx={{ fontSize: '1.1rem' }}>
+        {companyTicker}'s Revenue and Cost of Revenue
+      </AlertTitle>
       As shown on the graph below, in the last {dates.length >= 4 ? `${Math.ceil(dates.length / 4)} years` : `${dates.length} quarters`},{' '}
       {companyName || companyTicker} has{' '}
       {revenueHigherThanCostAll ? (
         <span>consistently reported a higher revenue than a cost of revenue. </span>
       ) : (
         <span>
-          reported a higher cost of revenue than revenue in
+          reported higher cost of revenue than revenue in
           {datesWhenRevenueLowerThanCost.length <= 1 ? (
             <span> a single quarter: </span>
           ) : (
@@ -72,11 +83,12 @@ const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChar
         <span>a great sign, and shows the company's potential for profitablity.</span>
       ) : averageMargin <= 50 && averageMargin >= 25 ? (
         <span> within the normal range</span>
-        ) : averageMargin < 24 ? (
-          <span> not a good sign, and it might singnal that the company is struggling to generate a profit.</span>
-        ) : <span>no info</span>
-      }
-    </p>
+      ) : averageMargin < 24 ? (
+        <span> not a good sign, and it might singnal that the company is struggling to generate a profit.</span>
+      ) : (
+        <span>no info</span>
+      )}
+    </Alert>
   );
 };
 

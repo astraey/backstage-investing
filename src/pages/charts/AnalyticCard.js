@@ -66,25 +66,25 @@ const AnalyticCard = ({
               size="medium"
             />
           </Grid>
-            <Grid item>
-              <Grid container alignItems="center">
-                <Grid item>
-                  <Chip
-                    variant="combined"
-                    icon={
-                      <>
-                        {percentageChange > 0 && <RiseOutlined style={{ fontSize: '1rem', color: 'inherit' }} />}
-                        {percentageChange < 0 && <FallOutlined style={{ fontSize: '1rem', color: 'inherit' }} />}
-                        {percentageChange === 0 && <SwapRightOutlined style={{ fontSize: '1rem', color: 'inherit' }} />}
-                      </>
-                    }
-                    label={`${percentageChange}%`}
-                    sx={{ ml: 1.25, pl: 1 }}
-                    size="small"
-                  />
-                </Grid>
+          <Grid item>
+            <Grid container alignItems="center">
+              <Grid item>
+                <Chip
+                  variant="combined"
+                  icon={
+                    <>
+                      {percentageChange > 0 && <RiseOutlined style={{ fontSize: '1rem', color: 'inherit' }} />}
+                      {percentageChange < 0 && <FallOutlined style={{ fontSize: '1rem', color: 'inherit' }} />}
+                      {percentageChange === 0 && <SwapRightOutlined style={{ fontSize: '1rem', color: 'inherit' }} />}
+                    </>
+                  }
+                  label={`${percentageChange}%`}
+                  sx={{ ml: 1.25, pl: 1 }}
+                  size="small"
+                />
               </Grid>
             </Grid>
+          </Grid>
         </Grid>
       </Stack>
       <Box sx={{ pt: 2.25 }}>

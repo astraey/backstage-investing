@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 
 // material-ui
-import { Box, Button, Grid, Stack, Typography, Alert, AlertTitle } from '@mui/material';
+import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 
 /*
 import {
@@ -281,7 +281,7 @@ const Company = () => {
                     <Typography variant="caption" color="secondary">
                       {' '}
                       <Button size="small" onClick={() => setRevenueInfoOpen(true)} color="secondary" variant={'text'}>
-                        Why is it important?
+                        How do these look for {params.companyTicker}?
                       </Button>
                     </Typography>
                   </span>
@@ -315,32 +315,18 @@ const Company = () => {
                 delivering a product or service to consumers.
               </p>
               {revenueInfoOpen ? (
-                <span>
-                  <Alert
-                    severity="info"
-                    sx={{ backgroundColor: 'primary.lighter', highlightColor: 'primary.lighter' }}
-                    onClose={() => {
-                      setRevenueInfoOpen(false);
-                    }}
-                  >
-                    <AlertTitle>Revenue and Cost of Revenue</AlertTitle>
-                    Understanding the relationship between revenue and cost of revenue is critical for businesses because it directly impacts their
-                    profitability. If a company's revenue is high but its cost of revenue is also high, it may struggle to generate a profit. On the
-                    other hand, if a company can increase its revenue while keeping its cost of revenue low, it can generate higher profits and
-                    reinvest those profits back into the business.
-                  </Alert>
-                </span>
+                <RevenueParagraphGenerator
+                  companyName={stocks.lookup(params.companyTicker)}
+                  companyTicker={params.companyTicker}
+                  slot={slot}
+                  datesChart={datesChart}
+                  revenueValuesChart={revenueValuesChart}
+                  costOfRevenue={costOfRevenue}
+                  setRevenueInfoOpen={setRevenueInfoOpen}
+                />
               ) : (
                 <span></span>
               )}
-              <RevenueParagraphGenerator
-                companyName={stocks.lookup(params.companyTicker)}
-                companyTicker={params.companyTicker}
-                slot={slot}
-                datesChart={datesChart}
-                revenueValuesChart={revenueValuesChart}
-                costOfRevenue={costOfRevenue}
-              />
             </Typography>
             <MainCard content={false} sx={{ mt: 1.5 }}>
               <Box sx={{ pt: 1, pr: 2 }}>
