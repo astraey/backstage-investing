@@ -317,6 +317,7 @@ const Company = () => {
                 <br></br>
                 <Alert
                   severity="info"
+                  sx={{ backgroundColor: 'primary.lighter', highlightColor: 'primary.lighter' }}
                   onClose={() => {
                     setRevenueInfoOpen(false);
                   }}
