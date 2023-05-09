@@ -3,7 +3,7 @@ const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChar
   let costOfRevenueValues = slot === 'All Time' ? costOfRevenue : costOfRevenue.slice(costOfRevenue.length - 8, costOfRevenue.length);
   let dates = slot === 'All Time' ? datesChart : datesChart.slice(datesChart.length - 8, datesChart.length);
 
-  let valuesSameLength = false;
+  //let valuesSameLength = false;
   let revenueHigherThanCostAll;
 
   let datesWhenRevenueLowerThanCost = [];
@@ -13,7 +13,7 @@ const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChar
   let averageMargin;
 
   if (revenueValues.length === dates.length && revenueValues.length === costOfRevenueValues.length) {
-    valuesSameLength = true;
+    //valuesSameLength = true;
     revenueHigherThanCostAll = true;
     for (let i = 0; i < dates.length; i++) {
       console.log('--------------------------------');
@@ -33,7 +33,7 @@ const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChar
     averageMargin = averageSum / dates.length;
     console.log(averageMargin);
   } else {
-    valuesSameLength = false;
+    //valuesSameLength = false;
   }
 
   return (

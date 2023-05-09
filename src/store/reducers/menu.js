@@ -6,7 +6,7 @@ const initialState = {
   openItem: ['company'],
   openComponent: 'buttons',
   drawerOpen: false,
-  componentDrawerOpen: true,
+  componentDrawerOpen: false,
 };
 
 // ==============================|| SLICE - MENU ||============================== //

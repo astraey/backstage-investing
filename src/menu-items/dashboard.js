@@ -22,6 +22,7 @@ const dashboard = {
       icon: icons.PieChartOutlined,
       breadcrumbs: false,
     },
+   /*
     {
       id: 'dashboard',
       title: 'Dashboard',
@@ -30,6 +31,7 @@ const dashboard = {
       icon: icons.DashboardOutlined,
       breadcrumbs: false,
     },
+    */
   ],
 };
 
