@@ -9,7 +9,13 @@ import MainCard from 'components/MainCard';
 import { useTheme } from '@mui/material/styles';
 
 // assets
-import { RiseOutlined, FallOutlined, DownOutlined, UpOutlined, SwapRightOutlined } from '@ant-design/icons';
+import {
+  RiseOutlined,
+  FallOutlined,
+  //DownOutlined,
+  //UpOutlined,
+  SwapRightOutlined,
+} from '@ant-design/icons';
 
 // ==============================|| STATISTICS - ECOMMERCE CARD  ||============================== //
 
@@ -26,18 +32,17 @@ const AnalyticCard = ({
   countPreviousQuarterFormatted,
 }) => {
   const theme = useTheme();
-  console.log(title);
-
-  console.log(companyTicker);
-  console.log(companyName);
-  console.log(quarter);
-  console.log(count);
-  console.log(countFormatted);
-  console.log(percentageChangeQuarter);
-  console.log(countPreviousQuarter);
-  console.log(countPreviousQuarterFormatted);
-  console.log(percentageChange);
-  console.log('-----------------------------');
+  //console.log(title);
+  //console.log(companyTicker);
+  //console.log(companyName);
+  //console.log(quarter);
+  //console.log(count);
+  //console.log(countFormatted);
+  //console.log(percentageChangeQuarter);
+  //console.log(countPreviousQuarter);
+  //console.log(countPreviousQuarterFormatted);
+  //console.log(percentageChange);
+  //console.log('-----------------------------');
 
   return (
     <MainCard contentSX={{ p: 2.25 }}>
@@ -75,7 +80,7 @@ const AnalyticCard = ({
                 color: count < 0 && theme.palette.error.main,
               }}
             >
-              {countFormatted.replace("$-","-$")}
+              {countFormatted.replace('$-', '-$')}
             </Typography>
           </Grid>
           <Grid item>
