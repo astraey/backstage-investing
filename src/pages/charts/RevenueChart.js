@@ -71,6 +71,13 @@ const RevenueChart = ({ slot, datesChart, revenueValuesChart, operatingExpensesV
           style: {
             colors: [secondary],
           },
+          formatter: function (value) {
+            if (value < 1000) {
+              return `$${value}M`;
+            } else {
+              return `$${value / 1000}B`;
+            }
+          },
         },
       },
       grid: {
