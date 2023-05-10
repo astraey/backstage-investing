@@ -126,7 +126,7 @@ const AnalyticCard = ({
           in {quarter}, {count < 0 ? <span>loosing</span> : <span>making</span>}{' '}
 
           {percentageChange !==0?
-          <div>
+          <span>
           <span
             style={{
               fontWeight: 'bold',
@@ -169,7 +169,7 @@ const AnalyticCard = ({
           ) : (
             percentageChange < 0 && <span>Decreasing {metricName} is not a good sign.</span>
           )}
-          </div>:<span>the same as in {percentageChangeQuarter}.</span>}
+          </span>:<span>the same as in {percentageChangeQuarter}.</span>}
         </Typography>
       </Box>
     </MainCard>
