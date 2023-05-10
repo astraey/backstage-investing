@@ -124,6 +124,9 @@ const AnalyticCard = ({
             {countFormatted.replace('-', '')}
           </Typography>{' '}
           in {quarter}, {count < 0 ? <span>loosing</span> : <span>making</span>}{' '}
+
+          {percentageChange !==0?
+          <div>
           <span
             style={{
               fontWeight: 'bold',
@@ -160,7 +163,13 @@ const AnalyticCard = ({
           >
             {countPreviousQuarterFormatted.replace('-', '')}
           </Typography>
-          . {percentageChange > 0 ? <span>Growing {metricName} is a good sign.</span> : <span>Decreasing {metricName} is not a good sign.</span>}
+          .{' '}
+          {percentageChange > 0 ? (
+            <span>Growing {metricName} is a good sign.</span>
+          ) : (
+            percentageChange < 0 && <span>Decreasing {metricName} is not a good sign.</span>
+          )}
+          </div>:<span>the same as in {percentageChangeQuarter}.</span>}
         </Typography>
       </Box>
     </MainCard>
