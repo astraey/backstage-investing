@@ -2,7 +2,12 @@ import PropTypes from 'prop-types';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { AppBar, IconButton, Toolbar, useMediaQuery } from '@mui/material';
+import {
+  AppBar,
+  //IconButton,
+  Toolbar,
+  useMediaQuery,
+} from '@mui/material';
 
 // project import
 import AppBarStyled from './AppBarStyled';
@@ -11,7 +16,7 @@ import HeaderContent from './HeaderContent';
 import Logo from 'components/Logo';
 
 // assets
-import { DoubleLeftOutlined, MenuOutlined } from '@ant-design/icons';
+//import { DoubleLeftOutlined, MenuOutlined } from '@ant-design/icons';
 
 // ==============================|| MAIN LAYOUT - HEADER ||============================== //
 
@@ -19,12 +24,14 @@ const Header = ({ open, handleDrawerToggle }) => {
   const theme = useTheme();
   const matchDownMD = useMediaQuery(theme.breakpoints.down('lg'));
 
-  const iconBackColor = 'grey.30';
-  const iconBackColorOpen = 'grey.30';
+  //const iconBackColor = 'grey.30';
+  //const iconBackColorOpen = 'grey.30';
 
   // common header
   const mainHeader = (
     <Toolbar>
+      {/* Commented Burger Menu Until we have more than a usable page. Leaning towards Bottom Navigation instead anyway*/}
+      {/*
       <IconButton
         disableRipple
         aria-label="open drawer"
@@ -39,7 +46,9 @@ const Header = ({ open, handleDrawerToggle }) => {
       >
         {!open ? <MenuOutlined /> : <DoubleLeftOutlined />}
       </IconButton>
-      {open ? <span></span> : <Logo />}
+      */}
+      {/*open ? <span></span> : <Logo />*/}
+      <Logo sx={{ m: -1 }} />
       <HeaderContent />
     </Toolbar>
   );
