@@ -59,7 +59,7 @@ function a11yProps(index) {
 
 // ==============================|| HEADER CONTENT - PROFILE ||============================== //
 
-const Profile = ({ user }) => {
+const Profile = ({ user, showUsername }) => {
   const theme = useTheme();
   const handleLogout = async () => {
     Auth.signOut()
@@ -98,7 +98,7 @@ const Profile = ({ user }) => {
   useEffect(() => {
     setUserEmail(user.attributes.email);
     setUsername(user.attributes.email.split('@')[0]);
-  });
+  },[user]);
 
   return (
     <Box sx={{ flexShrink: 0, ml: 0.75 }}>
@@ -117,7 +117,7 @@ const Profile = ({ user }) => {
       >
         <Stack direction="row" spacing={2} alignItems="center" sx={{ p: 0.5 }}>
           <Avatar alt="profile user" src={avatar5} sx={{ width: 32, height: 32 }} />
-          <Typography variant="subtitle1">{username}</Typography>
+          {showUsername && <Typography variant="subtitle1">{username}</Typography>}
         </Stack>
       </ButtonBase>
       <Popper
