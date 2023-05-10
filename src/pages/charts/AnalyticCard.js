@@ -100,7 +100,12 @@ const AnalyticCard = ({
                   sx={{ ml: 1.25, pl: 1 }}
                   size="small"
                   style={{
-                    backgroundColor: percentageChange < 0 ? theme.palette.error.light : theme.palette.success.light,
+                    backgroundColor:
+                      percentageChange < 0
+                        ? theme.palette.error.light
+                        : percentageChange > 0
+                        ? theme.palette.success.light
+                        : theme.palette.secondary.light,
                   }}
                 />
               </Grid>
