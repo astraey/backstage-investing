@@ -1,5 +1,8 @@
 import { Alert, AlertTitle } from '@mui/material';
 
+import {WarningFilled, InfoCircleFilled, CheckCircleFilled} from '@ant-design/icons';
+
+
 const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChart, revenueValuesChart, costOfRevenue, setRevenueInfoOpen }) => {
   let revenueValues = slot === 'All Time' ? revenueValuesChart : revenueValuesChart.slice(revenueValuesChart.length - 8, revenueValuesChart.length);
   let costOfRevenueValues = slot === 'All Time' ? costOfRevenue : costOfRevenue.slice(costOfRevenue.length - 8, costOfRevenue.length);
@@ -41,6 +44,7 @@ const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChar
   return (
     <Alert
       severity={averageMargin > 50 ? 'success' : averageMargin < 24 ? 'error' : 'info'}
+      icon={averageMargin > 50 ? <CheckCircleFilled/> : averageMargin < 24 ? <WarningFilled/> : <InfoCircleFilled/>}
       sx={{ fontSize: '0.9rem', borderRadius: '16px' }}
       onClose={() => {
         setRevenueInfoOpen(false);
