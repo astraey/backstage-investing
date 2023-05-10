@@ -233,6 +233,7 @@ const Company = () => {
             <Grid item xs={12} sm={6} md={4} lg={6}>
               <AnalyticCard
                 title={`${revenueLastReportedQuarter.reportedQuarter} Revenue`}
+                metricName={'revenue'}
                 count={revenueLastReportedQuarter.totalRevenue}
                 countFormatted={revenueLastReportedQuarter.revenueFormatted}
                 companyTicker={params.companyTicker}
@@ -247,6 +248,7 @@ const Company = () => {
             <Grid item xs={12} sm={6} md={4} lg={6}>
               <AnalyticCard
                 title={`${comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter} Comprehensive Net Income`}
+                metricName={'comprehensive net income'}
                 count={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTax}
                 countFormatted={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxFormatted}
                 companyTicker={params.companyTicker}

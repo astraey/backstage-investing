@@ -21,6 +21,7 @@ import {
 
 const AnalyticCard = ({
   title,
+  metricName,
   count,
   countFormatted,
   companyTicker,
@@ -152,8 +153,9 @@ const AnalyticCard = ({
             variant="caption"
             sx={{ color: countPreviousQuarter < 0 ? theme.palette.error.main : theme.palette.success.main, fontWeight: 'bold' }}
           >
-            {countPreviousQuarterFormatted.replace('-', '')}
+            {countPreviousQuarterFormatted.replace('-', '')}.
           </Typography>{' '}
+          {percentageChange > 0 ? <span>Growing {metricName} is a good sign.</span> : <span>Decreasing {metricName} is not a good sign.</span>}
         </Typography>
       </Box>
     </MainCard>

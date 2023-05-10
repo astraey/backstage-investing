@@ -98,7 +98,7 @@ const Profile = ({ user, showUsername }) => {
   useEffect(() => {
     setUserEmail(user.attributes.email);
     setUsername(user.attributes.email.split('@')[0]);
-  },[user]);
+  }, [user]);
 
   return (
     <Box sx={{ flexShrink: 0, ml: 0.75 }}>

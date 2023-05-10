@@ -78,11 +78,17 @@ const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChar
       is struggling to generate profits. In the last {dates.length >= 4 ? `${Math.ceil(dates.length / 4)} years` : `${dates.length} quarters`},{' '}
       {companyTicker} Gross Profit Margin of <strong>{averageMargin}%</strong> is{' '}
       {averageMargin > 50 ? (
-        <span>a great sign, and shows the company's potential for profitablity.</span>
+        <span>a great sign, and shows the company's potential for profitability.</span>
       ) : averageMargin <= 50 && averageMargin >= 25 ? (
-        <span> within the normal range</span>
-      ) : averageMargin < 24 ? (
-        <span> not a good sign, and it might singnal that the company is struggling to generate a profit.</span>
+        <span> within the normal range.</span>
+      ) : averageMargin < 24 && averageMargin >= 0 ? (
+        <span> not a good sign, and it might signal that the company is struggling to generate a profit.</span>
+      ) : averageMargin < 0 ? (
+        <span>
+          {' '}
+          a bad sign. The company is being operated at a <strong>LOSS</strong>, and unless the company has a plan to either increase their revenue, or
+          decrease their cost of revenue, it will eventually go bankrupt.
+        </span>
       ) : (
         <span>no info</span>
       )}
