@@ -2,12 +2,7 @@ import PropTypes from 'prop-types';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import {
-  AppBar,
-  IconButton,
-  Toolbar,
-  useMediaQuery,
-} from '@mui/material';
+import { AppBar, IconButton, Toolbar, useMediaQuery } from '@mui/material';
 
 // project import
 import AppBarStyled from './AppBarStyled';
@@ -31,7 +26,7 @@ const Header = ({ open, handleDrawerToggle }) => {
   const mainHeader = (
     <Toolbar>
       {/* Commented Burger Menu Until we have more than a usable page. Leaning towards Bottom Navigation instead anyway*/}
-      
+
       <IconButton
         disableRipple
         aria-label="open drawer"
@@ -46,7 +41,7 @@ const Header = ({ open, handleDrawerToggle }) => {
       >
         {!open ? <MenuOutlined /> : <DoubleLeftOutlined />}
       </IconButton>
-      
+
       {open ? <span></span> : <Logo />}
       {/*<Logo sx={{ m: -1 }} />*/}
       <HeaderContent />

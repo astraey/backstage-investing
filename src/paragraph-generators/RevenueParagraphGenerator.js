@@ -1,7 +1,6 @@
 import { Alert, AlertTitle } from '@mui/material';
 
-import {WarningFilled, InfoCircleFilled, CheckCircleFilled} from '@ant-design/icons';
-
+import { WarningFilled, InfoCircleFilled, CheckCircleFilled } from '@ant-design/icons';
 
 const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChart, revenueValuesChart, costOfRevenue, setRevenueInfoOpen }) => {
   let revenueValues = slot === 'All Time' ? revenueValuesChart : revenueValuesChart.slice(revenueValuesChart.length - 8, revenueValuesChart.length);
@@ -21,11 +20,11 @@ const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChar
     //valuesSameLength = true;
     revenueHigherThanCostAll = true;
     for (let i = 0; i < dates.length; i++) {
-      console.log('--------------------------------');
-      console.log(revenueValues[i]);
-      console.log(costOfRevenueValues[i]);
-      console.log(dates[i]);
-      console.log(Math.round(((revenueValues[i] - costOfRevenueValues[i]) / Math.abs(revenueValues[i])) * 100));
+      //console.log('--------------------------------');
+      //console.log(revenueValues[i]);
+      //console.log(costOfRevenueValues[i]);
+      //console.log(dates[i]);
+      //console.log(Math.round(((revenueValues[i] - costOfRevenueValues[i]) / Math.abs(revenueValues[i])) * 100));
       averageSum += Math.round(((revenueValues[i] - costOfRevenueValues[i]) / Math.abs(revenueValues[i])) * 100);
       if (revenueValues[i] < costOfRevenueValues[i]) {
         revenueHigherThanCostAll = false;
@@ -34,9 +33,9 @@ const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChar
         costsWhenRevenueLowerThanCost.push(costOfRevenueValues[i]);
       }
     }
-    console.log('Average Margin');
+    //console.log('Average Margin');
     averageMargin = averageSum / dates.length;
-    console.log(averageMargin);
+    //console.log(averageMargin);
   } else {
     //valuesSameLength = false;
   }
@@ -44,7 +43,7 @@ const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChar
   return (
     <Alert
       severity={averageMargin > 50 ? 'success' : averageMargin < 24 ? 'error' : 'info'}
-      icon={averageMargin > 50 ? <CheckCircleFilled/> : averageMargin < 24 ? <WarningFilled/> : <InfoCircleFilled/>}
+      icon={averageMargin > 50 ? <CheckCircleFilled /> : averageMargin < 24 ? <WarningFilled /> : <InfoCircleFilled />}
       sx={{ fontSize: '0.9rem', borderRadius: '16px' }}
       onClose={() => {
         setRevenueInfoOpen(false);

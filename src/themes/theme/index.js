@@ -1,7 +1,14 @@
 // ==============================|| PRESET THEME - THEME SELECTOR ||============================== //
 
 const Theme = (colors) => {
-  const { blue, red, gold, cyan, green, grey } = colors;
+  const {
+    blue,
+    red,
+    gold,
+    //cyan,
+    green,
+    grey,
+  } = colors;
   const greyColors = {
     0: grey[0],
     50: grey[1],

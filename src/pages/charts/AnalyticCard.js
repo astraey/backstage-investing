@@ -124,52 +124,54 @@ const AnalyticCard = ({
             {countFormatted.replace('-', '')}
           </Typography>{' '}
           in {quarter}, {count < 0 ? <span>loosing</span> : <span>making</span>}{' '}
-
-          {percentageChange !==0?
-          <span>
-          <span
-            style={{
-              fontWeight: 'bold',
-            }}
-          >
-            {Math.abs(percentageChange)}%
-          </span>{' '}
-          {(() => {
-            switch (true) {
-              case percentageChange >= 0 && count < 0 && countPreviousQuarter < 0:
-                return <span>less</span>;
-              case percentageChange < 0 && count < 0 && countPreviousQuarter < 0:
-                return <span>more</span>;
-              case percentageChange >= 0 && count >= 0 && countPreviousQuarter >= 0:
-                return <span>more</span>;
-              case percentageChange < 0 && count >= 0 && countPreviousQuarter >= 0:
-                return <span>less</span>;
-              case percentageChange >= 0 && count >= 0 && countPreviousQuarter < 0:
-                return <span>more</span>;
-              case percentageChange < 0 && count < 0 && countPreviousQuarter >= 0:
-                return <span>more</span>;
-              // eslint-disable-next-line
-              case percentageChange < 0 && count >= 0 && countPreviousQuarter >= 0:
-                return <span>less</span>;
-              default:
-                return <span></span>;
-            }
-          })()}{' '}
-          than in {percentageChangeQuarter}, when they {countPreviousQuarter < 0 ? <span>lost</span> : <span>made</span>}{' '}
-          <Typography
-            component="span"
-            variant="caption"
-            sx={{ color: countPreviousQuarter < 0 ? theme.palette.error.main : theme.palette.success.main, fontWeight: 'bold' }}
-          >
-            {countPreviousQuarterFormatted.replace('-', '')}
-          </Typography>
-          .{' '}
-          {percentageChange > 0 ? (
-            <span>Growing {metricName} is a good sign.</span>
+          {percentageChange !== 0 ? (
+            <span>
+              <span
+                style={{
+                  fontWeight: 'bold',
+                }}
+              >
+                {Math.abs(percentageChange)}%
+              </span>{' '}
+              {(() => {
+                switch (true) {
+                  case percentageChange >= 0 && count < 0 && countPreviousQuarter < 0:
+                    return <span>less</span>;
+                  case percentageChange < 0 && count < 0 && countPreviousQuarter < 0:
+                    return <span>more</span>;
+                  case percentageChange >= 0 && count >= 0 && countPreviousQuarter >= 0:
+                    return <span>more</span>;
+                  case percentageChange < 0 && count >= 0 && countPreviousQuarter >= 0:
+                    return <span>less</span>;
+                  case percentageChange >= 0 && count >= 0 && countPreviousQuarter < 0:
+                    return <span>more</span>;
+                  case percentageChange < 0 && count < 0 && countPreviousQuarter >= 0:
+                    return <span>more</span>;
+                  // eslint-disable-next-line
+                  case percentageChange < 0 && count >= 0 && countPreviousQuarter >= 0:
+                    return <span>less</span>;
+                  default:
+                    return <span></span>;
+                }
+              })()}{' '}
+              than in {percentageChangeQuarter}, when they {countPreviousQuarter < 0 ? <span>lost</span> : <span>made</span>}{' '}
+              <Typography
+                component="span"
+                variant="caption"
+                sx={{ color: countPreviousQuarter < 0 ? theme.palette.error.main : theme.palette.success.main, fontWeight: 'bold' }}
+              >
+                {countPreviousQuarterFormatted.replace('-', '')}
+              </Typography>
+              .{' '}
+              {percentageChange > 0 ? (
+                <span>Growing {metricName} is a good sign.</span>
+              ) : (
+                percentageChange < 0 && <span>Decreasing {metricName} is not a good sign.</span>
+              )}
+            </span>
           ) : (
-            percentageChange < 0 && <span>Decreasing {metricName} is not a good sign.</span>
+            <span>the same as in {percentageChangeQuarter}.</span>
           )}
-          </span>:<span>the same as in {percentageChangeQuarter}.</span>}
         </Typography>
       </Box>
     </MainCard>

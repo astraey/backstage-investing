@@ -2,6 +2,7 @@ import { API } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+import { CompanyNameLookup } from 'utils/CompanyNameLookup';
 
 // material-ui
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
@@ -48,8 +49,6 @@ import avatar2 from 'assets/images/users/avatar-2.png';
 import avatar3 from 'assets/images/users/avatar-3.png';
 import avatar4 from 'assets/images/users/avatar-4.png';
 */
-
-const stocks = require('stock-ticker-symbol');
 
 const apiName = 'backstageinvestingapi';
 const requestVariables = {
@@ -131,31 +130,31 @@ const Company = () => {
           costOfRevenue.push(Math.round((quarterlyReport.costOfRevenue / 1000000) * 10) / 10);
           costofGoodsAndServicesSold.push(Math.round((quarterlyReport.costofGoodsAndServicesSold / 1000000) * 10) / 10);
           let monthDay = `${quarterlyReport.fiscalDateEnding.split('-')[1]}-${quarterlyReport.fiscalDateEnding.split('-')[2]}`;
-          console.log(quarterlyReport.fiscalDateEnding);
+          //console.log(quarterlyReport.fiscalDateEnding);
           if (monthDay === '03-31') {
             fiscalDateEnding.push(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            console.log(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+            //console.log(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
           } else if (monthDay === '04-30') {
             fiscalDateEnding.push(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            console.log(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+            //console.log(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
           } else if (monthDay === '06-30') {
             fiscalDateEnding.push(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            console.log(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+            //console.log(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
           } else if (monthDay === '07-31') {
             fiscalDateEnding.push(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            console.log(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+            //console.log(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
           } else if (monthDay === '09-30') {
             fiscalDateEnding.push(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            console.log(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+            //console.log(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
           } else if (monthDay === '10-31') {
             fiscalDateEnding.push(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            console.log(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+            //console.log(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
           } else if (monthDay === '12-31') {
             fiscalDateEnding.push(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            console.log(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+            //console.log(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
           } else if (monthDay === '01-31') {
             fiscalDateEnding.push(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0] - 1}`);
-            console.log(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
+            //console.log(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
           } else {
             fiscalDateEnding.push('Quarter Unknown');
           }
@@ -217,15 +216,10 @@ const Company = () => {
   return (
     <div>
       <h1>
-        {stocks.lookup(params.companyTicker) ? (
-          <span>
-            {' '}
-            {`${stocks.lookup(params.companyTicker)}`}
-            <Typography variant="caption" color="secondary">{` ${params.companyTicker}`}</Typography>
-          </span>
-        ) : (
-          <span>{params.companyTicker}</span>
-        )}
+        <span>
+          {CompanyNameLookup(params.companyTicker)}
+          <Typography variant="caption" color="secondary">{` ${params.companyTicker}`}</Typography>
+        </span>
       </h1>
       {dataReceived ? (
         <div>
@@ -237,7 +231,7 @@ const Company = () => {
                 count={revenueLastReportedQuarter.totalRevenue}
                 countFormatted={revenueLastReportedQuarter.revenueFormatted}
                 companyTicker={params.companyTicker}
-                companyName={stocks.lookup(params.companyTicker)}
+                companyName={CompanyNameLookup(params.companyTicker)}
                 quarter={revenueLastReportedQuarter.reportedQuarter}
                 percentageChange={revenueLastReportedQuarter.percentageChange}
                 percentageChangeQuarter={revenueLastReportedQuarter.percentageChangeQuarter}
@@ -252,7 +246,7 @@ const Company = () => {
                 count={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTax}
                 countFormatted={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxFormatted}
                 companyTicker={params.companyTicker}
-                companyName={stocks.lookup(params.companyTicker)}
+                companyName={CompanyNameLookup(params.companyTicker)}
                 quarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter}
                 percentageChange={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChange}
                 percentageChangeQuarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChangeQuarter}
@@ -318,7 +312,7 @@ const Company = () => {
               </p>
               {revenueInfoOpen ? (
                 <RevenueParagraphGenerator
-                  companyName={stocks.lookup(params.companyTicker)}
+                  companyName={CompanyNameLookup(params.companyTicker)}
                   companyTicker={params.companyTicker}
                   slot={slot}
                   datesChart={datesChart}
