@@ -9,6 +9,7 @@ const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 
 // render - sample page
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
+const InvestingFundamentals = Loadable(lazy(() => import('pages/InvestingFundamentals')));
 
 // render - utilities
 const Typography = Loadable(lazy(() => import('pages/components-overview/Typography')));
@@ -31,6 +32,10 @@ const MainRoutes = {
     {
       path: 'color',
       element: <Color />,
+    },
+    {
+      path: 'investing-fundamentals',
+      element: <InvestingFundamentals />,
     },
     {
       path: 'dashboard',
