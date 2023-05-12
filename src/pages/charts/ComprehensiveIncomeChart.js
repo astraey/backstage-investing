@@ -97,7 +97,19 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
         },
       },
       yaxis: {
-        show: true,
+        labels: {
+          show: true,
+          style: {
+            colors: [secondary],
+          },
+          formatter: function (value) {
+            if (value < 1000) {
+              return `$${value}M`;
+            } else {
+              return `$${value / 1000}B`;
+            }
+          },
+        },
       },
       annotations: {
         yaxis: [
