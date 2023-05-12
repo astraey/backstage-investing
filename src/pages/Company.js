@@ -221,6 +221,10 @@ const Company = () => {
           <Typography variant="caption" color="secondary">{` ${params.companyTicker}`}</Typography>
         </span>
       </h1>
+      <br></br>
+      <h2>Is {params.companyTicker} Making Money?</h2>
+      <p>Very short executive summary here. A couple sentences max.</p>
+
       {dataReceived ? (
         <div>
           <Grid container rowSpacing={4.5} columnSpacing={2.75}>
