@@ -26,7 +26,7 @@ const CompanySelection = () => {
 
   return (
     <div>
-      <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ minHeight: '60vh', minWidth: '80vw' }}>
+      <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ minHeight: '60vh', minWidth: '90vw' }}>
         <Grid item xs={3}>
           <Typography variant="h2" style={{ fontSize: matchesXs ? '6vw' : '3vw' }}>
             Search for a Company
@@ -84,7 +84,7 @@ const CompanySelection = () => {
           <br></br>
           <Typography variant="body1" style={{ fontSize: matchesXs ? '2vw' : '1vw' }}>
             Or check out our{' '}
-            <Link style={{ color: '#5F9F9F',  fontSize: matchesXs ? '2vw' : '1vw' }} variant="body1" href="/investing-fundamentals/">
+            <Link style={{ color: '#009eea',  fontSize: matchesXs ? '2vw' : '1vw' }} variant="body1" href="/investing-fundamentals/">
               <b>investing fundamentals</b>
             </Link>
           </Typography>
