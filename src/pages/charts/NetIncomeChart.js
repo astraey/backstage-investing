@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import { 
-    //useState, 
-    useEffect 
+import {
+  //useState,
+  useEffect,
 } from 'react';
 import { useTheme } from '@mui/material/styles';
 
@@ -18,7 +18,7 @@ const NetIncomeChart = ({ slot, datesChart, netIncome }) => {
   const series = [
     {
       name: 'Net Income',
-      data: netIncome,
+      data: slot === 'All Time' ? netIncome : netIncome.slice(netIncome.length - 7, netIncome.length),
     },
   ];
 
@@ -38,7 +38,7 @@ const NetIncomeChart = ({ slot, datesChart, netIncome }) => {
       curve: 'smooth',
     },
     xaxis: {
-      categories: datesChart,
+      categories: slot === 'All Time' ? datesChart : datesChart.slice(datesChart.length - 7, datesChart.length),
       axisBorder: {
         show: true,
       },
@@ -71,7 +71,21 @@ const NetIncomeChart = ({ slot, datesChart, netIncome }) => {
         stops: [0, 100, 100, 100],
       },
     },
-    yaxis: {},
+    yaxis: {
+      labels: {
+        show: true,
+        style: {
+          colors: [secondary],
+        },
+        formatter: function (value) {
+          if (value < 1000) {
+            return `$${value}M`;
+          } else {
+            return `$${value / 1000}B`;
+          }
+        },
+      },
+    },
   };
 
   return (
