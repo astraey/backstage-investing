@@ -3,12 +3,7 @@ import { useState } from 'react';
 import Link from '@mui/material/Link';
 
 // material-ui
-import {
-  Grid,
-  Container,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Grid, Container, TextField, Typography } from '@mui/material';
 
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 
@@ -37,7 +32,7 @@ const CompanySelection = () => {
         <Grid item xs={7}>
           <Autocomplete
             value={value}
-            style={{ width: '60vw' }}
+            style={{ minWidth: matchesXs ? '60vw' : '30vw' }}
             onChange={(event, newValue) => {
               navigate(`company/${newValue.ticker}`);
               if (typeof newValue === 'string') {
@@ -84,7 +79,7 @@ const CompanySelection = () => {
           <br></br>
           <Typography variant="body1" style={{ fontSize: matchesXs ? '2vw' : '1vw' }}>
             Or check out our{' '}
-            <Link style={{ color: '#009eea',  fontSize: matchesXs ? '2vw' : '1vw' }} variant="body1" href="/investing-fundamentals/">
+            <Link style={{ color: '#009eea', fontSize: matchesXs ? '2vw' : '1vw' }} variant="body1" href="/investing-fundamentals/">
               <b>investing fundamentals</b>
             </Link>
           </Typography>

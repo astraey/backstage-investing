@@ -6,7 +6,7 @@ const icons = {
   DashboardOutlined,
   PieChartOutlined,
   BookOutlined,
-  AreaChartOutlined
+  AreaChartOutlined,
 };
 
 // ==============================|| MENU ITEMS - DASHBOARD ||============================== //

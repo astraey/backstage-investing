@@ -1,8 +1,9 @@
 import { API } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useTheme } from '@mui/material/styles';
+//import { useTheme } from '@mui/material/styles';
 import { CompanyNameLookup } from 'utils/CompanyNameLookup';
+import RotateLoader from 'react-spinners/RotateLoader';
 
 // material-ui
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
@@ -41,7 +42,7 @@ import AnalyticCard from 'pages/charts/AnalyticCard';
 import RevenueParagraphGenerator from 'paragraph-generators/RevenueParagraphGenerator';
 
 // assets
-import { SyncOutlined } from '@ant-design/icons';
+//import { SyncOutlined } from '@ant-design/icons';
 /*
 import { GiftOutlined, MessageOutlined, SettingOutlined, SyncOutlined } from '@ant-design/icons';
 import avatar1 from 'assets/images/users/avatar-1.png';
@@ -110,7 +111,7 @@ const Company = () => {
   const [costofGoodsAndServicesSold, setCostofGoodsAndServicesSold] = useState('Last 2 Years');
 
   const params = useParams();
-  const theme = useTheme();
+  //const theme = useTheme();
 
   useEffect(() => {
     let path = `/company/${params.companyTicker}`;
@@ -362,7 +363,7 @@ const Company = () => {
         <div>
           <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ minHeight: '60vh' }}>
             <Grid item xs={7}>
-              <SyncOutlined spin style={{ fontSize: '1000%', color: theme.palette.primary.light }} />
+              <RotateLoader color={'#009eea'} loading={true} size={15} aria-label="Loading Spinner" data-testid="loader" />{' '}
             </Grid>
           </Grid>
         </div>
