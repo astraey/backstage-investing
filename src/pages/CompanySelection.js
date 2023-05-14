@@ -52,11 +52,7 @@ const CompanySelection = () => {
               const filtered = filter(options, params);
               return filtered;
             }}
-            selectOnFocus
-            clearOnBlur
-            handleHomeEndKeys
             freeSolo
-            id="free-solo-with-text-demo"
             options={companies}
             getOptionLabel={(option) => {
               // Value selected with enter, right from the input

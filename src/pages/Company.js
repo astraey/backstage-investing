@@ -1,99 +1,24 @@
 import { API } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-//import { useTheme } from '@mui/material/styles';
+
+import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import { CompanyNameLookup } from 'utils/CompanyNameLookup';
 import RotateLoader from 'react-spinners/RotateLoader';
-
-// material-ui
-import { Box, Button, Grid, Stack, Typography } from '@mui/material';
-
-/*
-import {
-  Avatar,
-  AvatarGroup,
-  Box,
-  Button,
-  Grid,
-  List,
-  ListItemAvatar,
-  ListItemButton,
-  ListItemSecondaryAction,
-  ListItemText,
-  MenuItem,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
-*/
-
-// project import
-//import OrdersTable from 'pages/dashboard/OrdersTable';
-//import IncomeAreaChart from 'pages/dashboard/IncomeAreaChart';
-//import MonthlyBarChart from 'pages/dashboard/MonthlyBarChart';
-//import ReportAreaChart from 'pages/dashboard/ReportAreaChart';
-//import SalesColumnChart from 'pages/dashboard/SalesColumnChart';
-import MainCard from 'components/MainCard';
-//import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
-import RevenueChart from 'pages/charts/RevenueChart';
 import ComprehensiveIncomeChart from 'pages/charts/ComprehensiveIncomeChart';
 import AnalyticCard from 'pages/charts/AnalyticCard';
-
+import RevenueChart from 'pages/charts/RevenueChart';
+import MainCard from 'components/MainCard';
 import RevenueParagraphGenerator from 'paragraph-generators/RevenueParagraphGenerator';
-
-// assets
-//import { SyncOutlined } from '@ant-design/icons';
-/*
-import { GiftOutlined, MessageOutlined, SettingOutlined, SyncOutlined } from '@ant-design/icons';
-import avatar1 from 'assets/images/users/avatar-1.png';
-import avatar2 from 'assets/images/users/avatar-2.png';
-import avatar3 from 'assets/images/users/avatar-3.png';
-import avatar4 from 'assets/images/users/avatar-4.png';
-*/
 
 const apiName = 'backstageinvestingapi';
 const requestVariables = {
-  headers: {}, // OPTIONAL
-  response: false, // OPTIONAL (if true, return the entire Axios response object instead of only response.data)
+  headers: {},
+  response: false,
   queryStringParameters: {
-    name: 'param', // OPTIONAL
+    name: 'param',
   },
 };
-
-/*
-// avatar style
-const avatarSX = {
-  width: 36,
-  height: 36,
-  fontSize: '1rem',
-};
-
-// action style
-const actionSX = {
-  mt: 0.75,
-  ml: 1,
-  top: 'auto',
-  right: 'auto',
-  alignSelf: 'flex-start',
-  transform: 'none',
-};
-
-// sales report status
-const status = [
-  {
-    value: 'today',
-    label: 'Today',
-  },
-  {
-    value: 'month',
-    label: 'This Month',
-  },
-  {
-    value: 'year',
-    label: 'This Year',
-  },
-];
-*/
 
 const Company = () => {
   const [datesChart, setDatesChart] = useState(null);
@@ -105,13 +30,10 @@ const Company = () => {
   const [revenueLastReportedQuarter, setRevenueLastReportedQuarter] = useState(null);
   const [revenueInfoOpen, setRevenueInfoOpen] = useState(false);
   const [dataReceived, setDataReceived] = useState(null);
-
-  //const [value, setValue] = useState('today');
   const [slot, setSlot] = useState('Last 2 Years');
   const [costofGoodsAndServicesSold, setCostofGoodsAndServicesSold] = useState('Last 2 Years');
 
   const params = useParams();
-  //const theme = useTheme();
 
   useEffect(() => {
     let path = `/company/${params.companyTicker}`;
@@ -121,6 +43,7 @@ const Company = () => {
     let comprehensiveIncomeNetOfTax = [];
     let costOfRevenue = [];
     let costofGoodsAndServicesSold = [];
+    setDataReceived(false);
     API.get(apiName, path, requestVariables)
       .then((response) => {
         console.log(response);
@@ -131,31 +54,22 @@ const Company = () => {
           costOfRevenue.push(Math.round((quarterlyReport.costOfRevenue / 1000000) * 10) / 10);
           costofGoodsAndServicesSold.push(Math.round((quarterlyReport.costofGoodsAndServicesSold / 1000000) * 10) / 10);
           let monthDay = `${quarterlyReport.fiscalDateEnding.split('-')[1]}-${quarterlyReport.fiscalDateEnding.split('-')[2]}`;
-          //console.log(quarterlyReport.fiscalDateEnding);
           if (monthDay === '03-31') {
             fiscalDateEnding.push(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            //console.log(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
           } else if (monthDay === '04-30') {
             fiscalDateEnding.push(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            //console.log(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
           } else if (monthDay === '06-30') {
             fiscalDateEnding.push(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            //console.log(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
           } else if (monthDay === '07-31') {
             fiscalDateEnding.push(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            //console.log(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
           } else if (monthDay === '09-30') {
             fiscalDateEnding.push(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            //console.log(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
           } else if (monthDay === '10-31') {
             fiscalDateEnding.push(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            //console.log(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
           } else if (monthDay === '12-31') {
             fiscalDateEnding.push(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-            //console.log(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
           } else if (monthDay === '01-31') {
             fiscalDateEnding.push(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0] - 1}`);
-            //console.log(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
           } else {
             fiscalDateEnding.push('Quarter Unknown');
           }
@@ -216,50 +130,51 @@ const Company = () => {
 
   return (
     <div>
-      <h1>
-        <span>
-          {CompanyNameLookup(params.companyTicker)}
-          <Typography variant="caption" color="secondary">{` ${params.companyTicker}`}</Typography>
-        </span>
-      </h1>
-      <br></br>
-      <h2>Is {params.companyTicker} Making Money?</h2>
-      <p>Very short executive summary here. A couple sentences max.</p>
-
       {dataReceived ? (
         <div>
-          <Grid container rowSpacing={4.5} columnSpacing={2.75}>
-            <Grid item xs={12} sm={6} md={4} lg={6}>
-              <AnalyticCard
-                title={`${revenueLastReportedQuarter.reportedQuarter} Revenue`}
-                metricName={'revenue'}
-                count={revenueLastReportedQuarter.totalRevenue}
-                countFormatted={revenueLastReportedQuarter.revenueFormatted}
-                companyTicker={params.companyTicker}
-                companyName={CompanyNameLookup(params.companyTicker)}
-                quarter={revenueLastReportedQuarter.reportedQuarter}
-                percentageChange={revenueLastReportedQuarter.percentageChange}
-                percentageChangeQuarter={revenueLastReportedQuarter.percentageChangeQuarter}
-                countPreviousQuarter={revenueLastReportedQuarter.revenueLastReportedQuarter}
-                countPreviousQuarterFormatted={revenueLastReportedQuarter.revenuePreviousQuarterFormatted}
-              />{' '}
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={6}>
-              <AnalyticCard
-                title={`${comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter} Comprehensive Net Income`}
-                metricName={'comprehensive net income'}
-                count={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTax}
-                countFormatted={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxFormatted}
-                companyTicker={params.companyTicker}
-                companyName={CompanyNameLookup(params.companyTicker)}
-                quarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter}
-                percentageChange={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChange}
-                percentageChangeQuarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChangeQuarter}
-                countPreviousQuarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxPreviousQuarter}
-                countPreviousQuarterFormatted={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxPreviousQuarterFormatted}
-              />
-            </Grid>
-            {/*
+          <h1>
+            <span>
+              {CompanyNameLookup(params.companyTicker)}
+              <Typography variant="caption" color="secondary">{` ${params.companyTicker}`}</Typography>
+            </span>
+          </h1>
+          <br></br>
+          <h2>Is {params.companyTicker} Making Money?</h2>
+          <p>Very short executive summary here. A couple sentences max.</p>
+
+          <div>
+            <Grid container rowSpacing={4.5} columnSpacing={2.75}>
+              <Grid item xs={12} sm={6} md={4} lg={6}>
+                <AnalyticCard
+                  title={`${revenueLastReportedQuarter.reportedQuarter} Revenue`}
+                  metricName={'revenue'}
+                  count={revenueLastReportedQuarter.totalRevenue}
+                  countFormatted={revenueLastReportedQuarter.revenueFormatted}
+                  companyTicker={params.companyTicker}
+                  companyName={CompanyNameLookup(params.companyTicker)}
+                  quarter={revenueLastReportedQuarter.reportedQuarter}
+                  percentageChange={revenueLastReportedQuarter.percentageChange}
+                  percentageChangeQuarter={revenueLastReportedQuarter.percentageChangeQuarter}
+                  countPreviousQuarter={revenueLastReportedQuarter.revenueLastReportedQuarter}
+                  countPreviousQuarterFormatted={revenueLastReportedQuarter.revenuePreviousQuarterFormatted}
+                />{' '}
+              </Grid>
+              <Grid item xs={12} sm={6} md={4} lg={6}>
+                <AnalyticCard
+                  title={`${comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter} Comprehensive Net Income`}
+                  metricName={'comprehensive net income'}
+                  count={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTax}
+                  countFormatted={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxFormatted}
+                  companyTicker={params.companyTicker}
+                  companyName={CompanyNameLookup(params.companyTicker)}
+                  quarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter}
+                  percentageChange={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChange}
+                  percentageChangeQuarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChangeQuarter}
+                  countPreviousQuarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxPreviousQuarter}
+                  countPreviousQuarterFormatted={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxPreviousQuarterFormatted}
+                />
+              </Grid>
+              {/*
             <Grid item xs={12} sm={6} md={4} lg={3}>
               <AnalyticCard title="Total Users" count="78250" percentage={70.5} extra="8,900" />
             </Grid>
@@ -270,94 +185,95 @@ const Company = () => {
               <AnalyticCard title="Total Sales" count="35078" percentage={27.4} extra="$20,395" />
             </Grid>
             */}
-          </Grid>
-          <br></br>
-          <br></br>
-          <Grid item xs={12} md={7} lg={8}>
-            <Grid container alignItems="center" justifyContent="space-between">
-              <Grid item>
-                <h2>
-                  <span>
-                    <span>Revenue & Cost of Revenue</span>
-                    <Typography variant="caption" color="secondary">
-                      {' '}
-                      <Button size="small" onClick={() => setRevenueInfoOpen(true)} color="secondary" variant={'text'}>
-                        How do these look for {params.companyTicker}?
-                      </Button>
-                    </Typography>
-                  </span>
-                </h2>
-              </Grid>
-              <Grid item>
-                <Stack direction="row" alignItems="center" spacing={0}>
-                  <Button
-                    size="small"
-                    onClick={() => setSlot('All Time')}
-                    color={slot === 'All Time' ? 'primary' : 'secondary'}
-                    variant={slot === 'All Time' ? 'outlined' : 'text'}
-                  >
-                    All Time
-                  </Button>
-                  <Button
-                    size="small"
-                    onClick={() => setSlot('Last 2 Years')}
-                    color={slot === 'Last 2 Years' ? 'primary' : 'secondary'}
-                    variant={slot === 'Last 2 Years' ? 'outlined' : 'text'}
-                  >
-                    Last 2 Years
-                  </Button>
-                </Stack>
-              </Grid>
             </Grid>
-            <Typography color="textSecondary" variant="">
-              <p>
-                <strong>Revenue</strong> is the money a company earns from selling products or services, before deducting any expenses, such as the
-                cost of raw materials, employee salaries, taxes, etc. <strong>Cost of Revenue</strong> is the total cost of manufacturing and
-                delivering a product or service to consumers.
-              </p>
-              {revenueInfoOpen ? (
-                <RevenueParagraphGenerator
-                  companyName={CompanyNameLookup(params.companyTicker)}
-                  companyTicker={params.companyTicker}
-                  slot={slot}
-                  datesChart={datesChart}
-                  revenueValuesChart={revenueValuesChart}
-                  costOfRevenue={costOfRevenue}
-                  setRevenueInfoOpen={setRevenueInfoOpen}
-                />
-              ) : (
-                <span></span>
-              )}
-            </Typography>
-            <MainCard content={false} sx={{ mt: 1.5 }}>
-              <Box sx={{ pt: 1, pr: 2 }}>
-                <RevenueChart
-                  slot={slot}
-                  datesChart={datesChart}
-                  revenueValuesChart={revenueValuesChart}
-                  operatingExpensesValuesChart={operatingExpensesValuesChart}
-                  costOfRevenue={costOfRevenue}
-                  costOfGoodsAndServicesSold={costofGoodsAndServicesSold}
-                />
-              </Box>
-            </MainCard>
             <br></br>
             <br></br>
-            <Grid container alignItems="center" justifyContent="space-between">
-              <Grid item>
-                <Typography variant="h4">Comprehensive Income Net Of Tax</Typography>
-                <Typography color="textSecondary" variant="">
-                  Comprehensive income is the total profit or gain that a company makes in a particular period of time, plus the value of yet
-                  unrealized profits (or losses) in the same period.
-                </Typography>
+            <Grid item xs={12} md={7} lg={8}>
+              <Grid container alignItems="center" justifyContent="space-between">
+                <Grid item>
+                  <h2>
+                    <span>
+                      <span>Revenue & Cost of Revenue</span>
+                      <Typography variant="caption" color="secondary">
+                        {' '}
+                        <Button size="small" onClick={() => setRevenueInfoOpen(true)} color="secondary" variant={'text'}>
+                          How do these look for {params.companyTicker}?
+                        </Button>
+                      </Typography>
+                    </span>
+                  </h2>
+                </Grid>
+                <Grid item>
+                  <Stack direction="row" alignItems="center" spacing={0}>
+                    <Button
+                      size="small"
+                      onClick={() => setSlot('All Time')}
+                      color={slot === 'All Time' ? 'primary' : 'secondary'}
+                      variant={slot === 'All Time' ? 'outlined' : 'text'}
+                    >
+                      All Time
+                    </Button>
+                    <Button
+                      size="small"
+                      onClick={() => setSlot('Last 2 Years')}
+                      color={slot === 'Last 2 Years' ? 'primary' : 'secondary'}
+                      variant={slot === 'Last 2 Years' ? 'outlined' : 'text'}
+                    >
+                      Last 2 Years
+                    </Button>
+                  </Stack>
+                </Grid>
               </Grid>
+              <Typography color="textSecondary" variant="">
+                <p>
+                  <strong>Revenue</strong> is the money a company earns from selling products or services, before deducting any expenses, such as the
+                  cost of raw materials, employee salaries, taxes, etc. <strong>Cost of Revenue</strong> is the total cost of manufacturing and
+                  delivering a product or service to consumers.
+                </p>
+                {revenueInfoOpen ? (
+                  <RevenueParagraphGenerator
+                    companyName={CompanyNameLookup(params.companyTicker)}
+                    companyTicker={params.companyTicker}
+                    slot={slot}
+                    datesChart={datesChart}
+                    revenueValuesChart={revenueValuesChart}
+                    costOfRevenue={costOfRevenue}
+                    setRevenueInfoOpen={setRevenueInfoOpen}
+                  />
+                ) : (
+                  <span></span>
+                )}
+              </Typography>
+              <MainCard content={false} sx={{ mt: 1.5 }}>
+                <Box sx={{ pt: 1, pr: 2 }}>
+                  <RevenueChart
+                    slot={slot}
+                    datesChart={datesChart}
+                    revenueValuesChart={revenueValuesChart}
+                    operatingExpensesValuesChart={operatingExpensesValuesChart}
+                    costOfRevenue={costOfRevenue}
+                    costOfGoodsAndServicesSold={costofGoodsAndServicesSold}
+                  />
+                </Box>
+              </MainCard>
+              <br></br>
+              <br></br>
+              <Grid container alignItems="center" justifyContent="space-between">
+                <Grid item>
+                  <Typography variant="h4">Comprehensive Income Net Of Tax</Typography>
+                  <Typography color="textSecondary" variant="">
+                    Comprehensive income is the total profit or gain that a company makes in a particular period of time, plus the value of yet
+                    unrealized profits (or losses) in the same period.
+                  </Typography>
+                </Grid>
+              </Grid>
+              <MainCard content={false} sx={{ mt: 1.5 }}>
+                <Box sx={{ pt: 1, pr: 2 }}>
+                  <ComprehensiveIncomeChart slot={slot} datesChart={datesChart} comprehensiveIncomeNetOfTax={comprehensiveIncomeNetOfTax} />
+                </Box>
+              </MainCard>
             </Grid>
-            <MainCard content={false} sx={{ mt: 1.5 }}>
-              <Box sx={{ pt: 1, pr: 2 }}>
-                <ComprehensiveIncomeChart slot={slot} datesChart={datesChart} comprehensiveIncomeNetOfTax={comprehensiveIncomeNetOfTax} />
-              </Box>
-            </MainCard>
-          </Grid>
+          </div>
         </div>
       ) : (
         <div>
@@ -368,280 +284,6 @@ const Company = () => {
           </Grid>
         </div>
       )}
-
-      {/*Samples From Dashboard Page Start Here*/}
-      {/*
-      <br></br>
-      <br></br>
-      <Grid container rowSpacing={4.5} columnSpacing={2.75}>
-        <Grid item xs={12} sx={{ mb: -2.25 }}>
-          <Typography variant="h5">Dashboard Samples</Typography>
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <AnalyticEcommerce title="Total Page Views" count="4,42,236" percentage={59.3} extra="35,000" />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <AnalyticEcommerce title="Total Users" count="78,250" percentage={70.5} extra="8,900" />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <AnalyticEcommerce title="Total Order" count="18,800" percentage={27.4} isLoss color="warning" extra="1,943" />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <AnalyticEcommerce title="Total Sales" count="$35,078" percentage={27.4} isLoss color="warning" extra="$20,395" />
-        </Grid>
-
-        <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
-
-        <Grid item xs={12} md={7} lg={8}>
-          <Grid container alignItems="center" justifyContent="space-between">
-            <Grid item>
-              <Typography variant="h5">Unique Visitor</Typography>
-            </Grid>
-            <Grid item>
-              <Stack direction="row" alignItems="center" spacing={0}>
-                <Button
-                  size="small"
-                  onClick={() => setSlot('All Time')}
-                  color={slot === 'All Time' ? 'primary' : 'secondary'}
-                  variant={slot === 'All Time' ? 'outlined' : 'text'}
-                >
-                  All Time
-                </Button>
-                <Button
-                  size="small"
-                  onClick={() => setSlot('Last 2 Years')}
-                  color={slot === 'Last 2 Years' ? 'primary' : 'secondary'}
-                  variant={slot === 'Last 2 Years' ? 'outlined' : 'text'}
-                >
-                  Last 2 Years
-                </Button>
-              </Stack>
-            </Grid>
-          </Grid>
-          <MainCard content={false} sx={{ mt: 1.5 }}>
-            <Box sx={{ pt: 1, pr: 2 }}>
-              <IncomeAreaChart slot={slot} />
-            </Box>
-          </MainCard>
-        </Grid>
-        <Grid item xs={12} md={5} lg={4}>
-          <Grid container alignItems="center" justifyContent="space-between">
-            <Grid item>
-              <Typography variant="h5">Income Overview</Typography>
-            </Grid>
-            <Grid item />
-          </Grid>
-          <MainCard sx={{ mt: 2 }} content={false}>
-            <Box sx={{ p: 3, pb: 0 }}>
-              <Stack spacing={2}>
-                <Typography variant="h6" color="textSecondary">
-                  This Week Statistics
-                </Typography>
-                <Typography variant="h3">$7,650</Typography>
-              </Stack>
-            </Box>
-            <MonthlyBarChart />
-          </MainCard>
-        </Grid>
-
-        <Grid item xs={12} md={7} lg={8}>
-          <Grid container alignItems="center" justifyContent="space-between">
-            <Grid item>
-              <Typography variant="h5">Recent Orders</Typography>
-            </Grid>
-            <Grid item />
-          </Grid>
-          <MainCard sx={{ mt: 2 }} content={false}>
-            <OrdersTable />
-          </MainCard>
-        </Grid>
-        <Grid item xs={12} md={5} lg={4}>
-          <Grid container alignItems="center" justifyContent="space-between">
-            <Grid item>
-              <Typography variant="h5">Analytics Report</Typography>
-            </Grid>
-            <Grid item />
-          </Grid>
-          <MainCard sx={{ mt: 2 }} content={false}>
-            <List sx={{ p: 0, '& .MuiListItemButton-root': { py: 2 } }}>
-              <ListItemButton divider>
-                <ListItemText primary="Company Finance Growth" />
-                <Typography variant="h5">+45.14%</Typography>
-              </ListItemButton>
-              <ListItemButton divider>
-                <ListItemText primary="Company Expenses Ratio" />
-                <Typography variant="h5">0.58%</Typography>
-              </ListItemButton>
-              <ListItemButton>
-                <ListItemText primary="Business Risk Cases" />
-                <Typography variant="h5">Low</Typography>
-              </ListItemButton>
-            </List>
-            <ReportAreaChart />
-          </MainCard>
-        </Grid>
-
-        <Grid item xs={12} md={7} lg={8}>
-          <Grid container alignItems="center" justifyContent="space-between">
-            <Grid item>
-              <Typography variant="h5">Sales Report</Typography>
-            </Grid>
-            <Grid item>
-              <TextField
-                id="standard-select-currency"
-                size="small"
-                select
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-                sx={{
-                  '& .MuiInputBase-input': { py: 0.5, fontSize: '0.875rem' },
-                }}
-              >
-                {status.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Grid>
-          </Grid>
-          <MainCard sx={{ mt: 1.75 }}>
-            <Stack spacing={1.5} sx={{ mb: -12 }}>
-              <Typography variant="h6" color="secondary">
-                Net Profit
-              </Typography>
-              <Typography variant="h4">$1560</Typography>
-            </Stack>
-            <SalesColumnChart />
-          </MainCard>
-        </Grid>
-        <Grid item xs={12} md={5} lg={4}>
-          <Grid container alignItems="center" justifyContent="space-between">
-            <Grid item>
-              <Typography variant="h5">Transaction History</Typography>
-            </Grid>
-            <Grid item />
-          </Grid>
-          <MainCard sx={{ mt: 2 }} content={false}>
-            <List
-              component="nav"
-              sx={{
-                px: 0,
-                py: 0,
-                '& .MuiListItemButton-root': {
-                  py: 1.5,
-                  '& .MuiAvatar-root': avatarSX,
-                  '& .MuiListItemSecondaryAction-root': {
-                    ...actionSX,
-                    position: 'relative',
-                  },
-                },
-              }}
-            >
-              <ListItemButton divider>
-                <ListItemAvatar>
-                  <Avatar
-                    sx={{
-                      color: 'success.main',
-                      bgcolor: 'success.lighter',
-                    }}
-                  >
-                    <GiftOutlined />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={<Typography variant="subtitle1">Order #002434</Typography>} secondary="Today, 2:00 AM" />
-                <ListItemSecondaryAction>
-                  <Stack alignItems="flex-end">
-                    <Typography variant="subtitle1" noWrap>
-                      + $1,430
-                    </Typography>
-                    <Typography variant="h6" color="secondary" noWrap>
-                      78%
-                    </Typography>
-                  </Stack>
-                </ListItemSecondaryAction>
-              </ListItemButton>
-              <ListItemButton divider>
-                <ListItemAvatar>
-                  <Avatar
-                    sx={{
-                      color: 'primary.main',
-                      bgcolor: 'primary.lighter',
-                    }}
-                  >
-                    <MessageOutlined />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={<Typography variant="subtitle1">Order #984947</Typography>}
-                  secondary="5 August, 1:45 PM"
-                />
-                <ListItemSecondaryAction>
-                  <Stack alignItems="flex-end">
-                    <Typography variant="subtitle1" noWrap>
-                      + $302
-                    </Typography>
-                    <Typography variant="h6" color="secondary" noWrap>
-                      8%
-                    </Typography>
-                  </Stack>
-                </ListItemSecondaryAction>
-              </ListItemButton>
-              <ListItemButton>
-                <ListItemAvatar>
-                  <Avatar
-                    sx={{
-                      color: 'error.main',
-                      bgcolor: 'error.lighter',
-                    }}
-                  >
-                    <SettingOutlined />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={<Typography variant="subtitle1">Order #988784</Typography>} secondary="7 hours ago" />
-                <ListItemSecondaryAction>
-                  <Stack alignItems="flex-end">
-                    <Typography variant="subtitle1" noWrap>
-                      + $682
-                    </Typography>
-                    <Typography variant="h6" color="secondary" noWrap>
-                      16%
-                    </Typography>
-                  </Stack>
-                </ListItemSecondaryAction>
-              </ListItemButton>
-            </List>
-          </MainCard>
-          <MainCard sx={{ mt: 2 }}>
-            <Stack spacing={3}>
-              <Grid container justifyContent="space-between" alignItems="center">
-                <Grid item>
-                  <Stack>
-                    <Typography variant="h5" noWrap>
-                      Help & Support Chat
-                    </Typography>
-                    <Typography variant="caption" color="secondary" noWrap>
-                      Typical replay within 5 min
-                    </Typography>
-                  </Stack>
-                </Grid>
-                <Grid item>
-                  <AvatarGroup sx={{ '& .MuiAvatar-root': { width: 32, height: 32 } }}>
-                    <Avatar alt="Remy Sharp" src={avatar1} />
-                    <Avatar alt="Travis Howard" src={avatar2} />
-                    <Avatar alt="Cindy Baker" src={avatar3} />
-                    <Avatar alt="Agnes Walker" src={avatar4} />
-                  </AvatarGroup>
-                </Grid>
-              </Grid>
-              <Button size="small" variant="contained" sx={{ textTransform: 'capitalize' }}>
-                Need Help?
-              </Button>
-            </Stack>
-          </MainCard>
-        </Grid>
-      </Grid>
-      */}
     </div>
   );
 };
