@@ -6,12 +6,8 @@ export const CompanyNameLookup = (ticker) => {
 
   while (start <= end) {
     let mid = Math.floor((start + end) / 2);
-    //console.log(companies[mid].ticker);
-    //console.log(ticker);
-    //console.log(companies[mid].ticker < ticker);
     if (companies[mid].ticker === ticker) {
-      //console.log(JSON.stringify(companies[mid]))
-      return companies[mid].name;
+      return { name: companies[mid].name, exchange: companies[mid].exchange };
     } else if (companies[mid].ticker < ticker) {
       start = mid + 1;
     } else {

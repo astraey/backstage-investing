@@ -132,152 +132,155 @@ const Company = () => {
     <div>
       {dataReceived ? (
         <div>
-          <h1>
-            <span>
-              {CompanyNameLookup(params.companyTicker)}
-              <Typography variant="caption" color="secondary">{` ${params.companyTicker}`}</Typography>
-            </span>
-          </h1>
-          <br></br>
-          <h2>Is {params.companyTicker} Making Money?</h2>
-          <p>Very short executive summary here. A couple sentences max.</p>
+          <Typography style={{ marginTop: 10 }} variant="h1">
+            {CompanyNameLookup(params.companyTicker).name}
+          </Typography>
+          <Typography variant="subtitle" align="center" color="secondary">
+            {params.companyTicker} - {CompanyNameLookup(params.companyTicker).exchange} - USD
+          </Typography>
+          <h2 style={{ marginTop: 50 }}>Is {CompanyNameLookup(params.companyTicker).name} Making Money?</h2>
+          <p>We are going to focus on the following 3 metrics to answer the question:</p>
+          <li style={{ marginTop: 20 }}>
+            <b style={{ color: '#009eea' }}>Revenue</b>: The money a company earns from selling products or services, before deducting any expenses,
+            such as the cost of raw materials, employee salaries, taxes{' '}
+          </li>
+          <li style={{ marginTop: 20 }}>
+            <b style={{ color: '#009eea' }}>Cost of Revenue</b>: The cost to the company of delivering products and services to consumers{' '}
+          </li>
+          <li style={{ marginTop: 20, marginBottom: 25 }}>
+            <b style={{ color: '#009eea' }}>Comprehensive Income Net Of Tax</b>: Total gain or loss that a company makes in a particular period of
+            time, plus the value of yet unrealized profits or losses in the same period.
+          </li>
+          <p style={{ marginBottom: 30 }}>Here's some of {`${CompanyNameLookup(params.companyTicker).name}`}'s recently reported data:</p>
 
-          <div>
-            <Grid container rowSpacing={4.5} columnSpacing={2.75}>
-              <Grid item xs={12} sm={6} md={4} lg={6}>
-                <AnalyticCard
-                  title={`${revenueLastReportedQuarter.reportedQuarter} Revenue`}
-                  metricName={'revenue'}
-                  count={revenueLastReportedQuarter.totalRevenue}
-                  countFormatted={revenueLastReportedQuarter.revenueFormatted}
-                  companyTicker={params.companyTicker}
-                  companyName={CompanyNameLookup(params.companyTicker)}
-                  quarter={revenueLastReportedQuarter.reportedQuarter}
-                  percentageChange={revenueLastReportedQuarter.percentageChange}
-                  percentageChangeQuarter={revenueLastReportedQuarter.percentageChangeQuarter}
-                  countPreviousQuarter={revenueLastReportedQuarter.revenueLastReportedQuarter}
-                  countPreviousQuarterFormatted={revenueLastReportedQuarter.revenuePreviousQuarterFormatted}
-                />{' '}
+          <Grid container rowSpacing={4.5} columnSpacing={2.75}>
+            <Grid item xs={12} sm={6} md={4} lg={6}>
+              <AnalyticCard
+                title={`${CompanyNameLookup(params.companyTicker).name}'s ${revenueLastReportedQuarter.reportedQuarter} Revenue`}
+                metricName={'revenue'}
+                count={revenueLastReportedQuarter.totalRevenue}
+                countFormatted={revenueLastReportedQuarter.revenueFormatted}
+                companyTicker={params.companyTicker}
+                companyName={CompanyNameLookup(params.companyTicker).name}
+                quarter={revenueLastReportedQuarter.reportedQuarter}
+                percentageChange={revenueLastReportedQuarter.percentageChange}
+                percentageChangeQuarter={revenueLastReportedQuarter.percentageChangeQuarter}
+                countPreviousQuarter={revenueLastReportedQuarter.revenueLastReportedQuarter}
+                countPreviousQuarterFormatted={revenueLastReportedQuarter.revenuePreviousQuarterFormatted}
+              />{' '}
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={6}>
+              <AnalyticCard
+                title={`${CompanyNameLookup(params.companyTicker).name}'s ${
+                  comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter
+                } Comprehensive Net Income`}
+                metricName={'comprehensive net income'}
+                count={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTax}
+                countFormatted={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxFormatted}
+                companyTicker={params.companyTicker}
+                companyName={CompanyNameLookup(params.companyTicker).name}
+                quarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter}
+                percentageChange={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChange}
+                percentageChangeQuarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChangeQuarter}
+                countPreviousQuarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxPreviousQuarter}
+                countPreviousQuarterFormatted={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxPreviousQuarterFormatted}
+              />
+            </Grid>
+          </Grid>
+          <br></br>
+          <br></br>
+          <Grid item xs={12} md={7} lg={8}>
+            <Grid container alignItems="center" justifyContent="space-between">
+              <Grid item>
+                <h2>
+                  <span>
+                    <span>Revenue & Cost of Revenue</span>
+                    <Typography variant="caption" color="secondary">
+                      {' '}
+                      <Button size="small" onClick={() => setRevenueInfoOpen(true)} color="secondary" variant={'text'}>
+                        How do these look for {params.companyTicker}?
+                      </Button>
+                    </Typography>
+                  </span>
+                </h2>
               </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={6}>
-                <AnalyticCard
-                  title={`${comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter} Comprehensive Net Income`}
-                  metricName={'comprehensive net income'}
-                  count={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTax}
-                  countFormatted={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxFormatted}
+              <Grid item>
+                <Stack direction="row" alignItems="center" spacing={0}>
+                  <Button
+                    size="small"
+                    onClick={() => setSlot('All Time')}
+                    color={slot === 'All Time' ? 'primary' : 'secondary'}
+                    variant={slot === 'All Time' ? 'outlined' : 'text'}
+                  >
+                    All Time
+                  </Button>
+                  <Button
+                    size="small"
+                    onClick={() => setSlot('Last 2 Years')}
+                    color={slot === 'Last 2 Years' ? 'primary' : 'secondary'}
+                    variant={slot === 'Last 2 Years' ? 'outlined' : 'text'}
+                  >
+                    Last 2 Years
+                  </Button>
+                </Stack>
+              </Grid>
+            </Grid>
+            <Typography color="textSecondary" variant="">
+              <p>Info on how this looks for {`${CompanyNameLookup(params.companyTicker).name}`}</p>
+              {revenueInfoOpen ? (
+                <RevenueParagraphGenerator
+                  companyName={CompanyNameLookup(params.companyTicker).name}
                   companyTicker={params.companyTicker}
-                  companyName={CompanyNameLookup(params.companyTicker)}
-                  quarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter}
-                  percentageChange={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChange}
-                  percentageChangeQuarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChangeQuarter}
-                  countPreviousQuarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxPreviousQuarter}
-                  countPreviousQuarterFormatted={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxPreviousQuarterFormatted}
+                  slot={slot}
+                  datesChart={datesChart}
+                  revenueValuesChart={revenueValuesChart}
+                  costOfRevenue={costOfRevenue}
+                  setRevenueInfoOpen={setRevenueInfoOpen}
                 />
-              </Grid>
-              {/*
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <AnalyticCard title="Total Users" count="78250" percentage={70.5} extra="8,900" />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <AnalyticCard title="Total Order" count="18800" percentage={27.4} extra="1,943" />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <AnalyticCard title="Total Sales" count="35078" percentage={27.4} extra="$20,395" />
-            </Grid>
-            */}
-            </Grid>
+              ) : (
+                <span></span>
+              )}
+            </Typography>
+            <MainCard content={false} sx={{ mt: 1.5 }}>
+              <Box sx={{ pt: 1, pr: 2 }}>
+                <RevenueChart
+                  slot={slot}
+                  datesChart={datesChart}
+                  revenueValuesChart={revenueValuesChart}
+                  operatingExpensesValuesChart={operatingExpensesValuesChart}
+                  costOfRevenue={costOfRevenue}
+                  costOfGoodsAndServicesSold={costofGoodsAndServicesSold}
+                />
+              </Box>
+            </MainCard>
             <br></br>
             <br></br>
-            <Grid item xs={12} md={7} lg={8}>
-              <Grid container alignItems="center" justifyContent="space-between">
-                <Grid item>
-                  <h2>
-                    <span>
-                      <span>Revenue & Cost of Revenue</span>
-                      <Typography variant="caption" color="secondary">
-                        {' '}
-                        <Button size="small" onClick={() => setRevenueInfoOpen(true)} color="secondary" variant={'text'}>
-                          How do these look for {params.companyTicker}?
-                        </Button>
-                      </Typography>
-                    </span>
-                  </h2>
-                </Grid>
-                <Grid item>
-                  <Stack direction="row" alignItems="center" spacing={0}>
-                    <Button
-                      size="small"
-                      onClick={() => setSlot('All Time')}
-                      color={slot === 'All Time' ? 'primary' : 'secondary'}
-                      variant={slot === 'All Time' ? 'outlined' : 'text'}
-                    >
-                      All Time
-                    </Button>
-                    <Button
-                      size="small"
-                      onClick={() => setSlot('Last 2 Years')}
-                      color={slot === 'Last 2 Years' ? 'primary' : 'secondary'}
-                      variant={slot === 'Last 2 Years' ? 'outlined' : 'text'}
-                    >
-                      Last 2 Years
-                    </Button>
-                  </Stack>
-                </Grid>
+            <Grid container alignItems="center" justifyContent="space-between">
+              <Grid item>
+                <Typography variant="h4">Comprehensive Income Net Of Tax</Typography>
+                <Typography color="textSecondary" variant="">
+                  Info on how this looks for {`${CompanyNameLookup(params.companyTicker).name}`}
+                </Typography>
               </Grid>
-              <Typography color="textSecondary" variant="">
-                <p>
-                  <strong>Revenue</strong> is the money a company earns from selling products or services, before deducting any expenses, such as the
-                  cost of raw materials, employee salaries, taxes, etc. <strong>Cost of Revenue</strong> is the total cost of manufacturing and
-                  delivering a product or service to consumers.
-                </p>
-                {revenueInfoOpen ? (
-                  <RevenueParagraphGenerator
-                    companyName={CompanyNameLookup(params.companyTicker)}
-                    companyTicker={params.companyTicker}
-                    slot={slot}
-                    datesChart={datesChart}
-                    revenueValuesChart={revenueValuesChart}
-                    costOfRevenue={costOfRevenue}
-                    setRevenueInfoOpen={setRevenueInfoOpen}
-                  />
-                ) : (
-                  <span></span>
-                )}
-              </Typography>
-              <MainCard content={false} sx={{ mt: 1.5 }}>
-                <Box sx={{ pt: 1, pr: 2 }}>
-                  <RevenueChart
-                    slot={slot}
-                    datesChart={datesChart}
-                    revenueValuesChart={revenueValuesChart}
-                    operatingExpensesValuesChart={operatingExpensesValuesChart}
-                    costOfRevenue={costOfRevenue}
-                    costOfGoodsAndServicesSold={costofGoodsAndServicesSold}
-                  />
-                </Box>
-              </MainCard>
-              <br></br>
-              <br></br>
-              <Grid container alignItems="center" justifyContent="space-between">
-                <Grid item>
-                  <Typography variant="h4">Comprehensive Income Net Of Tax</Typography>
-                  <Typography color="textSecondary" variant="">
-                    Comprehensive income is the total profit or gain that a company makes in a particular period of time, plus the value of yet
-                    unrealized profits (or losses) in the same period.
-                  </Typography>
-                </Grid>
-              </Grid>
-              <MainCard content={false} sx={{ mt: 1.5 }}>
-                <Box sx={{ pt: 1, pr: 2 }}>
-                  <ComprehensiveIncomeChart slot={slot} datesChart={datesChart} comprehensiveIncomeNetOfTax={comprehensiveIncomeNetOfTax} />
-                </Box>
-              </MainCard>
             </Grid>
-          </div>
+            <MainCard content={false} sx={{ mt: 1.5 }}>
+              <Box sx={{ pt: 1, pr: 2 }}>
+                <ComprehensiveIncomeChart slot={slot} datesChart={datesChart} comprehensiveIncomeNetOfTax={comprehensiveIncomeNetOfTax} />
+              </Box>
+            </MainCard>
+          </Grid>
+          <h2 style={{ marginTop: 150 }}>How is {CompanyNameLookup(params.companyTicker).name} Valued?</h2>
+          <p>This time, we are going to focus on the following metric to answer the question:</p>
+          <li style={{ marginTop: 20 }}>
+            <b style={{ color: '#009eea' }}>Price to Earnings Ratio</b> (P/E): Is a way to value a company by comparing the price of a stock to its
+            earnings. The P/E equals the price of a share of stock, divided by the company's earnings-per-share. It tells you how much you are paying
+            for each dollar of earnings.{' '}
+          </li>
+          <p style={{ marginBottom: 30 }}>Here's some of {`${CompanyNameLookup(params.companyTicker).name}`}'s recently reported data:</p>
         </div>
       ) : (
         <div>
-          <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ minHeight: '60vh' }}>
+          <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ minHeight: '85vh' }}>
             <Grid item xs={7}>
               <RotateLoader color={'#009eea'} loading={true} size={15} aria-label="Loading Spinner" data-testid="loader" />{' '}
             </Grid>
