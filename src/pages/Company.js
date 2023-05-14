@@ -6,6 +6,7 @@ import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import { CompanyNameLookup } from 'utils/CompanyNameLookup';
 import RotateLoader from 'react-spinners/RotateLoader';
 import ComprehensiveIncomeChart from 'pages/charts/ComprehensiveIncomeChart';
+import NetIncomeChart from 'pages/charts/NetIncomeChart';
 import AnalyticCard from 'pages/charts/AnalyticCard';
 import RevenueChart from 'pages/charts/RevenueChart';
 import MainCard from 'components/MainCard';
@@ -26,6 +27,7 @@ const Company = () => {
   const [operatingExpensesValuesChart, setOperatingExpensesValuesChart] = useState(null);
   const [comprehensiveIncomeNetOfTax, setComprehensiveIncomeNetOfTax] = useState(null);
   const [costOfRevenue, setCostOfRevenue] = useState(null);
+  const [netIncome, setNetIncome] = useState(null);
   const [comprehensiveIncomeNetOfTaxLastReportedQuarter, setComprehensiveIncomeNetOfTaxLastReportedQuarter] = useState(null);
   const [revenueLastReportedQuarter, setRevenueLastReportedQuarter] = useState(null);
   const [revenueInfoOpen, setRevenueInfoOpen] = useState(false);
@@ -43,6 +45,7 @@ const Company = () => {
     let comprehensiveIncomeNetOfTax = [];
     let costOfRevenue = [];
     let costofGoodsAndServicesSold = [];
+    let netIncome = [];
     setDataReceived(false);
     API.get(apiName, path, requestVariables)
       .then((response) => {
@@ -53,6 +56,7 @@ const Company = () => {
           comprehensiveIncomeNetOfTax.push(Math.round((quarterlyReport.comprehensiveIncomeNetOfTax / 1000000) * 10) / 10);
           costOfRevenue.push(Math.round((quarterlyReport.costOfRevenue / 1000000) * 10) / 10);
           costofGoodsAndServicesSold.push(Math.round((quarterlyReport.costofGoodsAndServicesSold / 1000000) * 10) / 10);
+          netIncome.push(Math.round((quarterlyReport.netIncome / 1000000) * 10) / 10);
           let monthDay = `${quarterlyReport.fiscalDateEnding.split('-')[1]}-${quarterlyReport.fiscalDateEnding.split('-')[2]}`;
           if (monthDay === '03-31') {
             fiscalDateEnding.push(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
@@ -80,6 +84,7 @@ const Company = () => {
         setComprehensiveIncomeNetOfTax(comprehensiveIncomeNetOfTax.reverse());
         setCostOfRevenue(costOfRevenue.reverse());
         setCostofGoodsAndServicesSold(costofGoodsAndServicesSold.reverse());
+        setNetIncome(netIncome.reverse());
 
         setComprehensiveIncomeNetOfTaxLastReportedQuarter({
           reportedQuarter: fiscalDateEnding[fiscalDateEnding.length - 1],
@@ -187,9 +192,7 @@ const Company = () => {
               />
             </Grid>
           </Grid>
-          <br></br>
-          <br></br>
-          <Grid item xs={12} md={7} lg={8}>
+          <Grid item xs={12} md={7} lg={8} style={{ marginTop: 100 }}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
                 <h2>
@@ -266,6 +269,21 @@ const Company = () => {
             <MainCard content={false} sx={{ mt: 1.5 }}>
               <Box sx={{ pt: 1, pr: 2 }}>
                 <ComprehensiveIncomeChart slot={slot} datesChart={datesChart} comprehensiveIncomeNetOfTax={comprehensiveIncomeNetOfTax} />
+              </Box>
+            </MainCard>
+            <br></br>
+            <br></br>
+            <Grid container alignItems="center" justifyContent="space-between">
+              <Grid item>
+                <Typography variant="h4">Net Income</Typography>
+                <Typography color="textSecondary" variant="">
+                  Info on how this looks for {`${CompanyNameLookup(params.companyTicker).name}`}
+                </Typography>
+              </Grid>
+            </Grid>
+            <MainCard content={false} sx={{ mt: 1.5 }}>
+              <Box sx={{ pt: 1, pr: 2 }}>
+                <NetIncomeChart slot={slot} datesChart={datesChart} netIncome={netIncome} />
               </Box>
             </MainCard>
           </Grid>
