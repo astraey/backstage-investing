@@ -12,6 +12,9 @@ import RevenueChart from 'pages/charts/RevenueChart';
 import MainCard from 'components/MainCard';
 import RevenueParagraphGenerator from 'paragraph-generators/RevenueParagraphGenerator';
 
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
+
 const apiName = 'backstageinvestingapi';
 const requestVariables = {
   headers: {},
@@ -214,6 +217,7 @@ const Company = () => {
                     onClick={() => setSlot('All Time')}
                     color={slot === 'All Time' ? 'primary' : 'secondary'}
                     variant={slot === 'All Time' ? 'outlined' : 'text'}
+                    startIcon={<AllInclusiveIcon />}
                   >
                     All Time
                   </Button>
@@ -222,6 +226,7 @@ const Company = () => {
                     onClick={() => setSlot('Last 2 Years')}
                     color={slot === 'Last 2 Years' ? 'primary' : 'secondary'}
                     variant={slot === 'Last 2 Years' ? 'outlined' : 'text'}
+                    startIcon={<CalendarMonthIcon />}
                   >
                     Last 2 Years
                   </Button>
