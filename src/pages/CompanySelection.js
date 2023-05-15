@@ -21,9 +21,9 @@ const CompanySelection = () => {
 
   return (
     <div>
-      <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ minHeight: '60vh', minWidth: '90vw' }}>
+      <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ minHeight: '75vh', minWidth: '90vw' }}>
         <Grid item xs={3}>
-          <Typography variant="h2" style={{ fontSize: matchesXs ? '6vw' : '3vw' }}>
+          <Typography variant="h1">
             Search for a Company
           </Typography>
           <br></br>
@@ -73,9 +73,9 @@ const CompanySelection = () => {
         <Grid item xs={3}>
           <br></br>
           <br></br>
-          <Typography variant="body1" style={{ fontSize: matchesXs ? '2vw' : '1vw' }}>
+          <Typography variant="body1">
             Or check out our{' '}
-            <Link style={{ color: '#009eea', fontSize: matchesXs ? '2vw' : '1vw' }} variant="body1" href="/investing-fundamentals/">
+            <Link style={{ color: '#009eea' }} variant="body1" href="/investing-fundamentals/">
               <b>investing fundamentals</b>
             </Link>
           </Typography>
