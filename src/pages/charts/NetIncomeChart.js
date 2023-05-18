@@ -37,6 +37,22 @@ const NetIncomeChart = ({ slot, datesChart, netIncome }) => {
       width: 5,
       curve: 'smooth',
     },
+    dataLabels: {
+      enabled: true,
+      formatter(val) {
+        let isNegative = false;
+        if (val < 0) {
+          isNegative = true;
+          val = Math.abs(val);
+        }
+
+        if (val < 1000) {
+          return isNegative ? `-$${val}M` : `$${val}M`;
+        } else if (val >= 1000) {
+          return isNegative ? `-$${Math.round((val / 1000) * 10) / 10}B` : `$${Math.round((val / 1000) * 10) / 10}B`;
+        }
+      },
+    },
     xaxis: {
       categories: slot === 'All Time' ? datesChart : datesChart.slice(datesChart.length - 7, datesChart.length),
       axisBorder: {
@@ -56,19 +72,6 @@ const NetIncomeChart = ({ slot, datesChart, netIncome }) => {
       align: 'left',
       style: {
         fontSize: '16px',
-        color: '#666',
-      },
-    },
-    fill: {
-      type: 'gradient',
-      gradient: {
-        shade: 'dark',
-        gradientToColors: ['#FDD835'],
-        shadeIntensity: 1,
-        type: 'horizontal',
-        opacityFrom: 1,
-        opacityTo: 1,
-        stops: [0, 100, 100, 100],
       },
     },
     yaxis: {
@@ -77,11 +80,17 @@ const NetIncomeChart = ({ slot, datesChart, netIncome }) => {
         style: {
           colors: [secondary],
         },
-        formatter: function (value) {
-          if (value < 1000) {
-            return `$${value}M`;
-          } else {
-            return `$${value / 1000}B`;
+        formatter(val) {
+          let isNegative = false;
+          if (val < 0) {
+            isNegative = true;
+            val = Math.abs(val);
+          }
+
+          if (val < 1000) {
+            return isNegative ? `-$${val}M` : `$${val}M`;
+          } else if (val >= 1000) {
+            return isNegative ? `-$${Math.round((val / 1000) * 10) / 10}B` : `$${Math.round((val / 1000) * 10) / 10}B`;
           }
         },
       },

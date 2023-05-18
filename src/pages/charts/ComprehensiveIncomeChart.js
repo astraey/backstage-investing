@@ -102,11 +102,17 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
           style: {
             colors: [secondary],
           },
-          formatter: function (value) {
-            if (value < 1000) {
-              return `$${value}M`;
-            } else {
-              return `$${value / 1000}B`;
+          formatter(val) {
+            let isNegative = false;
+            if (val < 0) {
+              isNegative = true;
+              val = Math.abs(val);
+            }
+
+            if (val < 1000) {
+              return isNegative ? `-$${val}M` : `$${val}M`;
+            } else if (val >= 1000) {
+              return isNegative ? `-$${Math.round((val / 1000) * 10) / 10}B` : `$${Math.round((val / 1000) * 10) / 10}B`;
             }
           },
         },

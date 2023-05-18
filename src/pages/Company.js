@@ -143,9 +143,13 @@ const Company = () => {
           <Typography style={{ marginTop: 10 }} variant="h1">
             {CompanyNameLookup(params.companyTicker).name}
           </Typography>
-          <Typography variant="subtitle" align="center" color="secondary">
+          <Typography variant="subtitle" align="self" color="secondary">
             {params.companyTicker} - {CompanyNameLookup(params.companyTicker).exchange} - USD
           </Typography>
+          {/*<Typography variant="body1" align="left">
+            Status: Dumbster Fire 🗑️🔥 | Jim Cramer's Pick 🚨🔻 | Within Normal Range 🤷🏼‍♂️ | Strong Foundation 🏰
+          </Typography>
+          */}
           <h2 style={{ marginTop: 50 }}>Is {CompanyNameLookup(params.companyTicker).name} Making Money?</h2>
           <p>We are going to focus on the following 3 metrics to answer the question:</p>
           <li style={{ marginTop: 20 }}>
