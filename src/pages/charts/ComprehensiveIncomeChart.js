@@ -19,7 +19,7 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
         data:
           slot === 'All Time'
             ? comprehensiveIncomeNetOfTax
-            : comprehensiveIncomeNetOfTax.slice(comprehensiveIncomeNetOfTax.length - 7, comprehensiveIncomeNetOfTax.length),
+            : comprehensiveIncomeNetOfTax.slice(comprehensiveIncomeNetOfTax.length - 8, comprehensiveIncomeNetOfTax.length),
       },
     ]);
     setOptions({
@@ -83,7 +83,7 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
         },
       },
       xaxis: {
-        categories: slot === 'All Time' ? datesChart : datesChart.slice(datesChart.length - 7, datesChart.length),
+        categories: slot === 'All Time' ? datesChart : datesChart.slice(datesChart.length - 8, datesChart.length),
         axisBorder: {
           show: true,
         },

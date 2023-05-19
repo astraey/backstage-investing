@@ -31,12 +31,8 @@ const Company = () => {
   const [comprehensiveIncomeNetOfTax, setComprehensiveIncomeNetOfTax] = useState(null);
   const [costOfRevenue, setCostOfRevenue] = useState(null);
   const [netIncome, setNetIncome] = useState(null);
-  const [
-    comprehensiveIncomeNetOfTaxLastReportedQuarter, 
-    setComprehensiveIncomeNetOfTaxLastReportedQuarter] = useState(null);
-  const [
-    revenueLastReportedQuarter, 
-    setRevenueLastReportedQuarter] = useState(null);
+  const [comprehensiveIncomeNetOfTaxLastReportedQuarter, setComprehensiveIncomeNetOfTaxLastReportedQuarter] = useState(null);
+  const [revenueLastReportedQuarter, setRevenueLastReportedQuarter] = useState(null);
   const [revenueInfoOpen, setRevenueInfoOpen] = useState(false);
   const [dataReceived, setDataReceived] = useState(null);
   const [slot, setSlot] = useState('Last 2 Years');
