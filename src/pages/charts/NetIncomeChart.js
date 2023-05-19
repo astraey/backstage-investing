@@ -12,7 +12,6 @@ const NetIncomeChart = ({ slot, datesChart, netIncome }) => {
   const theme = useTheme();
   const { secondary } = theme.palette.text;
   //const [options, setOptions] = useState(NetIncomeChart);
-  console.log(netIncome);
   useEffect(() => {}, [slot, datesChart, netIncome]);
 
   const series = [

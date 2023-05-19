@@ -1,4 +1,4 @@
-export const dollarFormatter = (dollars) => {
+export const DollarFormatter = (dollars) => {
   let isNegative = false;
   if (dollars < 0) {
     isNegative = true;

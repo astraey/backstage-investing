@@ -7,10 +7,10 @@ import { CompanyNameLookup } from 'utils/CompanyNameLookup';
 import RotateLoader from 'react-spinners/RotateLoader';
 import ComprehensiveIncomeChart from 'pages/charts/ComprehensiveIncomeChart';
 import NetIncomeChart from 'pages/charts/NetIncomeChart';
-import AnalyticCard from 'pages/charts/AnalyticCard';
 import RevenueChart from 'pages/charts/RevenueChart';
 import MainCard from 'components/MainCard';
 import RevenueParagraphGenerator from 'paragraph-generators/RevenueParagraphGenerator';
+import { DateToQuarterFormatter } from 'utils/DateToQuarterFormatter';
 
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
@@ -31,8 +31,12 @@ const Company = () => {
   const [comprehensiveIncomeNetOfTax, setComprehensiveIncomeNetOfTax] = useState(null);
   const [costOfRevenue, setCostOfRevenue] = useState(null);
   const [netIncome, setNetIncome] = useState(null);
-  const [comprehensiveIncomeNetOfTaxLastReportedQuarter, setComprehensiveIncomeNetOfTaxLastReportedQuarter] = useState(null);
-  const [revenueLastReportedQuarter, setRevenueLastReportedQuarter] = useState(null);
+  const [
+    comprehensiveIncomeNetOfTaxLastReportedQuarter, 
+    setComprehensiveIncomeNetOfTaxLastReportedQuarter] = useState(null);
+  const [
+    revenueLastReportedQuarter, 
+    setRevenueLastReportedQuarter] = useState(null);
   const [revenueInfoOpen, setRevenueInfoOpen] = useState(false);
   const [dataReceived, setDataReceived] = useState(null);
   const [slot, setSlot] = useState('Last 2 Years');
@@ -60,26 +64,7 @@ const Company = () => {
           costOfRevenue.push(Math.round((quarterlyReport.costOfRevenue / 1000000) * 10) / 10);
           costofGoodsAndServicesSold.push(Math.round((quarterlyReport.costofGoodsAndServicesSold / 1000000) * 10) / 10);
           netIncome.push(Math.round((quarterlyReport.netIncome / 1000000) * 10) / 10);
-          let monthDay = `${quarterlyReport.fiscalDateEnding.split('-')[1]}-${quarterlyReport.fiscalDateEnding.split('-')[2]}`;
-          if (monthDay === '03-31') {
-            fiscalDateEnding.push(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-          } else if (monthDay === '04-30') {
-            fiscalDateEnding.push(`Q1 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-          } else if (monthDay === '06-30') {
-            fiscalDateEnding.push(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-          } else if (monthDay === '07-31') {
-            fiscalDateEnding.push(`Q2 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-          } else if (monthDay === '09-30') {
-            fiscalDateEnding.push(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-          } else if (monthDay === '10-31') {
-            fiscalDateEnding.push(`Q3 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-          } else if (monthDay === '12-31') {
-            fiscalDateEnding.push(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0]}`);
-          } else if (monthDay === '01-31') {
-            fiscalDateEnding.push(`Q4 ${quarterlyReport.fiscalDateEnding.split('-')[0] - 1}`);
-          } else {
-            fiscalDateEnding.push('Quarter Unknown');
-          }
+          fiscalDateEnding.push(DateToQuarterFormatter(quarterlyReport.fiscalDateEnding));
         });
         setDatesChart(fiscalDateEnding.reverse());
         setRevenueValuesChart(totalRevenue.reverse());
@@ -143,76 +128,20 @@ const Company = () => {
           <Typography style={{ marginTop: 10 }} variant="h1">
             {CompanyNameLookup(params.companyTicker).name}
           </Typography>
-          <Typography variant="subtitle" align="self" color="secondary">
+          <Typography variant="subtitle" align="left" color="secondary">
             {params.companyTicker} - {CompanyNameLookup(params.companyTicker).exchange} - USD
           </Typography>
           {/*<Typography variant="body1" align="left">
             Status: Dumbster Fire 🗑️🔥 | Jim Cramer's Pick 🚨🔻 | Within Normal Range 🤷🏼‍♂️ | Strong Foundation 🏰
           </Typography>
           */}
-          <h2 style={{ marginTop: 50 }}>Is {CompanyNameLookup(params.companyTicker).name} Making Money?</h2>
-          <p>We are going to focus on the following 3 metrics to answer the question:</p>
-          <li style={{ marginTop: 20 }}>
-            <b style={{ color: '#009eea' }}>Revenue</b>: The money a company earns from selling products or services, before deducting any expenses,
-            such as the cost of raw materials, employee salaries, taxes{' '}
-          </li>
-          <li style={{ marginTop: 20 }}>
-            <b style={{ color: '#009eea' }}>Cost of Revenue</b>: The cost to the company of delivering products and services to consumers{' '}
-          </li>
-          <li style={{ marginTop: 20, marginBottom: 25 }}>
-            <b style={{ color: '#009eea' }}>Comprehensive Income Net Of Tax</b>: Total gain or loss that a company makes in a particular period of
-            time, plus the value of yet unrealized profits or losses in the same period.
-          </li>
-          <p style={{ marginBottom: 30 }}>Here's some of {`${CompanyNameLookup(params.companyTicker).name}`}'s recently reported data:</p>
-
-          <Grid container rowSpacing={4.5} columnSpacing={2.75}>
-            <Grid item xs={12} sm={6} md={4} lg={6}>
-              <AnalyticCard
-                title={`${CompanyNameLookup(params.companyTicker).name}'s ${revenueLastReportedQuarter.reportedQuarter} Revenue`}
-                metricName={'revenue'}
-                count={revenueLastReportedQuarter.totalRevenue}
-                countFormatted={revenueLastReportedQuarter.revenueFormatted}
-                companyTicker={params.companyTicker}
-                companyName={CompanyNameLookup(params.companyTicker).name}
-                quarter={revenueLastReportedQuarter.reportedQuarter}
-                percentageChange={revenueLastReportedQuarter.percentageChange}
-                percentageChangeQuarter={revenueLastReportedQuarter.percentageChangeQuarter}
-                countPreviousQuarter={revenueLastReportedQuarter.revenueLastReportedQuarter}
-                countPreviousQuarterFormatted={revenueLastReportedQuarter.revenuePreviousQuarterFormatted}
-              />{' '}
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={6}>
-              <AnalyticCard
-                title={`${CompanyNameLookup(params.companyTicker).name}'s ${
-                  comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter
-                } Comprehensive Net Income`}
-                metricName={'comprehensive net income'}
-                count={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTax}
-                countFormatted={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxFormatted}
-                companyTicker={params.companyTicker}
-                companyName={CompanyNameLookup(params.companyTicker).name}
-                quarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.reportedQuarter}
-                percentageChange={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChange}
-                percentageChangeQuarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.percentageChangeQuarter}
-                countPreviousQuarter={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxPreviousQuarter}
-                countPreviousQuarterFormatted={comprehensiveIncomeNetOfTaxLastReportedQuarter.comprehensiveIncomeNetOfTaxPreviousQuarterFormatted}
-              />
-            </Grid>
-          </Grid>
-          <Grid item xs={12} md={7} lg={8} style={{ marginTop: 100 }}>
+          <Typography style={{ marginTop: 40 }} variant="h2">
+            Is {CompanyNameLookup(params.companyTicker).name} Making Money?
+          </Typography>
+          <Grid item xs={12} md={7} lg={8} style={{ marginTop: 20 }}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
-                <h2>
-                  <span>
-                    <span>Revenue & Cost of Revenue</span>
-                    <Typography variant="caption" color="secondary">
-                      {' '}
-                      <Button size="small" onClick={() => setRevenueInfoOpen(true)} color="secondary" variant={'text'}>
-                        How do these look for {params.companyTicker}?
-                      </Button>
-                    </Typography>
-                  </span>
-                </h2>
+                <Typography variant="h4">Revenue & Cost of Revenue</Typography>
               </Grid>
               <Grid item>
                 <Stack direction="row" alignItems="center" spacing={0}>
@@ -274,6 +203,28 @@ const Company = () => {
                   Info on how this looks for {`${CompanyNameLookup(params.companyTicker).name}`}
                 </Typography>
               </Grid>
+              <Grid item>
+                <Stack direction="row" alignItems="center" spacing={0}>
+                  <Button
+                    size="small"
+                    onClick={() => setSlot('All Time')}
+                    color={slot === 'All Time' ? 'primary' : 'secondary'}
+                    variant={slot === 'All Time' ? 'outlined' : 'text'}
+                    startIcon={<AllInclusiveIcon />}
+                  >
+                    All Time
+                  </Button>
+                  <Button
+                    size="small"
+                    onClick={() => setSlot('Last 2 Years')}
+                    color={slot === 'Last 2 Years' ? 'primary' : 'secondary'}
+                    variant={slot === 'Last 2 Years' ? 'outlined' : 'text'}
+                    startIcon={<CalendarMonthIcon />}
+                  >
+                    Last 2 Years
+                  </Button>
+                </Stack>
+              </Grid>
             </Grid>
             <MainCard content={false} sx={{ mt: 1.5 }}>
               <Box sx={{ pt: 1, pr: 2 }}>
@@ -288,6 +239,28 @@ const Company = () => {
                 <Typography color="textSecondary" variant="">
                   Info on how this looks for {`${CompanyNameLookup(params.companyTicker).name}`}
                 </Typography>
+              </Grid>
+              <Grid item>
+                <Stack direction="row" alignItems="center" spacing={0}>
+                  <Button
+                    size="small"
+                    onClick={() => setSlot('All Time')}
+                    color={slot === 'All Time' ? 'primary' : 'secondary'}
+                    variant={slot === 'All Time' ? 'outlined' : 'text'}
+                    startIcon={<AllInclusiveIcon />}
+                  >
+                    All Time
+                  </Button>
+                  <Button
+                    size="small"
+                    onClick={() => setSlot('Last 2 Years')}
+                    color={slot === 'Last 2 Years' ? 'primary' : 'secondary'}
+                    variant={slot === 'Last 2 Years' ? 'outlined' : 'text'}
+                    startIcon={<CalendarMonthIcon />}
+                  >
+                    Last 2 Years
+                  </Button>
+                </Stack>
               </Grid>
             </Grid>
             <MainCard content={false} sx={{ mt: 1.5 }}>
