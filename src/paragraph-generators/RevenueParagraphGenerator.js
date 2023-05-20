@@ -1,6 +1,6 @@
-import { Alert, AlertTitle } from '@mui/material';
+//import { Alert, AlertTitle } from '@mui/material';
 
-import { WarningFilled, InfoCircleFilled, CheckCircleFilled } from '@ant-design/icons';
+//import { WarningFilled, InfoCircleFilled, CheckCircleFilled } from '@ant-design/icons';
 
 const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChart, revenueValuesChart, costOfRevenue, setRevenueInfoOpen }) => {
   let revenueValues = slot === 'All Time' ? revenueValuesChart : revenueValuesChart.slice(revenueValuesChart.length - 8, revenueValuesChart.length);
@@ -40,16 +40,11 @@ const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChar
     //valuesSameLength = false;
   }
 
+  //{averageMargin > 50 ? <CheckCircleFilled /> : averageMargin < 24 ? <WarningFilled /> : <InfoCircleFilled />}
+  //      severity={averageMargin > 50 ? 'success' : averageMargin < 24 ? 'error' : 'info'}
+
   return (
-    <Alert
-      severity={averageMargin > 50 ? 'success' : averageMargin < 24 ? 'error' : 'info'}
-      icon={averageMargin > 50 ? <CheckCircleFilled /> : averageMargin < 24 ? <WarningFilled /> : <InfoCircleFilled />}
-      sx={{ fontSize: '0.9rem', borderRadius: '16px' }}
-      onClose={() => {
-        setRevenueInfoOpen(false);
-      }}
-    >
-      <AlertTitle sx={{ fontSize: '1.1rem' }}>{companyTicker}'s Revenue and Cost of Revenue</AlertTitle>
+    <span>
       As shown on the graph below, in the last {dates.length >= 4 ? `${Math.ceil(dates.length / 4)} years` : `${dates.length} quarters`},{' '}
       {companyName || companyTicker} has{' '}
       {revenueHigherThanCostAll ? (
@@ -95,7 +90,7 @@ const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChar
       ) : (
         <span>no info</span>
       )}
-    </Alert>
+    </span>
   );
 };
 

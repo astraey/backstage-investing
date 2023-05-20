@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import { CompanyNameLookup } from 'utils/CompanyNameLookup';
 import RotateLoader from 'react-spinners/RotateLoader';
-import ComprehensiveIncomeChart from 'pages/charts/ComprehensiveIncomeChart';
 import NetIncomeChart from 'pages/charts/NetIncomeChart';
 import RevenueChart from 'pages/charts/RevenueChart';
 import MainCard from 'components/MainCard';
@@ -31,9 +30,6 @@ const Company = () => {
   const [comprehensiveIncomeNetOfTax, setComprehensiveIncomeNetOfTax] = useState(null);
   const [costOfRevenue, setCostOfRevenue] = useState(null);
   const [netIncome, setNetIncome] = useState(null);
-  const [comprehensiveIncomeNetOfTaxLastReportedQuarter, setComprehensiveIncomeNetOfTaxLastReportedQuarter] = useState(null);
-  const [revenueLastReportedQuarter, setRevenueLastReportedQuarter] = useState(null);
-  const [revenueInfoOpen, setRevenueInfoOpen] = useState(false);
   const [dataReceived, setDataReceived] = useState(null);
   const [slot, setSlot] = useState('Last 2 Years');
   const [costofGoodsAndServicesSold, setCostofGoodsAndServicesSold] = useState('Last 2 Years');
@@ -69,46 +65,6 @@ const Company = () => {
         setCostOfRevenue(costOfRevenue.reverse());
         setCostofGoodsAndServicesSold(costofGoodsAndServicesSold.reverse());
         setNetIncome(netIncome.reverse());
-
-        setComprehensiveIncomeNetOfTaxLastReportedQuarter({
-          reportedQuarter: fiscalDateEnding[fiscalDateEnding.length - 1],
-          comprehensiveIncomeNetOfTax: comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1],
-          comprehensiveIncomeNetOfTaxFormatted:
-            comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1] < 1000 &&
-            comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1] > -1000
-              ? `$${comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1]}M`
-              : `$${Math.round((comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1] / 1000) * 10) / 10}B`,
-          percentageChange: Math.round(
-            ((comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1] -
-              comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 2]) /
-              Math.abs(comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 1])) *
-              100,
-          ),
-          percentageChangeQuarter: fiscalDateEnding[fiscalDateEnding.length - 2],
-          comprehensiveIncomeNetOfTaxPreviousQuarter: comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 2],
-          comprehensiveIncomeNetOfTaxPreviousQuarterFormatted:
-            comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 2] < 1000 &&
-            comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 2] > -1000
-              ? `$${comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 2]}M`
-              : `$${Math.round((comprehensiveIncomeNetOfTax[comprehensiveIncomeNetOfTax.length - 2] / 1000) * 10) / 10}B`,
-        });
-        setRevenueLastReportedQuarter({
-          reportedQuarter: fiscalDateEnding[fiscalDateEnding.length - 1],
-          totalRevenue: totalRevenue[totalRevenue.length - 1],
-          revenueFormatted:
-            totalRevenue[totalRevenue.length - 1] < 1000 && totalRevenue[totalRevenue.length - 1] > -1000
-              ? `$${totalRevenue[totalRevenue.length - 1]}M`
-              : `$${Math.round((totalRevenue[totalRevenue.length - 1] / 1000) * 10) / 10}B`,
-          percentageChange: Math.round(
-            ((totalRevenue[totalRevenue.length - 1] - totalRevenue[totalRevenue.length - 2]) / Math.abs(totalRevenue[totalRevenue.length - 1])) * 100,
-          ),
-          percentageChangeQuarter: fiscalDateEnding[fiscalDateEnding.length - 2],
-          revenueLastReportedQuarter: totalRevenue[totalRevenue.length - 2],
-          revenuePreviousQuarterFormatted:
-            totalRevenue[totalRevenue.length - 2] < 1000 && totalRevenue[totalRevenue.length - 2] > -1000
-              ? `$${totalRevenue[totalRevenue.length - 2]}M`
-              : `$${Math.round((totalRevenue[totalRevenue.length - 2] / 1000) * 10) / 10}B`,
-        });
         setDataReceived(true);
       })
       .catch((error) => {
@@ -162,22 +118,17 @@ const Company = () => {
                 </Stack>
               </Grid>
             </Grid>
-            <Typography color="textSecondary" variant="">
-              <p>Info on how this looks for {`${CompanyNameLookup(params.companyTicker).name}`}</p>
-              {revenueInfoOpen ? (
-                <RevenueParagraphGenerator
-                  companyName={CompanyNameLookup(params.companyTicker).name}
-                  companyTicker={params.companyTicker}
-                  slot={slot}
-                  datesChart={datesChart}
-                  revenueValuesChart={revenueValuesChart}
-                  costOfRevenue={costOfRevenue}
-                  setRevenueInfoOpen={setRevenueInfoOpen}
-                />
-              ) : (
-                <span></span>
-              )}
-            </Typography>
+            <Typography variant="body1" style={{ marginTop: 10 }}> 
+              <RevenueParagraphGenerator
+                companyName={CompanyNameLookup(params.companyTicker).name}
+                companyTicker={params.companyTicker}
+                slot={slot}
+                datesChart={datesChart}
+                revenueValuesChart={revenueValuesChart}
+                costOfRevenue={costOfRevenue}
+                //setRevenueInfoOpen={setRevenueInfoOpen}
+              />{' '}
+            </Typography>{' '}
             <MainCard content={false} sx={{ mt: 1.5 }}>
               <Box sx={{ pt: 1, pr: 2 }}>
                 <RevenueChart
@@ -190,11 +141,11 @@ const Company = () => {
                 />
               </Box>
             </MainCard>
-            <br></br>
-            <br></br>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
-                <Typography variant="h4">Comprehensive Income Net Of Tax</Typography>
+                <Typography style={{ marginTop: 50 }} variant="h4">
+                  Net Income & Comprehensive Income Net of Tax
+                </Typography>
                 <Typography color="textSecondary" variant="">
                   Info on how this looks for {`${CompanyNameLookup(params.companyTicker).name}`}
                 </Typography>
@@ -224,48 +175,13 @@ const Company = () => {
             </Grid>
             <MainCard content={false} sx={{ mt: 1.5 }}>
               <Box sx={{ pt: 1, pr: 2 }}>
-                <ComprehensiveIncomeChart slot={slot} datesChart={datesChart} comprehensiveIncomeNetOfTax={comprehensiveIncomeNetOfTax} />
-              </Box>
-            </MainCard>
-            <br></br>
-            <br></br>
-            <Grid container alignItems="center" justifyContent="space-between">
-              <Grid item>
-                <Typography variant="h4">Net Income</Typography>
-                <Typography color="textSecondary" variant="">
-                  Info on how this looks for {`${CompanyNameLookup(params.companyTicker).name}`}
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Stack direction="row" alignItems="center" spacing={0}>
-                  <Button
-                    size="small"
-                    onClick={() => setSlot('All Time')}
-                    color={slot === 'All Time' ? 'primary' : 'secondary'}
-                    variant={slot === 'All Time' ? 'outlined' : 'text'}
-                    startIcon={<AllInclusiveIcon />}
-                  >
-                    All Time
-                  </Button>
-                  <Button
-                    size="small"
-                    onClick={() => setSlot('Last 2 Years')}
-                    color={slot === 'Last 2 Years' ? 'primary' : 'secondary'}
-                    variant={slot === 'Last 2 Years' ? 'outlined' : 'text'}
-                    startIcon={<CalendarMonthIcon />}
-                  >
-                    Last 2 Years
-                  </Button>
-                </Stack>
-              </Grid>
-            </Grid>
-            <MainCard content={false} sx={{ mt: 1.5 }}>
-              <Box sx={{ pt: 1, pr: 2 }}>
-                <NetIncomeChart slot={slot} datesChart={datesChart} netIncome={netIncome} />
+                <NetIncomeChart slot={slot} datesChart={datesChart} netIncome={netIncome} comprehensiveIncomeNetOfTax={comprehensiveIncomeNetOfTax} />
               </Box>
             </MainCard>
           </Grid>
-          <h2 style={{ marginTop: 150 }}>How is {CompanyNameLookup(params.companyTicker).name} Valued?</h2>
+          <Typography style={{ marginTop: 150 }} variant="h2">
+            How is {CompanyNameLookup(params.companyTicker).name} Valued?
+          </Typography>
           <p>This time, we are going to focus on the following metric to answer the question:</p>
           <li style={{ marginTop: 20 }}>
             <b style={{ color: '#009eea' }}>Price to Earnings Ratio</b> (P/E): Is a way to value a company by comparing the price of a stock to its
@@ -273,6 +189,8 @@ const Company = () => {
             for each dollar of earnings.{' '}
           </li>
           <p style={{ marginBottom: 30 }}>Here's some of {`${CompanyNameLookup(params.companyTicker).name}`}'s recently reported data:</p>
+          <p style={{ marginBottom: 30 }}>{`${CompanyNameLookup(params.companyTicker).name}`}'s stock price and revenue, charted togehter.</p>
+          <p style={{ marginBottom: 30 }}>{`${CompanyNameLookup(params.companyTicker).name}`}'s stock PE, as well as other PE stocks also charted.</p>
         </div>
       ) : (
         <div>

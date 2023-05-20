@@ -35,11 +35,11 @@ const ComprehensiveIncomeChart = ({ slot, datesChart, comprehensiveIncomeNetOfTa
             ranges: [
               {
                 from: 0,
-                to: 10000000,
+                to: 999999999999,
                 color: theme.palette.success.light,
               },
               {
-                from: -10000000,
+                from: -999999999999,
                 to: 0,
                 color: theme.palette.error.light,
               },
