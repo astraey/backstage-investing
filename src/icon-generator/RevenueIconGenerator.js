@@ -1,6 +1,6 @@
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import WarningIcon from '@mui/icons-material/Warning';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import { Chip } from '@mui/material';
 
@@ -38,7 +38,7 @@ const RevenueIconGenerator = ({ slot, datesChart, revenueValuesChart, costOfReve
       {averageMargin > 50 ? (
         <Chip color="success" variant="outlined" size="small"  label="Awesome" icon={<RocketLaunchIcon />} />
       ) : averageMargin <= 50 && averageMargin >= 25 ? (
-        <Chip color="info" variant="outlined" size="small"  label="Normal Range" icon={<ThumbUpIcon />} />
+        <Chip color="info" variant="outlined" size="small"  label="Normal Range" icon={<CheckCircleIcon />} />
       ) : averageMargin < 24 && averageMargin >= 0 ? (
         <Chip color="warning" variant="outlined" size="small"  label="Not Great" icon={<WarningIcon />} />
       ) : averageMargin < 0 ? (
