@@ -84,10 +84,6 @@ const Company = () => {
           <Typography variant="subtitle" align="left" color="secondary">
             {params.companyTicker} - {CompanyNameLookup(params.companyTicker).exchange} - USD
           </Typography>
-          {/*<Typography variant="body1" align="left">
-            Status: Dumbster Fire 🗑️🔥 | Jim Cramer's Pick 🚨🔻 | Within Normal Range 🤷🏼‍♂️ | Strong Foundation 🏰
-          </Typography>
-          */}
           <Typography style={{ marginTop: 40 }} variant="h2">
             Is {CompanyNameLookup(params.companyTicker).name} Making Money?
           </Typography>
@@ -100,7 +96,7 @@ const Company = () => {
                 </Typography>
               </Stack>
               <Grid item>
-                <Stack direction="row" alignItems="center" spacing={0}>
+                <Stack direction="row" alignItems="center" spacing={0} style={{ margin: 8 }}>
                   <Button
                     size="small"
                     onClick={() => setSlot('All Time')}

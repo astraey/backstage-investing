@@ -23,7 +23,7 @@ const CompanySelection = () => {
     <div>
       <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ minHeight: '75vh', minWidth: '90vw' }}>
         <Grid item xs={3}>
-          <Typography variant="h1">Search for a Company</Typography>
+          <Typography variant="h1" align="center">Search for a Company</Typography>
           <br></br>
           <br></br>
         </Grid>
