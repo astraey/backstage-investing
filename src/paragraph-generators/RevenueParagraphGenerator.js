@@ -1,13 +1,7 @@
-//import { Alert, AlertTitle } from '@mui/material';
-
-//import { WarningFilled, InfoCircleFilled, CheckCircleFilled } from '@ant-design/icons';
-
-const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChart, revenueValuesChart, costOfRevenue, setRevenueInfoOpen }) => {
+const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChart, revenueValuesChart, costOfRevenue }) => {
   let revenueValues = slot === 'All Time' ? revenueValuesChart : revenueValuesChart.slice(revenueValuesChart.length - 8, revenueValuesChart.length);
   let costOfRevenueValues = slot === 'All Time' ? costOfRevenue : costOfRevenue.slice(costOfRevenue.length - 8, costOfRevenue.length);
   let dates = slot === 'All Time' ? datesChart : datesChart.slice(datesChart.length - 8, datesChart.length);
-
-  //let valuesSameLength = false;
   let revenueHigherThanCostAll;
 
   let datesWhenRevenueLowerThanCost = [];
@@ -17,14 +11,8 @@ const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChar
   let averageMargin;
 
   if (revenueValues.length === dates.length && revenueValues.length === costOfRevenueValues.length) {
-    //valuesSameLength = true;
     revenueHigherThanCostAll = true;
     for (let i = 0; i < dates.length; i++) {
-      //console.log('--------------------------------');
-      //console.log(revenueValues[i]);
-      //console.log(costOfRevenueValues[i]);
-      //console.log(dates[i]);
-      //console.log(Math.round(((revenueValues[i] - costOfRevenueValues[i]) / Math.abs(revenueValues[i])) * 100));
       averageSum += Math.round(((revenueValues[i] - costOfRevenueValues[i]) / Math.abs(revenueValues[i])) * 100);
       if (revenueValues[i] < costOfRevenueValues[i]) {
         revenueHigherThanCostAll = false;
@@ -33,15 +21,8 @@ const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChar
         costsWhenRevenueLowerThanCost.push(costOfRevenueValues[i]);
       }
     }
-    //console.log('Average Margin');
     averageMargin = averageSum / dates.length;
-    //console.log(averageMargin);
-  } else {
-    //valuesSameLength = false;
   }
-
-  //{averageMargin > 50 ? <CheckCircleFilled /> : averageMargin < 24 ? <WarningFilled /> : <InfoCircleFilled />}
-  //      severity={averageMargin > 50 ? 'success' : averageMargin < 24 ? 'error' : 'info'}
 
   return (
     <span>
@@ -59,13 +40,10 @@ const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChar
           )}
           {datesWhenRevenueLowerThanCost.map((date, i, arr) => {
             if (arr.length === 1) {
-              // last one
               return `${date}.`;
             } else if (arr.length - 1 === i) {
-              // last one
               return `and ${date}.`;
             } else {
-              // not last one
               return `${date}, `;
             }
           })}

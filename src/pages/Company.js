@@ -10,6 +10,7 @@ import RevenueChart from 'pages/charts/RevenueChart';
 import MainCard from 'components/MainCard';
 import RevenueParagraphGenerator from 'paragraph-generators/RevenueParagraphGenerator';
 import { DateToQuarterFormatter } from 'utils/DateToQuarterFormatter';
+import RevenueIconGenerator from 'icon-generator/RevenueIconGenerator';
 
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
@@ -92,9 +93,12 @@ const Company = () => {
           </Typography>
           <Grid item xs={12} md={7} lg={8} style={{ marginTop: 20 }}>
             <Grid container alignItems="center" justifyContent="space-between">
-              <Grid item>
-                <Typography variant="h4">Revenue & Cost of Revenue</Typography>
-              </Grid>
+              <Stack direction="row" alignItems="center" gap={1}>
+                <Typography variant="h4">
+                  Revenue & Cost of Revenue{' '}
+                  <RevenueIconGenerator slot={slot} datesChart={datesChart} revenueValuesChart={revenueValuesChart} costOfRevenue={costOfRevenue} />
+                </Typography>
+              </Stack>
               <Grid item>
                 <Stack direction="row" alignItems="center" spacing={0}>
                   <Button
@@ -118,7 +122,7 @@ const Company = () => {
                 </Stack>
               </Grid>
             </Grid>
-            <Typography variant="body1" style={{ marginTop: 10 }}> 
+            <Typography variant="body1" style={{ marginTop: 10 }}>
               <RevenueParagraphGenerator
                 companyName={CompanyNameLookup(params.companyTicker).name}
                 companyTicker={params.companyTicker}
