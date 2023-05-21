@@ -36,13 +36,13 @@ const RevenueIconGenerator = ({ slot, datesChart, revenueValuesChart, costOfReve
   return (
     <span>
       {averageMargin > 50 ? (
-        <Chip color="success" size="small" style={{ backgroundColor: '#95de64' }} label="Awesome" icon={<RocketLaunchIcon />} />
+        <Chip color="success" variant="outlined" size="small"  label="Awesome" icon={<RocketLaunchIcon />} />
       ) : averageMargin <= 50 && averageMargin >= 25 ? (
-        <Chip color="success" size="small" style={{ backgroundColor: '#78A2CC' }} label="Normal Range" icon={<ThumbUpIcon />} />
+        <Chip color="info" variant="outlined" size="small"  label="Normal Range" icon={<ThumbUpIcon />} />
       ) : averageMargin < 24 && averageMargin >= 0 ? (
-        <Chip color="warning" size="small" style={{ backgroundColor: '#ffa39e' }} label="Not Great" icon={<WarningIcon />} />
+        <Chip color="warning" variant="outlined" size="small"  label="Not Great" icon={<WarningIcon />} />
       ) : averageMargin < 0 ? (
-        <Chip color="warning" size="small" style={{ backgroundColor: '#ffa39e' }} label="Loosing Money" icon={<LocalFireDepartmentIcon />} />
+        <Chip color="error" variant="outlined" size="small" label="Loosing Money" icon={<LocalFireDepartmentIcon />} />
       ) : (
         <span>no info</span>
       )}
