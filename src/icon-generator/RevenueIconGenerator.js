@@ -8,26 +8,18 @@ const RevenueIconGenerator = ({ slot, datesChart, revenueValuesChart, costOfReve
   let revenueValues = slot === 'All Time' ? revenueValuesChart : revenueValuesChart.slice(revenueValuesChart.length - 8, revenueValuesChart.length);
   let costOfRevenueValues = slot === 'All Time' ? costOfRevenue : costOfRevenue.slice(costOfRevenue.length - 8, costOfRevenue.length);
   let dates = slot === 'All Time' ? datesChart : datesChart.slice(datesChart.length - 8, datesChart.length);
-  //let revenueHigherThanCostAll;
-
-  let datesWhenRevenueLowerThanCost = [];
-  let costsWhenRevenueLowerThanCost = [];
-  let revenuesWhenRevenueLowerThanCost = [];
   let averageSum = 0;
   let averageMargin;
+  let countSum = 0;
 
   if (revenueValues.length === dates.length && revenueValues.length === costOfRevenueValues.length) {
-    //revenueHigherThanCostAll = true;
     for (let i = 0; i < dates.length; i++) {
-      averageSum += Math.round(((revenueValues[i] - costOfRevenueValues[i]) / Math.abs(revenueValues[i])) * 100);
-      if (revenueValues[i] < costOfRevenueValues[i]) {
-        //revenueHigherThanCostAll = false;
-        datesWhenRevenueLowerThanCost.push(dates[i]);
-        revenuesWhenRevenueLowerThanCost.push(revenueValues[i]);
-        costsWhenRevenueLowerThanCost.push(costOfRevenueValues[i]);
+      if (!(isNaN(revenueValues[i]) || isNaN(costOfRevenueValues[i]))) {
+        countSum++;
+        averageSum += Math.round(((revenueValues[i] - costOfRevenueValues[i]) / Math.abs(revenueValues[i])) * 100);
       }
     }
-    averageMargin = averageSum / dates.length;
+    averageMargin = averageSum / countSum;
   }
 
   return (

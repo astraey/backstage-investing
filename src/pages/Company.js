@@ -1,19 +1,33 @@
-import { API } from 'aws-amplify';
+//React & Amplify
 import React, { useEffect, useState } from 'react';
+import { API } from 'aws-amplify';
 import { useParams } from 'react-router-dom';
 
+//MUI
 import { Box, Button, Grid, Stack, Typography } from '@mui/material';
-import { CompanyNameLookup } from 'utils/CompanyNameLookup';
-import RotateLoader from 'react-spinners/RotateLoader';
-import NetIncomeChart from 'pages/charts/NetIncomeChart';
-import RevenueChart from 'pages/charts/RevenueChart';
-import MainCard from 'components/MainCard';
-import RevenueParagraphGenerator from 'paragraph-generators/RevenueParagraphGenerator';
-import { DateToQuarterFormatter } from 'utils/DateToQuarterFormatter';
-import RevenueIconGenerator from 'icon-generator/RevenueIconGenerator';
-
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
+
+//Loader
+import RotateLoader from 'react-spinners/RotateLoader';
+
+//Charts
+import RevenueChart from 'pages/charts/RevenueChart';
+import ComprehensiveIncomeChart from 'pages/charts/ComprehensiveIncomeChart';
+
+//Components
+import MainCard from 'components/MainCard';
+
+//Utils
+import { CompanyNameLookup } from 'utils/CompanyNameLookup';
+import { DateToQuarterFormatter } from 'utils/DateToQuarterFormatter';
+
+//Paragraph Generators
+import RevenueParagraphGenerator from 'paragraph-generators/RevenueParagraphGenerator';
+import MakingMoneyParagraphGenerator from 'paragraph-generators/MakingMoneyParagraphGenerator';
+
+//Icon Generators
+import RevenueIconGenerator from 'icon-generator/RevenueIconGenerator';
 
 const apiName = 'backstageinvestingapi';
 const requestVariables = {
@@ -54,7 +68,7 @@ const Company = () => {
           totalRevenue.push(Math.round((quarterlyReport.totalRevenue / 1000000) * 10) / 10);
           operatingExpenses.push(Math.round((quarterlyReport.operatingExpenses / 1000000) * 10) / 10);
           comprehensiveIncomeNetOfTax.push(Math.round((quarterlyReport.comprehensiveIncomeNetOfTax / 1000000) * 10) / 10);
-          costOfRevenue.push(Math.round((quarterlyReport.costOfRevenue / 1000000) * 10) / 10);
+          costOfRevenue.push(Math.abs(Math.round((quarterlyReport.costOfRevenue / 1000000) * 10) / 10));
           costofGoodsAndServicesSold.push(Math.round((quarterlyReport.costofGoodsAndServicesSold / 1000000) * 10) / 10);
           netIncome.push(Math.round((quarterlyReport.netIncome / 1000000) * 10) / 10);
           fiscalDateEnding.push(DateToQuarterFormatter(quarterlyReport.fiscalDateEnding));
@@ -87,7 +101,16 @@ const Company = () => {
           <Typography style={{ marginTop: 40 }} variant="h2">
             Is {CompanyNameLookup(params.companyTicker).name} Making Money?
           </Typography>
-          <Grid item xs={12} md={7} lg={8} style={{ marginTop: 20 }}>
+          <Typography variant="body1">
+            <MakingMoneyParagraphGenerator
+              companyName={CompanyNameLookup(params.companyTicker).name}
+              companyTicker={params.companyTicker}
+              comprehensiveIncomeNet={comprehensiveIncomeNetOfTax}
+
+              //setRevenueInfoOpen={setRevenueInfoOpen}
+            />{' '}
+          </Typography>
+          <Grid item xs={12} md={7} lg={8} style={{ marginTop: 40 }}>
             <Grid container alignItems="center" justifyContent="space-between">
               <Stack direction="row" alignItems="center" gap={1}>
                 <Typography variant="h4">
@@ -118,7 +141,7 @@ const Company = () => {
                 </Stack>
               </Grid>
             </Grid>
-            <Typography variant="body1" style={{ marginTop: 10 }}>
+            <Typography variant="body1">
               <RevenueParagraphGenerator
                 companyName={CompanyNameLookup(params.companyTicker).name}
                 companyTicker={params.companyTicker}
@@ -127,8 +150,8 @@ const Company = () => {
                 revenueValuesChart={revenueValuesChart}
                 costOfRevenue={costOfRevenue}
                 //setRevenueInfoOpen={setRevenueInfoOpen}
-              />{' '}
-            </Typography>{' '}
+              />
+            </Typography>
             <MainCard content={false} sx={{ mt: 1.5 }}>
               <Box sx={{ pt: 1, pr: 2 }}>
                 <RevenueChart
@@ -144,7 +167,7 @@ const Company = () => {
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
                 <Typography style={{ marginTop: 50 }} variant="h4">
-                  Net Income & Comprehensive Income Net of Tax
+                  Comprehensive Income Net of Tax
                 </Typography>
                 <Typography color="textSecondary" variant="">
                   Info on how this looks for {`${CompanyNameLookup(params.companyTicker).name}`}
@@ -175,7 +198,12 @@ const Company = () => {
             </Grid>
             <MainCard content={false} sx={{ mt: 1.5 }}>
               <Box sx={{ pt: 1, pr: 2 }}>
-                <NetIncomeChart slot={slot} datesChart={datesChart} netIncome={netIncome} comprehensiveIncomeNetOfTax={comprehensiveIncomeNetOfTax} />
+                <ComprehensiveIncomeChart
+                  slot={slot}
+                  datesChart={datesChart}
+                  netIncome={netIncome}
+                  comprehensiveIncomeNetOfTax={comprehensiveIncomeNetOfTax}
+                />
               </Box>
             </MainCard>
           </Grid>

@@ -26,8 +26,7 @@ const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChar
 
   return (
     <span>
-      As shown on the graph below, in the last {dates.length >= 4 ? `${Math.ceil(dates.length / 4)} years` : `${dates.length} quarters`},{' '}
-      {companyName || companyTicker} has{' '}
+      Over the last {dates.length >= 4 ? `${Math.ceil(dates.length / 4)} years` : `${dates.length} quarters`}, {companyName || companyTicker} has{' '}
       {revenueHigherThanCostAll ? (
         <span>consistently reported a higher revenue than a cost of revenue. </span>
       ) : (
