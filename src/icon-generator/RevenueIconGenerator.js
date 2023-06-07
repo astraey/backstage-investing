@@ -27,7 +27,7 @@ const RevenueIconGenerator = ({ slot, datesChart, revenueValuesChart, costOfReve
       {averageMargin > 50 ? (
         <Chip color="success" variant="outlined" size="small" label="Awesome" icon={<RocketLaunchIcon />} />
       ) : averageMargin <= 50 && averageMargin >= 25 ? (
-        <Chip color="info" variant="outlined" size="small" label="Normal Range" icon={<CheckCircleIcon />} />
+        <Chip color="info" variant="outlined" size="small" label="Acceptable Range" icon={<CheckCircleIcon />} />
       ) : averageMargin < 24 && averageMargin >= 0 ? (
         <Chip color="warning" variant="outlined" size="small" label="Not Great" icon={<WarningIcon />} />
       ) : averageMargin < 0 ? (

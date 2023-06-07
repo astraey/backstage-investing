@@ -48,10 +48,10 @@ const RevenueParagraphGenerator = ({ companyName, companyTicker, slot, datesChar
           })}
         </span>
       )}
-      On average, there's a <strong>{averageMargin}%</strong> difference between {companyTicker}' revenue and cost of revenue, also called Gross
-      Profit Margin. In general, a gross profit margin of 50% or higher is considered good, while a margin of 20% or lower may indicate that a company
-      is struggling to generate profits. In the last {dates.length >= 4 ? `${Math.ceil(dates.length / 4)} years` : `${dates.length} quarters`},{' '}
-      {companyTicker} Gross Profit Margin of <strong>{averageMargin}%</strong> is{' '}
+      On average, there's a <strong>{averageMargin.toFixed(1)}%</strong> difference between {companyTicker}' revenue and cost of revenue, also called
+      Gross Profit Margin. In general, a gross profit margin of 50% or higher is considered good, while a margin of 20% or lower may indicate that a
+      company is struggling to generate profits. In the last {dates.length >= 4 ? `${Math.ceil(dates.length / 4)} years` : `${dates.length} quarters`}
+      , {companyTicker} Gross Profit Margin of <strong>{averageMargin.toFixed(1)}%</strong> is{' '}
       {averageMargin > 50 ? (
         <span>a great sign, and shows the company's potential for profitability.</span>
       ) : averageMargin <= 50 && averageMargin >= 25 ? (
