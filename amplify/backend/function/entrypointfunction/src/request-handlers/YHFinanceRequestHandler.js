@@ -45,17 +45,20 @@ class YHFinanceRequestHandler {
   //https://github.com/pilwon/node-yahoo-finance/blob/HEAD/docs/quote.md
   async getCompanyMetrics(stockTicker) {
     return new Promise((resolve, reject) => {
-      yahooFinance.quote({
-        symbol: stockTicker,
-        modules: [ 'price', 'summaryDetail' ]
-      }, function (err, quotes) {
-        if (err) {
-          console.log("Error:", err);
-        } else {
-          console.log(quotes);
-          resolve(quotes);
-        }
-      });
+      yahooFinance.quote(
+        {
+          symbol: stockTicker,
+          modules: ['price', 'summaryDetail'],
+        },
+        function (err, quotes) {
+          if (err) {
+            console.log('Error:', err);
+          } else {
+            console.log(quotes);
+            resolve(quotes);
+          }
+        },
+      );
     });
   }
 }
