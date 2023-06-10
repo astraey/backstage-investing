@@ -8,6 +8,14 @@
         "setting": "private",
         "auth": ["create", "read", "update", "delete"]
       }
+    },
+    "/yhcompany": {
+      "name": "/yhcompany",
+      "lambdaFunction": "entrypointfunction",
+      "permissions": {
+        "setting": "private",
+        "auth": ["create", "read", "update", "delete"]
+      }
     }
   }
 }
