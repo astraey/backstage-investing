@@ -107,7 +107,9 @@ const Company = () => {
               <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ minHeight: '85vh' }}>
                 <Grid container direction="column" justifyContent="space-between" alignItems="center">
                   <ClockLoader color={'#009eea'} loading={true} size={50} aria-label="Loading Spinner" data-testid="loader" />{' '}
-                  <Typography variant="h5" style={{marginTop:30}}>Our system is receiving an unusually high number or requests.</Typography>
+                  <Typography variant="h5" style={{ marginTop: 30 }}>
+                    Our system is receiving an unusually high number or requests.
+                  </Typography>
                   <Typography variant="body1">We could not fetch the financial information for {params.companyTicker}.</Typography>
                   <Typography variant="body1">Please try again in a few minutes.</Typography>
                 </Grid>
