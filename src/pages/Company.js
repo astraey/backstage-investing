@@ -57,6 +57,7 @@ const Company = () => {
 
   useEffect(() => {
     let path = `/company/${params.companyTicker}`;
+    let path2 = `/yhcompany/${params.companyTicker}`;
     let totalRevenue = [];
     let fiscalDateEnding = [];
     let operatingExpenses = [];
@@ -92,6 +93,14 @@ const Company = () => {
           setNetIncome(netIncome.reverse());
           setDataReceived(true);
         }
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+
+    API.get(apiName, path2, requestVariables)
+      .then((response) => {
+        console.log(response);
       })
       .catch((error) => {
         console.log(error.response);

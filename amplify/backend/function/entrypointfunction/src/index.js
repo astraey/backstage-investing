@@ -4,6 +4,8 @@
 
 const AlphaVantageRequestHandler = require('./request-handlers/AlphaVantageRequestHandler');
 const alphaVantageRequestHandler = new AlphaVantageRequestHandler();
+const YHFinanceRequestHandler = require('./request-handlers/YHFinanceRequestHandler');
+const yHFinanceRequestHandler = new YHFinanceRequestHandler();
 const headers = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': '*',
@@ -12,7 +14,7 @@ exports.handler = async (event) => {
   console.log(event.resource);
   if (typeof event.resource !== 'undefined') {
     if (event.resource.includes('/company/')) {
-      console.log("We are executing the original Company API Request");
+      console.log('We are using the AlphaVantage API');
       return {
         statusCode: 200,
         headers: headers,
@@ -20,14 +22,11 @@ exports.handler = async (event) => {
       };
     }
     if (event.resource.includes('/yhcompany/')) {
-      console.log("We are executing the new Yahoo Company API Request");
+      console.log('We are using the Yahoo Finance API');
       return {
         statusCode: 200,
         headers: headers,
-        body: JSON.stringify({
-          event: event || {},
-          info: 'We are executing the new Yahoo Company API Request',
-        }),
+        body: JSON.stringify(await yHFinanceRequestHandler.getCompanyMetrics(event.pathParameters.proxy)),
       };
     }
   } else {

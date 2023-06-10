@@ -1,6 +1,6 @@
 {
-  "resource": "/yhcompany/{proxy+}",
-  "path": "/yhcompany/AMZN",
+  "resource": "/company/{proxy+}",
+  "path": "/company/AMZN",
   "httpMethod": "GET",
   "headers": {
     "Accept": "application/json, text/plain, */*",
@@ -74,11 +74,11 @@
   "stageVariables": null,
   "requestContext": {
     "resourceId": "eyie65",
-    "resourcePath": "/yhcompany/{proxy+}",
+    "resourcePath": "/company/{proxy+}",
     "httpMethod": "GET",
     "extendedRequestId": "D4MaaFCeoAMFYIw=",
     "requestTime": "24/Apr/2023:10:32:08 +0000",
-    "path": "/staging/yhcompany/AMZN",
+    "path": "/staging/company/AMZN",
     "accountId": "692815762720",
     "protocol": "HTTP/1.1",
     "stage": "staging",
